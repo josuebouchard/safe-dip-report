@@ -1,0 +1,118 @@
+dipseal-hot-melt-wax:
+  type: article
+  title: What is Hot Melt Wax Coating for Tools?
+  publisher: "Dip Seal Plastics, Inc."
+  date: 2022-07-13
+  url:
+    date: 2026-06-25
+    value: https://www.dipseal.com/plastic-dipped-parts-tools-and-corner/what-is-hot-melt-wax-coating-for-tools
+
+dominessy-endmill-coating:
+  type: video
+  title: End Mill Hot-Dip Wax Coating
+  author: "Dominessy, David"
+  date: 2020-07-24
+  url:
+    date: 2026-06-25
+    value: https://www.youtube.com/watch?v=gGHxNu6oPSY
+  parent:
+    type: web
+    title: YouTube
+
+iqs-lead-screws:
+  type: article
+  title: "Lead Screws: What Is It?, How It Works, Types, and Advantages"
+  author: "IQS Directory Editorial Team"
+  date: 2026-06-16
+  url:
+    date: 2026-06-26
+    value: https://www.iqsdirectory.com/articles/ball-screw/lead-screws.html
+  parent:
+    type: web
+    title: "IQS Directory"
+
+moons-thrust-generation:
+  type: article
+  title: "Thrust generation principle of a linear lead screw motor"
+  publisher: "MOONS' Industries"
+  url:
+    date: 2026-06-25
+    value: "https://www.moonsindustries.com/article/thrust-generation-principle-linear-lead-screw-motor"
+
+se-faq-fa225420:
+  type: article
+  title: "What is the difference between Stop Category 0, Stop Category 1 and Stop Category 2?"
+  publisher: "Schneider Electric"
+  url:
+    date: 2026-07-05
+    value: "https://www.se.com/eg/en/faqs/FA225420/"
+  date: 2014-02-28
+
+madbus-cli:
+  type: article
+  title: "madbus-cli: A modbus tui using the madbus crate"
+  author: "RipInPease"
+  url:
+    date: 2026-07-04
+    value: "https://lib.rs/crates/madbus-cli"
+  date: 2026-03-18
+  version: "1.0.1"
+
+aramfix-effco-ds250:
+  type: web
+  title: "EFFCO DS-250 Dip-Spin Coating Machine"
+  publisher: "Aramfix"
+  url:
+    date: 2026-07-20
+    value: "https://www.aramfix.com/product/effco-ds-250-dip-spin-coating-machine-250mm-basketxlxwxh-1500x1500x1890mm-steel-alloy-blue-1-pce"
+
+shisheng-ms800:
+  type: web
+  title: "MS800 Automatic Tiltable Dip-Spin Coating Machine"
+  publisher: "Shisheng Group"
+  url:
+    date: 2026-07-20
+    value: "https://www.shishengst.com/shisheng-group-sale-ms800-automatic-tiltable-dip-spin-coating-machine.html"
+
+tianhao-th2004l3:
+  type: web
+  title: "TH-2004L3 Thread Coating Machine"
+  publisher: "TianHao Dispensing"
+  url:
+    date: 2026-07-20
+    value: "https://www.tianhaodispensing.com/products/coating-machine/thread-coating-machin-TH-2004L3-D.html"
+
+tianhao-automatic-thread-coater:
+  type: web
+  title: "Automatic Thread Coating Machine"
+  publisher: "TianHao Dispensing"
+  url:
+    date: 2026-07-20
+    value: "https://www.tianhaodispensing.com/products/coating-machine/thread-coating-machine-automatic.html"
+
+south-shore-specialty-equipment:
+  type: web
+  title: "Custom Automation and Specialty Equipment"
+  publisher: "South Shore Controls"
+  url:
+    date: 2026-07-20
+    value: "https://southshorecontrols.com/specialty-equipment/"
+
+universal-robots-ur5e:
+  type: web
+  title: "UR5e Collaborative Industrial Robot"
+  publisher: "Universal Robots"
+  url:
+    date: 2026-07-20
+    value: "https://www.universal-robots.com/manuals/EN/HTML/SW10_12/Content/Landingpages/WebPolyX/LandingarmUR5e.htm"
+
+iec-60204-1:
+  type: report
+  title: "Safety of machinery — Electrical equipment of machines — Part 1: General requirements"
+  publisher: "International Electrotechnical Commission"
+  date: 2021-09-15
+  edition: "6.1"
+  serial-number: "IEC 60204-1:2016+A1:2021"
+  url:
+    date: 2026-07-20
+    value: "https://webstore.iec.ch/en/publication/71256"

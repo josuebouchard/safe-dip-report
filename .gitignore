@@ -1,0 +1,27 @@
+# Typst build output (the published PDF lives in artifacts/)
+/*.pdf
+/*.svg
+/*.png
+/out/
+/build/
+
+# Office and LibreOffice lock, temp and backup files
+.~lock.*#
+~$*
+*.bak
+*.tmp
+*.orig
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Unprocessed phone photos (strip metadata first)
+*.heic
