@@ -1,0 +1,15 @@
+# KiCad per-user state, backups and caches
+*.kicad_prl
+*-backups/
+.history/
+*.bak
+*.lck
+~*.lck
+fp-info-cache
+_autosave-*
+*-save.kicad_sch
+*-save.kicad_pcb
+
+# The STEP model of the Nucleo footprint is 21 MB and only needed for 3D views
+*.step
+*.stp
