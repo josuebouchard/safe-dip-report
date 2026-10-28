@@ -207,7 +207,7 @@
 
         taskgroup(title: [*End Effector and Safety*], {
           task("Electromagnet driver and 12 V supply", iv(7, 7, "J/A"), iv(9, 9, "J"))
-          task("Wire and verify the emergency stop", iv(10, 10, "A/J"))
+          task("Wire and verify the emergency stop", iv(10, 11, "A/J"))
         })
 
         taskgroup(title: [*Integration and Validation*], {
