@@ -238,6 +238,6 @@
         milestone(text(size: 7pt)[*Dec 4* Presentation], at: 14.7)
       },
     ),
-    caption: [Modified Safe Dip implementation schedule, Aug 24 -- Dec 4, 2026, as of October 25, 2026. It reflects the progress to date and the current weekly task plan.],
+    caption: [Modified Safe Dip implementation schedule.],
   ) <figure:gantt-modified>
 ]
