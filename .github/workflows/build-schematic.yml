@@ -1,0 +1,42 @@
+name: Build schematic          # shown in the Actions tab
+
+# The KiCad image takes most of a minute to download, so this only runs when
+# the schematic changes, or from the "Run workflow" button.
+on:
+  push:
+    branches: [main]
+    paths: ["kicad_schematic/**", ".github/workflows/build-schematic.yml"]
+  pull_request:
+    paths: ["kicad_schematic/**", ".github/workflows/build-schematic.yml"]
+  workflow_dispatch:
+
+# The workflow only reads the repository; it never pushes or comments.
+permissions:
+  contents: read
+
+# A newer push to the same branch cancels the run that is still going.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  schematic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    container:
+      image: kicad/kicad:10.0          # official KiCad 10 image, includes kicad-cli
+      options: --user root             # lets the job write to the checked-out workspace
+    env:
+      HOME: /tmp                       # kicad-cli needs a writable home for its settings
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - run: kicad-cli sch export pdf --output kicad_schematic.pdf kicad_schematic/kicad_schematic.kicad_sch
+
+      - uses: actions/upload-artifact@v7
+        with:
+          path: kicad_schematic.pdf
+          archive: false
+          retention-days: 7
