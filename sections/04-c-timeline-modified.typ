@@ -14,10 +14,6 @@
   }
   (from: a - 1, to: b, content: label, style: (stroke: 10pt + color))
 }
-
-#[
-  #set text(size: 9pt)
-
   #align(center)[
     *Legend:*
     #box(fill: adriano-color, inset: 3pt)[*A*] Adriano
@@ -29,8 +25,8 @@
     (the first letter is the person leading the task)
   ]
 
-  #figure(
-    timeliney.timeline(
+  
+    #timeliney.timeline(
       show-grid: true,
       spacing: 3.5pt,
       {
@@ -86,7 +82,7 @@
           task("Electrical design (power, wiring, schematic)", iv(4, 7, "J"))
           task("Mechanical design (CAD) and 3D printing", iv(3, 7, "A"), iv(9, 9, "A"), iv(14, 14, "A"))
           task("Project expenses and budget", iv(10, 10, "A"), iv(13, 13, "A"))
-          task("Website, weekly records, and report", iv(3, 15, "J"))
+          task("Website, weekly records, and report", iv(3, 15, "J/A"))
         })
 
         milestone(text(size: 7pt)[*Oct 11* Checkpoint 1], at: 7)
@@ -95,7 +91,4 @@
         milestone(text(size: 7pt)[*Nov 20* Final report], at: 12.7)
         milestone(text(size: 7pt)[*Dec 4* Presentation], at: 14.7)
       },
-    ),
-    caption: [Modified Safe Dip implementation schedule.],
-  ) <figure:gantt-modified>
-]
+    )
