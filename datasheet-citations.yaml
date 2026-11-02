@@ -31,7 +31,6 @@ meanwell-lrs350:
   type: report
   genre: Datasheet
   title: "350W Single Output Switching Power Supply {LRS-350} Series"
-  author: MEAN WELL Enterprises Co., Ltd.
   publisher: MEAN WELL Enterprises Co., Ltd.
   date: 2021-08-13
   serial-number: LRS-350-SPEC
@@ -64,6 +63,18 @@ stepperonline-dm542te-manual:
     date: 2026-07-27
     value: "https://www.omc-stepperonline.com/download/TE%20_series_user_manual.pdf"
 
+lm2596-datasheet:
+  type: report
+  genre: Datasheet
+  title: "LM2596 SIMPLE SWITCHER Power Converter 150-kHz 3-A Step-Down Voltage Regulator"
+  publisher: "Texas Instruments"
+  date: 2023-03-22
+  edition: "Revision G"
+  serial-number: "SNVS124G"
+  url:
+    date: 2026-11-02
+    value: "https://www.ti.com/lit/ds/symlink/lm2596.pdf"
+
 baomain-bm-p-80-38:
   type: web
   title: "BM-P 80-38 Electromagnet Solenoid, 1000 N Holding Force"
@@ -81,14 +92,14 @@ songle-srd-05vdc-sl-c:
     date: 2026-10-25
     value: "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Ningbo-Songle-Relay-SRD-05VDC-SL-C_C35449.pdf"
 
-hcsr04-datasheet:
+vishay-1n4007:
   type: report
   genre: Datasheet
-  title: "Ultrasonic Ranging Module HC-SR04"
-  publisher: "Elec Freaks"
+  title: "1N4001 through 1N4007 General-Purpose Plastic Rectifiers"
+  publisher: "Vishay Intertechnology, Inc."
   url:
-    date: 2026-10-25
-    value: "https://cdn.sparkfun.com/datasheets/Sensors/Proximity/HCSR04.pdf"
+    date: 2026-11-02
+    value: "https://www.vishay.com/en/product/88503/"
 
 modbus-application-protocol-v1-1b3:
   type: report
