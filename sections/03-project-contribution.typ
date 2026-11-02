@@ -40,7 +40,7 @@ The normal operating cycle is represented as an ordered list of nonblocking oper
 
 Each operation represents an absolute objective rather than a blocking procedure. For example, `MOVE_Y_UP` requests that the vertical axis move to its configured upper position. The operation hands the target to the motion planner and returns immediately; the sequencer then keeps checking the operation until the axis reports that the target has been reached.
 
-Two kinds of operations are planned but not yet part of the sequence. `HOME_Y` and `HOME_X` will drive each axis slowly toward its limit switch and set that point as position zero; they will run only after a start press, with the vertical axis homed first so that the end effector is raised before the gantry travels horizontally. `WAIT_FOR_PART` will hold the cycle before the pick stage until the ultrasonic sensor detects a workpiece at the input station, satisfying the requirement that no motion begins without a part present.
+Two kinds of operations are planned but not yet part of the sequence. `HOME_Y` and `HOME_X` will drive each axis slowly toward its limit switch and set that point as position zero; they will run only after a start press, with the vertical axis homed first so that the end effector is raised before the gantry travels horizontally. `WAIT_FOR_TRIGGER` will hold the cycle before the pick stage until the part-ready trigger is asserted, satisfying the requirement that no cycle begins without the trigger.
 
 #place.flush()
 ==== Operation Interface <sec:operation-interface>
