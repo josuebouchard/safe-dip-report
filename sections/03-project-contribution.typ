@@ -99,7 +99,7 @@ Each axis has its own motion planner, which converts a goal into a continuously 
     "/images/software/Motion Planner.svg",
     width: 100%,
   ),
-  caption: [One call of the motion planner's `process()` function. $v_"max"$ and $v_"land"$ are applied in the direction of the target.],
+  caption: [One call of the motion planner's `process()` function],
   placement: auto,
 )<flowchart:motion-planner>
 

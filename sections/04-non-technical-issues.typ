@@ -13,7 +13,12 @@
 
 The proposed implementation schedule spans sixteen weeks. Mechanical construction and firmware development proceed in parallel so that each subsystem can be tested soon after installation. The schedule intentionally reserves the final weeks for integrated testing, debugging, refinement, and presentation preparation.
 
-#include "04-b-timeline.typ"
+#page(flipped: true, margin: 0.45in)[
+  #set text(size: 11pt)
+
+  #include "04-b-timeline-proposal.typ"
+  #include "04-c-timeline-modified.typ"
+]
 
 == Project Expenses
 
