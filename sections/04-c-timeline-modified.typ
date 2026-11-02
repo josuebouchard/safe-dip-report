@@ -45,8 +45,8 @@
         })
 
         taskgroup(title: [*Sensors*], {
-          task("Install limit switches and test homing", iv(10, 10, "J/A"))
-          task("Select, order, and install the part-detection sensor", iv(9, 9, "J/A"), iv(11, 11, "J"))
+          task("Install limit switches and test homing", iv(11, 11, "J/A"))
+          task("Select the part-detection sensor", iv(9, 9, "J/A"))
         })
 
         taskgroup(title: [*Horizontal Axis*], {
@@ -56,12 +56,12 @@
 
         taskgroup(title: [*Vertical Axis*], {
           task("Install vertical-axis mechanism", iv(9, 9, "A"))
-          task("Program and test vertical-axis motion", iv(5, 6, "J"), iv(9, 9, "A/J"), iv(10, 10, "A/J"))
+          task("Program and test vertical-axis motion", iv(5, 6, "J"), iv(9, 9, "A/J"), iv(11, 11, "A/J"))
         })
 
         taskgroup(title: [*End Effector and Safety*], {
           task("Electromagnet driver and 12 V supply", iv(7, 7, "J/A"), iv(9, 9, "J"))
-          task("Wire and verify the emergency stop", iv(10, 11, "A/J"))
+          task("Wire and verify the emergency stop", iv(10, 10, "A/J"))
         })
 
         taskgroup(title: [*Integration and Validation*], {
