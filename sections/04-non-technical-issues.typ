@@ -58,7 +58,7 @@ As the build has progressed, responsibilities have shifted in several areas. @ta
       [*Primary responsibilities*],
     ),
     [Josué Bouchard],
-    [Embedded firmware; selection and interfacing of the workpiece-detection sensor and interfacing of the limit switches; horizontal- and vertical-axis motion control; supervisory state machine; Modbus TCP integration; electrical design, including the power distribution and wiring; system debugging; software-oriented verification; project documentation; and preparation of most of the report.],
+    [Embedded firmware; interfacing of the part-ready trigger input and the limit switches; horizontal- and vertical-axis motion control; supervisory state machine; Modbus TCP integration; electrical design, including the power distribution and wiring; system debugging; software-oriented verification; project documentation; and preparation of most of the report.],
     [Adriano Duque Mena],
     [Mechanical design in CAD, including the vertical assembly; mechanical frame assembly; installation of rails, transmissions, motors, and sensors; fabrication of custom parts; procurement of the mechanical components; mechanical troubleshooting; preparation of rated-load testing; and preparation of the mechanical parts of the report.],
     [Both],
@@ -71,6 +71,7 @@ The main changes are:
 
 - The external conveyor interfaces were removed from the project scope, so the conveyor activities in @figure:gantt no longer apply.
 - An HC-SR04 ultrasonic sensor was chosen for workpiece detection because of its affordability and availability, and it is assumed to be sufficient for the prototype.
+- The part-detection sensor was later replaced by a part-ready trigger input, on the advisor's recommendation, since the sensor's type and position depend on the conveyor, which is outside the project scope.
 - Electrical design and project documentation became part of Josué's responsibilities.
 - Mechanical design in CAD and the procurement of the mechanical components became part of Adriano's responsibilities.
 - Report preparation, previously shared, is now split: Josué writes most of the report, and Adriano contributes the mechanical parts.
@@ -114,8 +115,8 @@ The movement emergency stop is implemented as a Category 0 stop of the movement 
       [Fuse ratings and conductor sizes must be finalized from the actual branch currents and selected hardware.],
   
       [Loss of position reference],
-      [Normally-closed limit switches provide homing and boundary references, while the ultrasonic sensor verifies workpiece presence before the cycle begins.],
-      [Sensor detection does not make entry into the machine workspace safe while motion is enabled.],
+      [Normally-closed limit switches provide homing and boundary references, while the external part-ready trigger must be asserted before a cycle begins.],
+      [The trigger does not make entry into the machine workspace safe while motion is enabled.],
   
       [Thermal or coating exposure],
       [No heated coating material is used during prototype acceptance testing.],

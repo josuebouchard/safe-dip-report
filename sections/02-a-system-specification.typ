@@ -111,7 +111,7 @@
       [Limit switches],
       [
         - Normally-closed configuration
-        - One per axis end, used for homing
+        - One per axis, at the home end of travel, used for homing
         - Rated for the operating environment
       ],
       [Verified by commanding each axis to its respective home and confirming motion stops upon switch actuation.],

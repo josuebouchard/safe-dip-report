@@ -47,9 +47,9 @@
       [Execute one dip sequence and measure the dwell period with a stopwatch or equivalent timing instrument.],
 
       sr(),
-      [The system shall complete one full unattended pick-dip-place cycle, beginning with the part-ready trigger at the input station and ending with workpiece release at the output station and return to the home position.],
+      [The system shall complete one full unattended pick-dip-place cycle, beginning with the part-ready trigger and ending with workpiece release at the output station and return to the home position.],
       [Every stage completes in order without operator intervention.],
-      [Place a workpiece at the input station and command one operating cycle. Confirm that the system detects and acquires the workpiece, transfers it to the dipping position, lowers it to the programmed immersion depth, holds it for the programmed dwell time, raises it, transfers it to the output station, releases it, and returns to the home position.],
+      [Place a workpiece at the input station and assert the part-ready trigger. Confirm that the system acquires the workpiece, transfers it to the dipping position, lowers it to the programmed immersion depth, holds it for the programmed dwell time, raises it, transfers it to the output station, releases it, and returns to the home position.],
 
       sr(),
       [The system shall remove power from both stepper-motor drivers when the emergency stop is actuated.],

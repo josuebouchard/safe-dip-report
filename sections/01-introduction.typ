@@ -183,7 +183,7 @@ The E-stop module will contain all the mechanisms needed to perform a category-0
 
 The processing module is the heart of the system, encapsulating the microcontroller, which receives all inputs and translates them into the corresponding actuator responses. It also includes any and all components to ensure that the incoming data is at an acceptable input voltage for the microcontroller. This module receives its power from the power distribution module, and through the microcontroller's on-board power converter, it feeds #zi.V[3.3] to the other modules.
 
-The sensing module is composed of the ultrasonic sensor (HC-SR04) that detects the workpiece, as well as limiting switches and other sensors. Because the conveyor is outside the project scope, the system that supplies the workpieces also signals when one is ready, through a part-ready trigger input on the controller. For the demonstration, this input is driven by a push button.
+The sensing module is composed of the limit switches used to home each axis. Because the conveyor is outside the project scope, the system that supplies the workpieces also signals when one is ready, through a part-ready trigger input on the controller. For the demonstration, this input is driven by a push button.
 
 The movement module is composed of all the stepper motors and controllers required for the horizontal movement of the gantry and the movement of the vertical assembly.
 

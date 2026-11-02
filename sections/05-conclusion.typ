@@ -11,7 +11,7 @@
 
 Safe Dip is a safety-oriented pick-dip-place system designed to reduce worker exposure to the hazards associated with manual hot-melt coating operations. The design uses a two-axis Cartesian gantry to detect, acquire, transport, dip, and release a workpiece without requiring the operator to remain near the dipping area.
 
-The system is controlled by an STM32 microcontroller that coordinates the stepper-driven horizontal and vertical axes, the ultrasonic sensor, limit switches, electromagnet, emergency-stop input, and communication interfaces. Serial communication provides the baseline operator interface, while Modbus TCP through the W5500 module allows system states, sensor information, and fault conditions to be observed by external equipment.
+The system is controlled by an STM32 microcontroller that coordinates the stepper-driven horizontal and vertical axes, the part-ready trigger input, limit switches, electromagnet, emergency-stop input, and communication interfaces. Serial communication provides the baseline operator interface, while Modbus TCP through the W5500 module allows system states, sensor information, and fault conditions to be observed by external equipment.
 
 Safety is a central consideration in the design. A normally-closed, twist-reset emergency-stop button immediately removes power from the movement subsystem, while the conventional electromagnet remains powered from a separate supply so that actuating the movement emergency stop does not intentionally release the suspended workpiece. Fuses are also included in the prototype power branches to reduce the consequences of electrical faults.
 

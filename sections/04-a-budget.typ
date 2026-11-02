@@ -28,7 +28,7 @@
       [Power Supply (24 V)],
       [Mean Well LRS-350-24],
       [1],
-      price[\31.47],
+      price[31.47],
 
       [Microcontroller],
       [STM32 NUCLEO-F446RE],
