@@ -35,8 +35,17 @@ jobs:
 
       - run: kicad-cli sch export pdf --output kicad_schematic.pdf kicad_schematic/kicad_schematic.kicad_sch
 
+      # Writes kicad_schematic.svg (named after the schematic) into the folder.
+      - run: kicad-cli sch export svg --output . kicad_schematic/kicad_schematic.kicad_sch
+
       - uses: actions/upload-artifact@v7
         with:
           path: kicad_schematic.pdf
+          archive: false
+          retention-days: 7
+
+      - uses: actions/upload-artifact@v7
+        with:
+          path: kicad_schematic.svg
           archive: false
           retention-days: 7
