@@ -36,7 +36,7 @@
       price[31.00],
 
       [Stepper Motor],
-      [3HS22-2804S NEMA 23],
+      [23HS22-2804S NEMA 23],
       [2],
       price[26.74],
 
@@ -153,7 +153,7 @@
       [Relay],
       [DC 5V One-Channel Relay Module],
       [3],
-      price[8.99],
+      price[3.60],
 
       [Motor Mounting],
       [NEMA 23 Steel Mounting Bracket],
@@ -175,7 +175,7 @@
       table.cell(colspan: 3, align: right)[
         *Total (before tax)*
       ],
-      [*#price[553.28]*],
+      [*#price[547.89]*],
     ),
 
     caption: [Project component budget],
