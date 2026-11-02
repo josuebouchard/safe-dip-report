@@ -1,4 +1,5 @@
-# Typst build output (the published PDF lives in artifacts/)
+# Build output: the report PDF, the Gantt SVG and the schematic PDF are built
+# and uploaded by the GitHub Actions workflows, not kept in the repository
 /*.pdf
 /*.svg
 /*.png
