@@ -36,7 +36,7 @@ The task assignments shown in @figure:gantt identify a primary owner for each ac
       [*Primary responsibilities*],
     ),
     [Josué Bouchard],
-    [Embedded firmware; ultrasonic-sensor and limit-switch interfacing; horizontal- and vertical-axis motion control; supervisory state machine; Modbus TCP integration; system debugging; and software-oriented verification.],
+    [Embedded firmware; part-detection sensor and limit-switch interfacing; horizontal- and vertical-axis motion control; supervisory state machine; Modbus TCP integration; system debugging; and software-oriented verification.],
     [Adriano Duque Mena],
     [Mechanical frame assembly; installation of rails, transmissions, motors, sensors, and external conveyor interfaces; mechanical troubleshooting; fabrication support; and preparation of rated-load testing.],
     [Both],
@@ -70,8 +70,7 @@ As the build has progressed, responsibilities have shifted in several areas. @ta
 The main changes are:
 
 - The external conveyor interfaces were removed from the project scope, so the conveyor activities in @figure:gantt no longer apply.
-- An HC-SR04 ultrasonic sensor was chosen for workpiece detection because of its affordability and availability, and it is assumed to be sufficient for the prototype.
-- The part-detection sensor was later replaced by a part-ready trigger input, on the advisor's recommendation, since the sensor's type and position depend on the conveyor, which is outside the project scope.
+- The part-detection sensor was replaced by a part-ready trigger input, on the advisor's recommendation, since the sensor's type and position depend on the conveyor, which is outside the project scope.
 - Electrical design and project documentation became part of Josué's responsibilities.
 - Mechanical design in CAD and the procurement of the mechanical components became part of Adriano's responsibilities.
 - Report preparation, previously shared, is now split: Josué writes most of the report, and Adriano contributes the mechanical parts.
