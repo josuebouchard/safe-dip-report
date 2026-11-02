@@ -1,0 +1,81 @@
+name: Build report assets     # shown in the Actions tab
+
+on:                           # when it runs
+  push:
+    branches: [main]
+  pull_request:               # also on PRs, so problems show before merging
+  workflow_dispatch:          # adds a "Run workflow" button for testing any branch
+
+# The workflow only reads the repository; it never pushes or comments.
+permissions:
+  contents: read
+
+# A newer push to the same branch cancels the run that is still going.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false   # the token is not left on the runner
+
+      - name: Check the photos have no location metadata
+        run: |
+          sudo apt-get install -y -qq libimage-exiftool-perl > /dev/null
+          found=$(exiftool -q -q -r -if '$GPSLatitude' -p '$Directory/$FileName' \
+            -ext jpg -ext jpeg -ext png -ext heic -ext webp images || true)
+          if [ -n "$found" ]; then
+            echo "::error::These photos contain GPS coordinates; strip them before committing:"
+            echo "$found"
+            exit 1
+          fi
+
+      - uses: typst-community/setup-typst@v5
+        with:
+          typst-version: "0.15.1"      # the version that built the current PDF
+
+      - run: typst compile main.typ report.pdf
+
+      - name: Export the modified Gantt chart for the website
+        run: typst compile gantt-modified.typ gantt-modified.svg
+
+      - name: Check the PDF has no photo metadata
+        run: |
+          if strings -n 6 report.pdf | grep -qiE 'iPhone|GPSLat'; then
+            echo "::error::The PDF contains photo metadata (device or GPS)."
+            exit 1
+          fi
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: report
+          path: |
+            report.pdf
+            gantt-modified.svg
+          retention-days: 7            # old runs' files are deleted after a week
+
+  schematic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    container:
+      image: kicad/kicad:10.0          # official KiCad 10 image, includes kicad-cli
+      options: --user root             # lets the job write to the checked-out workspace
+    env:
+      HOME: /tmp                       # kicad-cli needs a writable home for its settings
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - run: kicad-cli sch export pdf --output kicad_schematic.pdf kicad_schematic/kicad_schematic.kicad_sch
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: kicad-schematic
+          path: kicad_schematic.pdf
+          retention-days: 7            # old runs' files are deleted after a week
