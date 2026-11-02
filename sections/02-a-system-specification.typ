@@ -108,15 +108,6 @@
         [*Specific Component*], [*Engineering Specifications*], [*Justification & Verification*]
       ),
 
-      [Ultrasonic sensor\ (HC-SR04)],
-      [
-        - Operating voltage: 5 VDC
-        - Detection range sufficient to cover the input station
-        - Blind zone under 3 cm
-        - Trigger and echo interface compatible with the microcontroller, with the 5 V echo output on a 5 V-tolerant input
-      ],
-      [Chosen for its affordability and availability, and assumed sufficient for the prototype. Verified by placing and removing a part at the input station and confirming correct detection in both cases. Electrical parameters from the manufacturer datasheet @hcsr04-datasheet.],
-
       [Limit switches],
       [
         - Normally-closed configuration

@@ -122,7 +122,14 @@ An inline fuse holder provides overcurrent protection for the switched supply ra
 
 === Sensing Module
 
-The sensing hardware provides the workpiece-presence and axis-homing feedback required for the sense-pick-dip-place sequence and satisfies the requirements in @table:module:sensing.
+The sensing hardware provides the axis-homing feedback required by the pick-dip-place sequence and satisfies the requirements in @table:module:sensing. Because the stepper motors run open loop, the controller knows each axis position only by counting the steps it has commanded, and that count is lost whenever the controller restarts or the drivers lose power during an emergency stop. Each axis therefore has a limit switch at the home end of its travel, which gives it a fixed physical reference: the axis is driven slowly toward its switch, and the point where the switch trips becomes position zero.
+
+The HiLetgo KW12-3 micro limit switch shown in @figure:limit-switch was selected for this purpose. It is a compact snap-action switch, 20 × 10.5 × 6.5 mm, with a roller lever that lets the moving carriage actuate it without a precise contact point. Its single-pole double-throw contacts provide common, normally-open, and normally-closed terminals, so the normally-closed contact can be used: a broken wire then reads the same as a tripped switch and stops the axis instead of letting it drive past home. The contacts are rated for 5 A at 125 VAC, far above the low-voltage, low-current logic signal they switch in Safe Dip. The switches are sold in packs of ten, which leaves spares beyond the two that the axes require.
+
+#figure(
+  image("../images/hardware/limit_switches.jpg", width: 65%),
+  caption: [HiLetgo KW12-3 micro limit switch with roller lever]
+)<figure:limit-switch>
 
 === Power Distribution Module
 
@@ -208,11 +215,11 @@ For the extension goal to communicate using Modbus-TCP, a W5500 was chosen. The 
 
 @figure:schematic shows the complete electrical schematic of Safe Dip, drawn in KiCad. It connects the power supplies, the emergency-stop circuit, the stepper drivers, the electromagnet driver, the sensors, and the Nucleo board, and it is the reference for the wiring of the prototype.
 
-#page(flipped: true)[
-#figure(
-  image("../images/hardware/schematic.svg", height: 82%),
-  caption: [Electrical schematic of the Safe Dip prototype.],
-) <figure:schematic>
+#page(flipped: true, margin: (x: .45in, top: .45in))[
+  #figure(
+    image("../images/hardware/schematic.svg", height: 100%),
+    caption: [Electrical schematic of the Safe Dip prototype.],
+  ) <figure:schematic>
 ]
 
 == Software and Programming Languages

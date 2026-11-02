@@ -147,7 +147,7 @@ The following constraints define the boundaries within which Safe Dip is designe
 - Safe Dip operates along two axes only: a horizontal axis for transfer between the input station, dipping bath, and output station, and a vertical axis for picking, dipping, and placing the workpiece. The system does not support rotation or movement perpendicular to the horizontal travel path.
 - The system is designed to handle cylindrical workpieces within the specified size and payload limits.
 - Workpieces must be presented at a known, fixed input position. The system does not perform lateral alignment, orientation correction, or vision-based localization.
-- Each workpiece must provide a clean, flat, ferromagnetic attachment surface that remains outside the required coating area. Because the electromagnet remains in contact with this surface throughout the cycle, the attachment area will not be dipped or coated. Workpieces requiring complete surface coverage would require a different end effector or a secondary coating operation.
+- Each workpiece must provide a clean, flat, ferromagnetic attachment surface that remains outside the required coating area. Because the electromagnet remains in contact with this surface throughout the cycle, the attachment area will not be dipped or coated. Workpieces requiring complete surface coverage would require a different end effector or a secondary coating operation. 
 #v(1em)
 
 For the laboratory prototype, the following additional operating limitations apply:
@@ -156,6 +156,7 @@ For the laboratory prototype, the following additional operating limitations app
 - The laboratory prototype is designed and validated for workpieces with a maximum mass of 1 lb. Operation above this payload is outside the prototype's validated operating range.
 - The prototype shall not be operated with a heated dipping bath or exposed to temperatures beyond the rated limits of its selected components. All acceptance testing will be performed using an unheated, laboratory-safe medium under room-temperature conditions.
 - The prototype does not validate operation near molten wax, heated resin, process fumes, splashing hot material, or other industrial hot-dip conditions.
+- Because of budget limitations and component availability, the prototype uses a conventional electromagnet rather than one that holds the workpiece without power. A loss of the effector power supply or of mains power will therefore release the workpiece, although axis motion stops.
 #v(1em)
 
 This limitation keeps the prototype safe and practical to demonstrate in the laboratory. Using molten wax or another heated material would introduce burn, splash, spill, and fume hazards that would require additional protective equipment and facilities. Heat could also affect the frame, wiring, sensors, motors, lubrication, and end effector.
@@ -182,7 +183,7 @@ The E-stop module will contain all the mechanisms needed to perform a category-0
 
 The processing module is the heart of the system, encapsulating the microcontroller, which receives all inputs and translates them into the corresponding actuator responses. It also includes any and all components to ensure that the incoming data is at an acceptable input voltage for the microcontroller. This module receives its power from the power distribution module, and through the microcontroller's on-board power converter, it feeds #zi.V[3.3] to the other modules.
 
-The sensing module is composed of the ultrasonic sensor (HC-SR04) that detects the workpiece, as well as limiting switches and other sensors.
+The sensing module is composed of the ultrasonic sensor (HC-SR04) that detects the workpiece, as well as limiting switches and other sensors. Because the conveyor is outside the project scope, the system that supplies the workpieces also signals when one is ready, through a part-ready trigger input on the controller. For the demonstration, this input is driven by a push button.
 
 The movement module is composed of all the stepper motors and controllers required for the horizontal movement of the gantry and the movement of the vertical assembly.
 

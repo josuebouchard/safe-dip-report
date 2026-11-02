@@ -1,4 +1,4 @@
-The power budget of the Safe Dip prototype is given in @power-budget, which lists the voltage, current, and power of each load, and @power-sources compares the resulting demand with the rating of each supply. The two stepper motors and their drivers are powered from the 24 V rail, the electromagnet from the 12 V rail, and the sensing, communications, and processing modules from the 5 V and 3.3 V rails derived from them. The figures for the motors and drivers are worst-case values, computed as the supply voltage multiplied by the rated current.
+The power budget of the Safe Dip prototype is given in @power-budget, which lists the voltage, current, and power of each load, and @power-sources compares the resulting demand with the rating of each supply. The two stepper motors and their drivers are powered from the 24 V rail, the electromagnet from the 12 V rail, and the emergency-stop, communications, and processing modules from the 5 V and 3.3 V rails derived from them. The figures for the motors and drivers are worst-case values, computed as the supply voltage multiplied by the rated current.
 
 #figure(
   table(
@@ -47,6 +47,20 @@ The power budget of the Safe Dip prototype is given in @power-budget, which list
     [2],
     [24],
 
+    // E-stop module
+    table.cell(
+      align: center + horizon,
+      inset: (x: 0.5em, y: 1em),
+    )[
+      #rotate(-90deg, reflow: true)[*E-Stop*]
+    ],
+    [E-stop relay],
+    [5],
+    [≈0.07–0.10],
+    [≈0.5],
+    [2],
+    [≈1],
+
     // End-effector module
     table.cell(
       rowspan: 2,
@@ -68,20 +82,6 @@ The power budget of the Safe Dip prototype is given in @power-budget, which list
     [≈0.5],
     [1],
     [≈0.5],
-
-    // Sensing module
-    table.cell(
-      align: center + horizon,
-      inset: (x: 0.5em, y: 1em),
-    )[
-      #rotate(-90deg, reflow: true)[*Sensing*]
-    ],
-    [Ultrasonic sensor \ (HC-SR04)],
-    [5],
-    [0.015],
-    [≈0.075],
-    [1],
-    [≈0.075],
 
     // Communications module
     table.cell(
@@ -119,7 +119,7 @@ The power budget of the Safe Dip prototype is given in @power-budget, which list
     )[
       *Total operational power*
     ],
-    [*177.7 W*],
+    [*178.7 W*],
   ),
   caption: [Power budget for the Safe Dip prototype.]
 )<power-budget>
@@ -199,10 +199,10 @@ The Safe Dip prototype uses two independent AC-DC power adapters. The 24 V suppl
     [45%],
 
     [12 V],
-    [Electromagnet, and, through the 12 V to 5 V buck converter, the electromagnet driver, ultrasonic sensor, Ethernet module, and STM32 (conversion losses neglected)],
-    [19.3],
+    [Electromagnet, and, through the 12 V to 5 V buck converter, the e-stop relays, electromagnet driver, Ethernet module, and STM32 (conversion losses neglected)],
+    [20.3],
     [60],
-    [32%],
+    [34%],
 
     table.cell(
       colspan: 2,
@@ -211,9 +211,9 @@ The Safe Dip prototype uses two independent AC-DC power adapters. The 24 V suppl
     )[
       *Total*
     ],
-    [*177.7*],
+    [*178.7*],
     [*410.4*],
-    [*43%*],
+    [*44%*],
   ),
   caption: [Load on each power rail compared with the rating of its AC-DC power adapter.]
 )<power-rails>

@@ -22,9 +22,9 @@
       ),
 
       sr(),
-      [The system shall not initiate motion unless a workpiece is detected at the input station.],
-      [Pick sequence initiates with a workpiece present; no motion initiates with it absent.],
-      [Place a workpiece at the input station and command an operating cycle. Remove the workpiece and command another cycle.],
+      [The system shall not initiate a pick-dip-place cycle unless its part-ready trigger input is asserted.],
+      [A cycle starts with the trigger asserted; no motion starts with it released or disconnected.],
+      [Command a cycle with the trigger asserted by a push button. Release it, then disconnect it, and command a cycle each time.],
 
       sr(),
       [The system shall position the end effector at the programmed pickup position within $plus.minus #zi.cm[1]$ along both axes before acquiring the workpiece.],
@@ -47,7 +47,7 @@
       [Execute one dip sequence and measure the dwell period with a stopwatch or equivalent timing instrument.],
 
       sr(),
-      [The system shall complete one full unattended pick-dip-place cycle, beginning with workpiece detection at the input station and ending with workpiece release at the output station and return to the home position.],
+      [The system shall complete one full unattended pick-dip-place cycle, beginning with the part-ready trigger at the input station and ending with workpiece release at the output station and return to the home position.],
       [Every stage completes in order without operator intervention.],
       [Place a workpiece at the input station and command one operating cycle. Confirm that the system detects and acquires the workpiece, transfers it to the dipping position, lowers it to the programmed immersion depth, holds it for the programmed dwell time, raises it, transfers it to the output station, releases it, and returns to the home position.],
 
