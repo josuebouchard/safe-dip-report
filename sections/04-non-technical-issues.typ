@@ -33,7 +33,7 @@ The proposed implementation schedule spans sixteen weeks. Mechanical constructio
 
 == Project Expenses
 
-The monetary budget in this section represents a preliminary estimate for the laboratory prototype. Prices were obtained from currently available commercial listings and may change as component availability, shipping costs, taxes, and final mechanical dimensions are resolved.
+This section compares three budgets: the budget proposed in the Senior Design Proposal, the total spent on the prototype to date, and the cost of the parts in the final design. Prices are from the commercial listings the parts were bought from and exclude taxes and shipping.
 
 #include "04-a-budget.typ"
 
