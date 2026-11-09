@@ -45,7 +45,7 @@
         })
 
         taskgroup(title: [*Sensors*], {
-          task("Install limit switches and test homing", iv(11, 11, "J/A"))
+          task("Install limit switches and test homing", iv(11, 12, "J/A"))
           task("Select the part-detection sensor", iv(9, 9, "J/A"))
         })
 
@@ -56,7 +56,7 @@
 
         taskgroup(title: [*Vertical Axis*], {
           task("Install vertical-axis mechanism", iv(9, 9, "A"))
-          task("Program and test vertical-axis motion", iv(5, 6, "J"), iv(9, 9, "A/J"), iv(11, 11, "A/J"))
+          task("Program and test vertical-axis motion", iv(5, 6, "J"), iv(9, 9, "A/J"), iv(11, 12, "A/J"))
         })
 
         taskgroup(title: [*End Effector and Safety*], {
@@ -78,7 +78,7 @@
         })
 
         taskgroup(title: [*Software, Electrical, and Documentation*], {
-          task("Firmware, started in early August", iv(1, 8, "J"), iv(10, 11, "J"))
+          task("Firmware, started in early August", iv(1, 8, "J"), iv(10, 12, "J"))
           task("Electrical design (power, wiring, schematic)", iv(4, 7, "J"))
           task("Mechanical design (CAD) and 3D printing", iv(3, 7, "A"), iv(9, 9, "A"), iv(14, 14, "A"))
           task("Project expenses and budget", iv(10, 10, "A"), iv(13, 13, "A"))
