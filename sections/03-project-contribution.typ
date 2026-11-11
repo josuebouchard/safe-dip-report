@@ -111,7 +111,7 @@ $ d_"brake" = (v^2 - v_"land"^2) / (2a) $
 
 Once the remaining distance falls within $d_"brake"$, a landing flag is set and the desired speed becomes $v_"land"$ instead of $v_"max"$. If the axis is moving away from its target, the desired speed is zero, so the axis first brakes and then reverses. In velocity mode, the desired speed is simply the commanded speed. In both modes, the current speed is then ramped toward the desired speed by at most $a dot Delta t$ and sent to the stepper driver.
 
-The resulting motion is a trapezoidal speed profile, accelerating, cruising at $v_"max"$, and braking, followed by a short approach at the landing speed, which lets the axis stop exactly on the target step instead of overshooting or stalling short of it. With the current tuning, $v_"max" = 4000$ steps/s, $a = 4000$ steps/s², and $v_"land" = 100$ steps/s.
+The resulting motion is a trapezoidal speed profile, accelerating, cruising at $v_"max"$, and braking, followed by a short approach at the landing speed, which lets the axis stop exactly on the target step instead of overshooting or stalling short of it. With the current tuning, the horizontal axis uses $v_"max" = 200$ mm/s, $a = 100$ mm/s², and $v_"land" = 2.5$ mm/s, which the scale factor in @eq:steps-per-mm converts to 8000 steps/s, 4000 steps/s², and 100 steps/s. The vertical axis uses $v_"max" = 50$ mm/s, $a = 40$ mm/s², and $v_"land" = 0.5$ mm/s, or 10,000 steps/s, 8000 steps/s², and 100 steps/s.
 
 ==== Step Pulse Generation <sec:step-pulse>
 

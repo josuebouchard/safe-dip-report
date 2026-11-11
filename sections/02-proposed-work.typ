@@ -33,19 +33,75 @@ This section presents the theory behind the design: how the axes convert motor r
 
 === Axis Motion and Resolution
 
-With the stepper drivers set to $P$ microsteps per revolution, the leadscrew nut moves
+Both axes run open loop, so the firmware commands each position as a number of STEP pulses, and every distance in millimeters must be converted to pulses. Each pulse moves the motor by one microstep. With $N_"full"$ full steps per motor revolution and the driver DIP switches set to $M$ microsteps per full step, the number of pulses per revolution is
 
-$ Delta x = L / P $ <eq:resolution>
+$ N_"rev" = N_"full" M $ <eq:pulses-per-rev>
 
-per step, where $L$ is the leadscrew lead. At a linear speed $v$ the step rate is
+The 23HS22-2804S motor has a step angle of 1.8°, so $N_"full" = 200$, and both DM542TE drivers are set to $M = 8$, which gives $N_"rev" = 1600$ pulses per revolution.
 
-$ f_"step" = v / (Delta x) $ <eq:step-rate>
+One motor revolution moves an axis by a distance $L$ that depends on its transmission. On the horizontal axis, a pulley with $Z$ teeth advances a belt of pitch $p_"belt"$ by
+
+$ L_x = Z p_"belt" $ <eq:belt-travel>
+
+The GT2 belt has a pitch of 2 mm and the pulley has 20 teeth, so $L_x = 40$ mm. On the vertical axis, a leadscrew with $n_"starts"$ thread starts of pitch $p_"screw"$ advances the nut by its lead,
+
+$ L_y = n_"starts" p_"screw" $ <eq:screw-lead>
+
+The Tr8x8 leadscrew has a pitch of 2 mm and four starts, so $L_y = 8$ mm. The scale factor of an axis, in steps per millimeter, is then
+
+$ K = N_"rev" / L $ <eq:steps-per-mm>
+
+A position $x$ in millimeters, measured from the origin set by homing, corresponds to the step count
+
+$ N = "round"(K x) $ <eq:mm-to-steps>
+
+and a step count $N$ corresponds to the position
+
+$ x = N / K = (N L) / N_"rev" $ <eq:steps-to-mm>
+
+The firmware rounds to the nearest step. Positions are programmed in whole millimeters and $K$ is an integer on both axes, so the conversion is currently exact. One step moves the axis by
+
+$ Delta x = L / N_"rev" = 1 / K $ <eq:resolution>
+
+and at a linear speed $v$ in mm/s the step rate is
+
+$ f_"step" = K v = v / (Delta x) $ <eq:step-rate>
+
+The same factor converts an acceleration in mm/s² to steps/s². @table:axis-scale lists the resulting values for each axis. For example, a 100 mm move takes 4000 pulses on the horizontal axis and 20,000 pulses on the vertical axis.
+
+#figure(
+  table(
+    columns: (auto, auto, 1fr, 1fr),
+    align: (left + horizon, center + horizon, center + horizon, center + horizon),
+    inset: (x: 0.6em, y: 0.55em),
+    stroke: 0.5pt,
+
+    table.header(
+      [*Quantity*],
+      [*Symbol*],
+      [*Horizontal axis (X)*],
+      [*Vertical axis (Y)*],
+    ),
+
+    [Full steps per revolution], [$N_"full"$], [200], [200],
+    [Microsteps per full step], [$M$], [8], [8],
+    [Pulses per revolution], [$N_"rev"$], [1600], [1600],
+    [Travel per revolution], [$L$], [40 mm], [8 mm],
+    [Scale factor], [$K$], [40 steps/mm], [200 steps/mm],
+    [Distance per step], [$Delta x$], [0.025 mm], [0.005 mm],
+  ),
+  caption: [Conversion between stepper driver pulses and axis travel],
+)<table:axis-scale>
+
+#v(.5em)
+
+For the vertical axis, with $L = L_y$, the maximum safe payload is
 
 // Update from the proposal (Appendix A): keep v = n L and the payload equation,
 // but use the torque T(omega) read from the motor's 24 V torque--speed curve.
 $ m_"safe" = (2 pi T(omega) eta) / (S L g) $ <eq:payload>
 
-Here $T(omega)$ is the motor torque at the operating speed, $eta$ is the mechanical efficiency of the leadscrew, $S$ is the safety factor, and $g$ is the gravitational acceleration. The derivation of this expression from the leadscrew kinematics is given in #link(<appendix:calculations>)[Appendix D].
+Here $T(omega)$ is the motor torque at the operating speed, $eta$ is the mechanical efficiency of the leadscrew, $S$ is the safety factor, and $g$ is the gravitational acceleration. The derivation of this expression from the leadscrew kinematics is given in @appendix:calculations.
 
 === Step Pulse Generation
 
@@ -82,7 +138,7 @@ The structural frame and motion transmission of Safe Dip are built from standard
 
 The frame is assembled from 4040 T-slot aluminum extrusion, which forms the horizontal beam, the vertical column, and the supporting legs shown in @cad-model. The T-slot profile allows components to be mounted at arbitrary positions along each beam and secured with T-nuts and M5 hardware, which simplifies alignment during assembly and permits adjustment of the input, dipping, and output station positions.
 
-The horizontal axis is guided by an MGN12H linear rail and carriage and driven by a GT2 timing belt, converting the rotation of the horizontal NEMA 23 into the linear travel between stations described in @cad-dimensions. The vertical axis uses a Tr8x2 leadscrew supported by pillow-block bearings and coupled to the vertical NEMA 23 through a flexible shaft coupler; the leadscrew converts motor rotation into the controlled lifting and immersion motion, and its selection is supported by the leadscrew speed and payload calculations in #link(<appendix:calculations>)[Appendix A]. An anti-backlash nut block is used on the leadscrew to remove axial play so that programmed immersion depth remains repeatable across cycles.
+The horizontal axis is guided by an MGN12H linear rail and carriage and driven by a GT2 timing belt, converting the rotation of the horizontal NEMA 23 into the linear travel between stations described in @cad-dimensions. The vertical axis uses a Tr8x8 leadscrew (8 mm lead, 2 mm pitch, four starts) supported by pillow-block bearings and coupled to the vertical NEMA 23 through a flexible shaft coupler; the leadscrew converts motor rotation into the controlled lifting and immersion motion, and its selection is supported by the leadscrew speed and payload calculations in @appendix:calculations. An anti-backlash nut block is used on the leadscrew to remove axial play so that programmed immersion depth remains repeatable across cycles.
 
 #import "@preview/subpar:0.2.2"
 
