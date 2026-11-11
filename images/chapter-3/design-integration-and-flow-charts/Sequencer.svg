@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1060" height="900" viewBox="0 0 1060 900">
+<rect width="1060" height="900" fill="#fff"/>
+<path d="M320 68L320 95" fill="none" stroke="#3a414a" stroke-width="2.5"/>
+<polygon points="320,95 313,82 327,82" fill="#3a414a"/>
+<path d="M320 215L320 255" fill="none" stroke="#2e8b3d" stroke-width="2.5"/>
+<polygon points="320,255 313,242 327,242" fill="#2e8b3d"/>
+<path d="M320 375L320 420" fill="none" stroke="#2e8b3d" stroke-width="2.5"/>
+<polygon points="320,420 313,407 327,407" fill="#2e8b3d"/>
+<path d="M320 480L320 525" fill="none" stroke="#3a414a" stroke-width="2.5"/>
+<polygon points="320,525 313,512 327,512" fill="#3a414a"/>
+<path d="M320 655L320 690" fill="none" stroke="#2e8b3d" stroke-width="2.5"/>
+<polygon points="320,690 313,677 327,677" fill="#2e8b3d"/>
+<path d="M320 780L320 832" fill="none" stroke="#3a414a" stroke-width="2.5"/>
+<polygon points="320,832 313,819 327,819" fill="#3a414a"/>
+<path d="M530.0 155L1030 155L1030 860L420 860" fill="none" stroke="#d33a2c" stroke-width="2.5"/>
+<polygon points="420,860 433,853 433,867" fill="#d33a2c"/>
+<path d="M530.0 315L620 315" fill="none" stroke="#d33a2c" stroke-width="2.5"/>
+<polygon points="620,315 607,308 607,322" fill="#d33a2c"/>
+<path d="M770 365L770 400L980 400L980 860" fill="none" stroke="#3a414a" stroke-width="2.5"/>
+<path d="M530.0 590L620 590" fill="none" stroke="#d33a2c" stroke-width="2.5"/>
+<polygon points="620,590 607,583 607,597" fill="#d33a2c"/>
+<path d="M770 650L770 860" fill="none" stroke="#3a414a" stroke-width="2.5"/>
+<path d="M110.0 590L40 590L40 860L220 860" fill="none" stroke="#3a414a" stroke-width="2.5"/>
+<polygon points="220,860 207,853 207,867" fill="#3a414a"/>
+<rect x="190.0" y="12.0" width="260" height="56" rx="28.0" fill="#fff" stroke="#3a414a" stroke-width="2"/>
+<text x="320" y="47.3" text-anchor="middle" font-family="Libertinus Serif" font-size="22" fill="#000">Step sequencer</text>
+<path d="M320 95.0L530.0 155L320 215.0L110.0 155Z" fill="#fff" stroke="#3a414a" stroke-width="2"/>
+<text x="320" y="148.8" text-anchor="middle" font-family="Libertinus Serif" font-size="22" fill="#000">Is the sequencer</text>
+<text x="320" y="175.8" text-anchor="middle" font-family="Libertinus Serif" font-size="22" fill="#000">running?</text>
+<path d="M320 255.0L530.0 315L320 375.0L110.0 315Z" fill="#fff" stroke="#3a414a" stroke-width="2"/>
+<text x="320" y="308.8" text-anchor="middle" font-family="Libertinus Serif" font-size="22" fill="#000">Has the operation</text>
+<text x="320" y="335.8" text-anchor="middle" font-family="Libertinus Serif" font-size="22" fill="#000">started?</text>
+<rect x="620.0" y="265.0" width="300" height="100" rx="5" fill="#fff" stroke="#3a414a" stroke-width="2"/>
+<text x="770" y="308.8" text-anchor="middle" font-family="Libertinus Serif" font-size="22" fill="#000">Set the started flag;</text>
+<text x="770" y="335.8" text-anchor="middle" font-family="Libertinus Serif" font-size="22" fill="#000">start the operation</text>
+<rect x="170.0" y="420.0" width="300" height="60" rx="5" fill="#fff" stroke="#3a414a" stroke-width="2"/>
+<text x="320" y="457.3" text-anchor="middle" font-family="Libertinus Serif" font-size="22" fill="#000">Poll the operation</text>
+<path d="M320 525.0L530.0 590L320 655.0L110.0 590Z" fill="#fff" stroke="#3a414a" stroke-width="2"/>
+<text x="320" y="583.8" text-anchor="middle" font-family="Libertinus Serif" font-size="22" fill="#000">What did it</text>
+<text x="320" y="610.8" text-anchor="middle" font-family="Libertinus Serif" font-size="22" fill="#000">report?</text>
+<rect x="150.0" y="690.0" width="340" height="90" rx="5" fill="#fff" stroke="#3a414a" stroke-width="2"/>
+<text x="320" y="728.8" text-anchor="middle" font-family="Libertinus Serif" font-size="22" fill="#000">Clear the started flag;</text>
+<text x="320" y="755.8" text-anchor="middle" font-family="Libertinus Serif" font-size="22" fill="#000">advance to the next one</text>
+<rect x="620.0" y="530.0" width="300" height="120" rx="5" fill="#fff" stroke="#3a414a" stroke-width="2"/>
+<text x="770" y="570.3" text-anchor="middle" font-family="Libertinus Serif" font-size="22" fill="#000">Stop the sequencer;</text>
+<text x="770" y="597.3" text-anchor="middle" font-family="Libertinus Serif" font-size="22" fill="#000">keep the index on</text>
+<text x="770" y="624.3" text-anchor="middle" font-family="Libertinus Serif" font-size="22" fill="#000">this operation</text>
+<rect x="220.0" y="832.0" width="200" height="56" rx="28.0" fill="#fff" stroke="#3a414a" stroke-width="2"/>
+<text x="320" y="867.3" text-anchor="middle" font-family="Libertinus Serif" font-size="22" fill="#000">Return</text>
+<text x="330" y="241.6" text-anchor="start" font-family="Libertinus Serif" font-size="20" fill="#2e8b3d" font-weight="bold">Yes</text>
+<text x="330" y="403.6" text-anchor="start" font-family="Libertinus Serif" font-size="20" fill="#2e8b3d" font-weight="bold">Yes</text>
+<text x="330" y="678.6" text-anchor="start" font-family="Libertinus Serif" font-size="20" fill="#2e8b3d" font-weight="bold">Finished</text>
+<text x="535.0" y="141.6" text-anchor="start" font-family="Libertinus Serif" font-size="20" fill="#d33a2c" font-weight="bold">No</text>
+<text x="535.0" y="301.6" text-anchor="start" font-family="Libertinus Serif" font-size="20" fill="#d33a2c" font-weight="bold">No</text>
+<text x="532.0" y="576.6" text-anchor="start" font-family="Libertinus Serif" font-size="20" fill="#d33a2c" font-weight="bold">Aborted</text>
+<text x="25.0" y="576.6" text-anchor="start" font-family="Libertinus Serif" font-size="20" fill="#3a414a" font-weight="bold">Running</text>
+</svg>

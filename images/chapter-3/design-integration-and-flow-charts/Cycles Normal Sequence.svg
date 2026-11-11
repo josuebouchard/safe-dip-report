@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1420" height="640" viewBox="0 0 1420 640">
+<rect width="1420" height="640" fill="#fff"/>
+<path d="M170 156.0L170 189.0" fill="none" stroke="#3a414a" stroke-width="2.5"/>
+<polygon points="170,189.0 163,176.0 177,176.0" fill="#3a414a"/>
+<path d="M277.5 225L307.5 225L307.5 120L337.5 120" fill="none" stroke="#3a414a" stroke-width="2.5"/>
+<polygon points="337.5,120 324.5,113 324.5,127" fill="#3a414a"/>
+<path d="M445 156.0L445 189.0" fill="none" stroke="#3a414a" stroke-width="2.5"/>
+<polygon points="445,189.0 438,176.0 452,176.0" fill="#3a414a"/>
+<path d="M445 261.0L445 294.0" fill="none" stroke="#3a414a" stroke-width="2.5"/>
+<polygon points="445,294.0 438,281.0 452,281.0" fill="#3a414a"/>
+<path d="M552.5 330L582.5 330L582.5 120L612.5 120" fill="none" stroke="#3a414a" stroke-width="2.5"/>
+<polygon points="612.5,120 599.5,113 599.5,127" fill="#3a414a"/>
+<path d="M720 156.0L720 189.0" fill="none" stroke="#3a414a" stroke-width="2.5"/>
+<polygon points="720,189.0 713,176.0 727,176.0" fill="#3a414a"/>
+<path d="M720 261.0L720 294.0" fill="none" stroke="#3a414a" stroke-width="2.5"/>
+<polygon points="720,294.0 713,281.0 727,281.0" fill="#3a414a"/>
+<path d="M720 366.0L720 399.0" fill="none" stroke="#3a414a" stroke-width="2.5"/>
+<polygon points="720,399.0 713,386.0 727,386.0" fill="#3a414a"/>
+<path d="M827.5 435L857.5 435L857.5 120L887.5 120" fill="none" stroke="#3a414a" stroke-width="2.5"/>
+<polygon points="887.5,120 874.5,113 874.5,127" fill="#3a414a"/>
+<path d="M995 156.0L995 189.0" fill="none" stroke="#3a414a" stroke-width="2.5"/>
+<polygon points="995,189.0 988,176.0 1002,176.0" fill="#3a414a"/>
+<path d="M1102.5 225L1132.5 225L1132.5 120L1162.5 120" fill="none" stroke="#3a414a" stroke-width="2.5"/>
+<polygon points="1162.5,120 1149.5,113 1149.5,127" fill="#3a414a"/>
+<path d="M1270 156.0L1270 189.0" fill="none" stroke="#3a414a" stroke-width="2.5"/>
+<polygon points="1270,189.0 1263,176.0 1277,176.0" fill="#3a414a"/>
+<path d="M1377.5 225L1402.5 225L1402.5 590L30 590L30 120L62.5 120" fill="none" stroke="#3a414a" stroke-width="2.5"/>
+<polygon points="62.5,120 49.5,113 49.5,127" fill="#3a414a"/>
+<text x="170" y="54.9" text-anchor="middle" font-family="Libertinus Serif" font-size="30" fill="#000" font-weight="bold">HOME</text>
+<rect x="62.5" y="84.0" width="215" height="72" rx="5" fill="#fff" stroke="#3a414a" stroke-width="2"/>
+<text x="170" y="127.3" text-anchor="middle" font-family="Libertinus Serif" font-size="22" fill="#000">HOME_Y</text>
+<rect x="62.5" y="189.0" width="215" height="72" rx="5" fill="#fff" stroke="#3a414a" stroke-width="2"/>
+<text x="170" y="232.3" text-anchor="middle" font-family="Libertinus Serif" font-size="22" fill="#000">HOME_X</text>
+<text x="445" y="54.9" text-anchor="middle" font-family="Libertinus Serif" font-size="30" fill="#000" font-weight="bold">PICK</text>
+<rect x="337.5" y="84.0" width="215" height="72" rx="5" fill="#fff" stroke="#3a414a" stroke-width="2"/>
+<text x="445" y="127.3" text-anchor="middle" font-family="Libertinus Serif" font-size="22" fill="#000">MOVE_Y_DOWN</text>
+<rect x="337.5" y="189.0" width="215" height="72" rx="5" fill="#fff" stroke="#3a414a" stroke-width="2"/>
+<text x="445" y="218.8" text-anchor="middle" font-family="Libertinus Serif" font-size="22" fill="#000">EFFECTOR</text>
+<text x="445" y="245.8" text-anchor="middle" font-family="Libertinus Serif" font-size="22" fill="#000">ENGAGE</text>
+<rect x="337.5" y="294.0" width="215" height="72" rx="5" fill="#fff" stroke="#3a414a" stroke-width="2"/>
+<text x="445" y="337.3" text-anchor="middle" font-family="Libertinus Serif" font-size="22" fill="#000">MOVE_Y_UP</text>
+<text x="720" y="54.9" text-anchor="middle" font-family="Libertinus Serif" font-size="30" fill="#000" font-weight="bold">DIP</text>
+<rect x="612.5" y="84.0" width="215" height="72" rx="5" fill="#fff" stroke="#3a414a" stroke-width="2"/>
+<text x="720" y="127.3" text-anchor="middle" font-family="Libertinus Serif" font-size="22" fill="#000">MOVE_X_DIP</text>
+<rect x="612.5" y="189.0" width="215" height="72" rx="5" fill="#fff" stroke="#3a414a" stroke-width="2"/>
+<text x="720" y="232.3" text-anchor="middle" font-family="Libertinus Serif" font-size="22" fill="#000">MOVE_Y_DOWN</text>
+<rect x="612.5" y="294.0" width="215" height="72" rx="5" fill="#fff" stroke="#3a414a" stroke-width="2"/>
+<text x="720" y="337.3" text-anchor="middle" font-family="Libertinus Serif" font-size="22" fill="#000">DWELL</text>
+<rect x="612.5" y="399.0" width="215" height="72" rx="5" fill="#fff" stroke="#3a414a" stroke-width="2"/>
+<text x="720" y="442.3" text-anchor="middle" font-family="Libertinus Serif" font-size="22" fill="#000">MOVE_Y_UP</text>
+<text x="995" y="54.9" text-anchor="middle" font-family="Libertinus Serif" font-size="30" fill="#000" font-weight="bold">DEPOSIT</text>
+<rect x="887.5" y="84.0" width="215" height="72" rx="5" fill="#fff" stroke="#3a414a" stroke-width="2"/>
+<text x="995" y="127.3" text-anchor="middle" font-family="Libertinus Serif" font-size="22" fill="#000">MOVE_X_OUTPUT</text>
+<rect x="887.5" y="189.0" width="215" height="72" rx="5" fill="#fff" stroke="#3a414a" stroke-width="2"/>
+<text x="995" y="232.3" text-anchor="middle" font-family="Libertinus Serif" font-size="22" fill="#000">MOVE_Y_DOWN</text>
+<text x="1270" y="54.9" text-anchor="middle" font-family="Libertinus Serif" font-size="30" fill="#000" font-weight="bold">RELEASE</text>
+<rect x="1162.5" y="84.0" width="215" height="72" rx="5" fill="#fff" stroke="#3a414a" stroke-width="2"/>
+<text x="1270" y="113.8" text-anchor="middle" font-family="Libertinus Serif" font-size="22" fill="#000">EFFECTOR</text>
+<text x="1270" y="140.8" text-anchor="middle" font-family="Libertinus Serif" font-size="22" fill="#000">DISENGAGE</text>
+<rect x="1162.5" y="189.0" width="215" height="72" rx="5" fill="#fff" stroke="#3a414a" stroke-width="2"/>
+<text x="1270" y="232.3" text-anchor="middle" font-family="Libertinus Serif" font-size="22" fill="#000">MOVE_Y_UP</text>
+</svg>

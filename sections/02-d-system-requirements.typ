@@ -77,5 +77,5 @@
       [Attach a 1 lb workpiece and command one complete pick-dip-place cycle.]
     ),
     caption: [System requirements and verification criteria]
-  )
+  )<table:requirements>
 ]

@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1725" viewBox="0 0 900 1725">
+<rect width="900" height="1725" fill="#fff"/>
+<path d="M340 68L340 90" fill="none" stroke="#3a414a" stroke-width="2.5"/>
+<polygon points="340,90 333,77 347,77" fill="#3a414a"/>
+<path d="M340 170L340 197" fill="none" stroke="#3a414a" stroke-width="2.5"/>
+<polygon points="340,197 333,184 347,184" fill="#3a414a"/>
+<path d="M340 253L340 272" fill="none" stroke="#3a414a" stroke-width="2.5"/>
+<polygon points="340,272 333,259 347,259" fill="#3a414a"/>
+<path d="M340 328L340 345" fill="none" stroke="#3a414a" stroke-width="2.5"/>
+<polygon points="340,345 333,332 347,332" fill="#3a414a"/>
+<path d="M340 425L340 435" fill="none" stroke="#3a414a" stroke-width="2.5"/>
+<polygon points="340,435 333,422 347,422" fill="#3a414a"/>
+<path d="M340 1280L340 1310" fill="none" stroke="#3a414a" stroke-width="2.5"/>
+<polygon points="340,1310 333,1297 347,1297" fill="#3a414a"/>
+<path d="M340 1525L340 1562" fill="none" stroke="#3a414a" stroke-width="2.5"/>
+<polygon points="340,1562 333,1549 347,1549" fill="#3a414a"/>
+<path d="M340 1618L340 1637" fill="none" stroke="#3a414a" stroke-width="2.5"/>
+<polygon points="340,1637 333,1624 347,1624" fill="#3a414a"/>
+<path d="M340 555L340 615" fill="none" stroke="#d33a2c" stroke-width="2.5"/>
+<polygon points="340,615 333,602 347,602" fill="#d33a2c"/>
+<path d="M340 745L340 775" fill="none" stroke="#2e8b3d" stroke-width="2.5"/>
+<polygon points="340,775 333,762 347,762" fill="#2e8b3d"/>
+<path d="M340 895L340 915" fill="none" stroke="#d33a2c" stroke-width="2.5"/>
+<polygon points="340,915 333,902 347,902" fill="#d33a2c"/>
+<path d="M340 985L340 1050" fill="none" stroke="#3a414a" stroke-width="2.5"/>
+<polygon points="340,1050 333,1037 347,1037" fill="#3a414a"/>
+<path d="M340 1170L340 1200" fill="none" stroke="#d33a2c" stroke-width="2.5"/>
+<polygon points="340,1200 333,1187 347,1187" fill="#d33a2c"/>
+<path d="M340 1430L340 1465" fill="none" stroke="#d33a2c" stroke-width="2.5"/>
+<polygon points="340,1465 333,1452 347,1452" fill="#d33a2c"/>
+<path d="M560.0 495L600 495" fill="none" stroke="#2e8b3d" stroke-width="2.5"/>
+<polygon points="600,495 587,488 587,502" fill="#2e8b3d"/>
+<path d="M730 535L730 590L340 590" fill="none" stroke="#3a414a" stroke-width="2.5"/>
+<polygon points="340,590 353,583 353,597" fill="#3a414a"/>
+<path d="M560.0 835L600 835" fill="none" stroke="#2e8b3d" stroke-width="2.5"/>
+<polygon points="600,835 587,828 587,842" fill="#2e8b3d"/>
+<path d="M730 870L730 1020L340 1020" fill="none" stroke="#3a414a" stroke-width="2.5"/>
+<polygon points="340,1020 353,1013 353,1027" fill="#3a414a"/>
+<path d="M120.0 680L60 680L60 1020L340 1020" fill="none" stroke="#d33a2c" stroke-width="2.5"/>
+<polygon points="340,1020 327,1013 327,1027" fill="#d33a2c"/>
+<path d="M560.0 1110L730 1110L730 1295L340 1295" fill="none" stroke="#2e8b3d" stroke-width="2.5"/>
+<polygon points="340,1295 353,1288 353,1302" fill="#2e8b3d"/>
+<path d="M560.0 1370L600 1370" fill="none" stroke="#2e8b3d" stroke-width="2.5"/>
+<polygon points="600,1370 587,1363 587,1377" fill="#2e8b3d"/>
+<path d="M730 1425L730 1545L340 1545" fill="none" stroke="#3a414a" stroke-width="2.5"/>
+<polygon points="340,1545 353,1538 353,1552" fill="#3a414a"/>
+<path d="M340 1693L340 1715L20 1715L20 225L160.0 225" fill="none" stroke="#3a414a" stroke-width="2.5"/>
+<polygon points="160.0,225 147.0,218 147.0,232" fill="#3a414a"/>
+<rect x="220.0" y="12.0" width="240" height="56" rx="28.0" fill="#fff" stroke="#3a414a" stroke-width="2"/>
+<text x="340" y="47.3" text-anchor="middle" font-family="Libertinus Serif" font-size="22" fill="#000">Power on</text>
+<rect x="130.0" y="90.0" width="420" height="80" rx="5" fill="#fff" stroke="#3a414a" stroke-width="2"/>
+<text x="340" y="123.8" text-anchor="middle" font-family="Libertinus Serif" font-size="22" fill="#000">Initialize Ethernet, Modbus and the</text>
+<text x="340" y="150.8" text-anchor="middle" font-family="Libertinus Serif" font-size="22" fill="#000">controllers; disengage the effector</text>
+<rect x="160.0" y="197.0" width="360" height="56" rx="5" fill="#fff" stroke="#3a414a" stroke-width="2"/>
+<text x="340" y="232.3" text-anchor="middle" font-family="Libertinus Serif" font-size="22" fill="#000">Read the inputs and the time</text>
+<rect x="160.0" y="272.0" width="360" height="56" rx="5" fill="#fff" stroke="#3a414a" stroke-width="2"/>
+<text x="340" y="307.3" text-anchor="middle" font-family="Libertinus Serif" font-size="22" fill="#000">Debounce the Start button</text>
+<rect x="160.0" y="345.0" width="360" height="80" rx="5" fill="#fff" stroke="#3a414a" stroke-width="2"/>
+<text x="340" y="378.8" text-anchor="middle" font-family="Libertinus Serif" font-size="22" fill="#000">Stop any axis moving</text>
+<text x="340" y="405.8" text-anchor="middle" font-family="Libertinus Serif" font-size="22" fill="#000">into its limit switch</text>
+<path d="M340 435.0L560.0 495L340 555.0L120.0 495Z" fill="#fff" stroke="#3a414a" stroke-width="2"/>
+<text x="340" y="488.8" text-anchor="middle" font-family="Libertinus Serif" font-size="22" fill="#000">E-stop</text>
+<text x="340" y="515.8" text-anchor="middle" font-family="Libertinus Serif" font-size="22" fill="#000">pressed?</text>
+<rect x="600.0" y="455.0" width="260" height="80" rx="5" fill="#fff" stroke="#3a414a" stroke-width="2"/>
+<text x="730" y="488.8" text-anchor="middle" font-family="Libertinus Serif" font-size="22" fill="#000">Raise the</text>
+<text x="730" y="515.8" text-anchor="middle" font-family="Libertinus Serif" font-size="22" fill="#000">E-stop fault</text>
+<path d="M340 615.0L560.0 680L340 745.0L120.0 680Z" fill="#fff" stroke="#3a414a" stroke-width="2"/>
+<text x="340" y="673.8" text-anchor="middle" font-family="Libertinus Serif" font-size="22" fill="#000">Start pressed and</text>
+<text x="340" y="700.8" text-anchor="middle" font-family="Libertinus Serif" font-size="22" fill="#000">E-stop released?</text>
+<path d="M340 775.0L560.0 835L340 895.0L120.0 835Z" fill="#fff" stroke="#3a414a" stroke-width="2"/>
+<text x="340" y="828.8" text-anchor="middle" font-family="Libertinus Serif" font-size="22" fill="#000">Any fault</text>
+<text x="340" y="855.8" text-anchor="middle" font-family="Libertinus Serif" font-size="22" fill="#000">latched?</text>
+<rect x="600.0" y="800.0" width="260" height="70" rx="5" fill="#fff" stroke="#3a414a" stroke-width="2"/>
+<text x="730" y="842.3" text-anchor="middle" font-family="Libertinus Serif" font-size="22" fill="#000">Clear the faults</text>
+<rect x="160.0" y="915.0" width="360" height="70" rx="5" fill="#fff" stroke="#3a414a" stroke-width="2"/>
+<text x="340" y="957.3" text-anchor="middle" font-family="Libertinus Serif" font-size="22" fill="#000">Restart the cycle if stopped</text>
+<path d="M340 1050.0L560.0 1110L340 1170.0L120.0 1110Z" fill="#fff" stroke="#3a414a" stroke-width="2"/>
+<text x="340" y="1103.8" text-anchor="middle" font-family="Libertinus Serif" font-size="22" fill="#000">Any fault</text>
+<text x="340" y="1130.8" text-anchor="middle" font-family="Libertinus Serif" font-size="22" fill="#000">latched?</text>
+<rect x="160.0" y="1200.0" width="360" height="80" rx="5" fill="#fff" stroke="#3a414a" stroke-width="2"/>
+<text x="340" y="1233.8" text-anchor="middle" font-family="Libertinus Serif" font-size="22" fill="#000">Step the sequencer; the</text>
+<text x="340" y="1260.8" text-anchor="middle" font-family="Libertinus Serif" font-size="22" fill="#000">operation may raise a fault</text>
+<path d="M340 1310.0L560.0 1370L340 1430.0L120.0 1370Z" fill="#fff" stroke="#3a414a" stroke-width="2"/>
+<text x="340" y="1363.8" text-anchor="middle" font-family="Libertinus Serif" font-size="22" fill="#000">Any fault</text>
+<text x="340" y="1390.8" text-anchor="middle" font-family="Libertinus Serif" font-size="22" fill="#000">latched?</text>
+<rect x="600.0" y="1315.0" width="260" height="110" rx="5" fill="#fff" stroke="#3a414a" stroke-width="2"/>
+<text x="730" y="1350.3" text-anchor="middle" font-family="Libertinus Serif" font-size="22" fill="#000">Safe state: stop the</text>
+<text x="730" y="1377.3" text-anchor="middle" font-family="Libertinus Serif" font-size="22" fill="#000">sequencer and axes,</text>
+<text x="730" y="1404.3" text-anchor="middle" font-family="Libertinus Serif" font-size="22" fill="#000">engage the effector</text>
+<rect x="160.0" y="1465.0" width="360" height="60" rx="5" fill="#fff" stroke="#3a414a" stroke-width="2"/>
+<text x="340" y="1502.3" text-anchor="middle" font-family="Libertinus Serif" font-size="22" fill="#000">Run both stepper controllers</text>
+<rect x="160.0" y="1562.0" width="360" height="56" rx="5" fill="#fff" stroke="#3a414a" stroke-width="2"/>
+<text x="340" y="1597.3" text-anchor="middle" font-family="Libertinus Serif" font-size="22" fill="#000">Record the loop time</text>
+<rect x="160.0" y="1637.0" width="360" height="56" rx="5" fill="#fff" stroke="#3a414a" stroke-width="2"/>
+<text x="340" y="1672.3" text-anchor="middle" font-family="Libertinus Serif" font-size="22" fill="#000">Serve Modbus TCP</text>
+<text x="350" y="581.6" text-anchor="start" font-family="Libertinus Serif" font-size="20" fill="#d33a2c" font-weight="bold">No</text>
+<text x="350" y="766.6" text-anchor="start" font-family="Libertinus Serif" font-size="20" fill="#2e8b3d" font-weight="bold">Yes</text>
+<text x="350" y="909.6" text-anchor="start" font-family="Libertinus Serif" font-size="20" fill="#d33a2c" font-weight="bold">No</text>
+<text x="350" y="1191.6" text-anchor="start" font-family="Libertinus Serif" font-size="20" fill="#d33a2c" font-weight="bold">No</text>
+<text x="350" y="1453.6" text-anchor="start" font-family="Libertinus Serif" font-size="20" fill="#d33a2c" font-weight="bold">No</text>
+<text x="565.0" y="481.6" text-anchor="start" font-family="Libertinus Serif" font-size="20" fill="#2e8b3d" font-weight="bold">Yes</text>
+<text x="565.0" y="821.6" text-anchor="start" font-family="Libertinus Serif" font-size="20" fill="#2e8b3d" font-weight="bold">Yes</text>
+<text x="70.0" y="666.6" text-anchor="start" font-family="Libertinus Serif" font-size="20" fill="#d33a2c" font-weight="bold">No</text>
+<text x="565.0" y="1096.6" text-anchor="start" font-family="Libertinus Serif" font-size="20" fill="#2e8b3d" font-weight="bold">Yes</text>
+<text x="565.0" y="1356.6" text-anchor="start" font-family="Libertinus Serif" font-size="20" fill="#2e8b3d" font-weight="bold">Yes</text>
+</svg>
