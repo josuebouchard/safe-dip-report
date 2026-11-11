@@ -1,4 +1,4 @@
-#import "template.typ": config
+#import "template.typ": config, appendix
 #import "coverpage.typ": coverpage
 #import "tables_of_content.typ":
 
@@ -51,6 +51,6 @@
 
 #metadata(false)<marker:references-end>
 
-// Todo: fix appendix figures
+#show: appendix
 
 #include "sections/99-appendix.typ"

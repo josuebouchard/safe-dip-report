@@ -16,6 +16,13 @@
           it.indented(none, [*Chapter #chapter_number #it.inner()*]),
         )
       ]
+    } else if it.element.supplement == [Appendix] {
+      let letter = numbering("A", counter(heading).at(it.element.location()).first())
+
+      link(
+        it.element.location(),
+        it.indented(none, [*Appendix #letter - #it.inner()*]),
+      )
     } else {
       link(
         it.element.location(),

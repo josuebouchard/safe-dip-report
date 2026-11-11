@@ -1,13 +1,9 @@
 #import "@preview/zebraw:0.6.0": *
 
 
-= Appendix A - Programming Code <appendix:code>
+= Programming Code <appendix:code>
 
-#show figure: set figure(numbering: (a) => "A."+str(a))
-
-= Appendix B - Applicable Engineering Codes and Standards
-
-#show figure: set figure(numbering: (a) => "B."+str(a))
+= Applicable Engineering Codes and Standards
 
 The codes and standards in @applicable-standards were identified as relevant references for the design and development of Safe Dip. Their inclusion does not represent a claim of certification or complete compliance. Formal compliance would require evaluation of the finished system against the complete requirements of each applicable document.
 
@@ -81,7 +77,7 @@ The codes and standards in @applicable-standards were identified as relevant ref
   )<applicable-standards>
 ]
 
-= Appendix C - Datasheets
+= Datasheets
 
 #bibliography(
   "../datasheet-citations.yaml",
@@ -90,9 +86,7 @@ The codes and standards in @applicable-standards were identified as relevant ref
   full: true
 )
 
-= Appendix D - Calculations <appendix:calculations>
-
-#show figure: set figure(numbering: (a) => "D."+str(a))
+= Calculations <appendix:calculations>
 
 == Leadscrew calculations<sec:leadscrew-calculations>
 
@@ -124,7 +118,7 @@ In these equations, $L$ is the leadscrew lead, defined as the axial distance tra
 
 The torque used in @eq:max-safe-weight-vertical should be obtained from the motor's torque--speed curve at the intended operating speed. The static holding torque should not be used for a moving-axis calculation because the available motor torque decreases as rotational speed increases.
 
-= Appendix E - Team Biographies
+= Team Biographies
 
 #grid(
   columns: (150pt, 1fr),

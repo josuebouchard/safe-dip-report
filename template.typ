@@ -47,6 +47,13 @@
         #set text(size: 2.5em, weight: "regular", fill: red)
         *#it.body*
       ]
+    } else if it.supplement == [Appendix] {
+      // Appendix heading: looks like a regular heading, lettered by the counter
+      align(center)[
+        #block(below: 2em)[
+          #text(size: 24pt)[Appendix #counter(heading).display("A") - #it.body]
+        ]
+      ]
     } else {
       // Regular heading
       align(center)[
@@ -62,6 +69,7 @@
     // While it says kind:image, it works for all figures
     counter(figure.where(kind: image)).update(0)
     counter(figure.where(kind: table)).update(0)
+    counter(figure.where(kind: raw)).update(0)
   }
 
 
@@ -141,6 +149,19 @@
   #pagebreak()
 
 ]
+
+// Apply with `#show: appendix`. Every level-1 heading after it is an appendix:
+// write `= Title` and it becomes "Appendix A - Title", lettered by position.
+// Subheadings are numbered A.1, figures and tables A.1, A.2, ... per appendix,
+// and `@label` on an appendix heading prints "Appendix A".
+#let appendix(body) = {
+  set heading(numbering: "A.1", supplement: [Appendix])
+  show figure: set figure(numbering: (..nums) => (
+    numbering("A.1", counter(heading).get().first(), ..nums)
+  ))
+  counter(heading).update(0)
+  body
+}
 
 #let TODO_ENABLE = true
 
