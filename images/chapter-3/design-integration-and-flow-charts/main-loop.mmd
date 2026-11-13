@@ -1,0 +1,11 @@
+flowchart TD
+    power([Power on]) --> init[Initialize the hardware]
+    init --> read[Read the inputs]
+    read --> safety[Check the E-stop and limit switches]
+    safety --> start[Start button: clear the faults or restart the cycle]
+    start --> fault{Fault latched?}
+    fault -->|No| run[Run the cycle and move the axes]
+    fault -->|Yes| safe[Safe state: stop the axes, hold the part]
+    run --> report[Report the state over Modbus]
+    safe --> report
+    report -->|Next pass| read

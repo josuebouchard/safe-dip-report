@@ -1,0 +1,22 @@
+flowchart TB
+    subgraph Home
+        direction LR
+        hy[Home Y] --> hx[Home X]
+    end
+    subgraph Pick
+        direction LR
+        p1[Lower Y] --> p2[Engage magnet] --> p3[Raise Y]
+    end
+    subgraph Dip
+        direction LR
+        d1[Move X to bath] --> d2[Lower Y] --> d3[Dwell] --> d4[Raise Y]
+    end
+    subgraph Deposit
+        direction LR
+        o1[Move X to output] --> o2[Lower Y]
+    end
+    subgraph Release
+        direction LR
+        r1[Release magnet] --> r2[Raise Y]
+    end
+    Home --> Pick --> Dip --> Deposit --> Release --> again([Back to Home])

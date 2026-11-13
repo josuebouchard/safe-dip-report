@@ -177,7 +177,7 @@
       #set par(first-line-indent: 0in)
       
       #text(fill: rgb("c92a2a"), weight: "bold")[
-        ⚠️ HEMINGWAY BRIDGE:
+        ⚠️ TODO Note:
       ]
       #v(2pt) 
       #text(fill: rgb("212529"))[#body]

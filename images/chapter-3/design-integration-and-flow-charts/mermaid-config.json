@@ -1,0 +1,12 @@
+{
+  "theme": "neutral",
+  "htmlLabels": false,
+  "flowchart": {
+    "htmlLabels": false,
+    "curve": "linear",
+    "useMaxWidth": false,
+    "nodeSpacing": 30,
+    "rankSpacing": 35,
+    "wrappingWidth": 170
+  }
+}

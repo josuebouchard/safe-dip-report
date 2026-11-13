@@ -1,0 +1,10 @@
+flowchart TD
+    begin([Move starts]) --> target[Convert the position to steps and set the target]
+    target --> arrived{On the target?}
+    arrived -->|Yes| finished([Finished])
+    arrived -->|No| limit{Switch pressed?}
+    limit -->|Yes| fault[Stop the axis and raise a fault]
+    limit -->|No| stopped{Stopped early?}
+    stopped -->|Yes| fault
+    stopped -->|No, next pass| arrived
+    fault --> aborted([Aborted])

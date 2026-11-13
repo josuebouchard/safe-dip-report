@@ -1,0 +1,11 @@
+flowchart TD
+    begin([Step the sequencer]) --> started{Started?}
+    started -->|No| start[Start the operation]
+    started -->|Yes| poll[Poll the operation]
+    poll --> result{Result?}
+    result -->|Finished| advance[Advance to the next operation]
+    result -->|Aborted| stop[Stop on this operation]
+    result -->|Running| done([Return])
+    start --> done
+    advance --> done
+    stop --> done

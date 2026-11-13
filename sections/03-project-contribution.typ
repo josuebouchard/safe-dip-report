@@ -10,13 +10,33 @@
 #let site = "https://safe-dip.vercel.app/progress/"
 
 // A numbered video with a link, as the course asks: "Video 3.1: Title, https://..."
-#let video(file, caption) = figure(
-  [],
+// It is a figure so that @labels and the numbering work, but it is drawn as a
+// left-aligned box: the title on one line, the link below it.
+#let video(file, title) = figure(
+  link(site + file),
   kind: "video",
   supplement: [Video],
-  gap: 0pt,
-  caption: [#caption, #link(site + file)],
+  caption: title,
 )
+
+// Room between a figure's caption and the text around it.
+#show figure.where(kind: image): set block(above: 1.4em, below: 1.4em)
+#show figure.where(kind: table): set block(above: 1.4em, below: 1.4em)
+
+#show figure.where(kind: "video"): it => block(
+  width: 100%,
+  above: 1.4em,
+  below: 1.4em,
+  inset: (x: 10pt, y: 8pt),
+  fill: luma(247),
+  stroke: (left: 2pt + luma(150)),
+  breakable: false,
+)[
+  #set align(left)
+  #set par(first-line-indent: 0pt, justify: false)
+  *#it.supplement #context it.counter.display(it.numbering):* #it.caption.body \
+  #text(size: 9pt, it.body)
+]
 
 // One problem from the build, in the order the course asks for.
 #let issue(symptom: none, cause: none, solution: none, result: none) = [
@@ -30,7 +50,7 @@
 ]
 
 #chapter(
-  description: [This chapter presents the work carried out to turn the Safe Dip design into a working prototype. It explains how the hardware and firmware modules connect and operate together, describes how each module was built, wired, and programmed, and records the significant problems found along the way with their causes and solutions. It then tests each system requirement against its success criterion, summarizes the results, and shows the prototype as built.]
+  description: [This chapter presents the work carried out to turn the Safe Dip design into a working prototype. It explains how the hardware and firmware modules connect and operate together, describes how each module was built, wired, and programmed, and records the significant problems found along the way with their causes and solutions. It then tests each system requirement against its success criterion, summarizes the results, and shows the prototype as built.],
 )[Project Contribution]
 
 == Design Integration and Flow Charts
@@ -42,12 +62,12 @@ The control software uses a cooperative, nonblocking architecture. Rather than e
 The firmware is divided into layers, and the build system rejects any dependency that points the wrong way. The driver layer handles timers and pins; the control layer turns a position request into a speed over time; the sequencer runs an ordered list of steps; the operations layer defines the kinds of step that exist; and the application layer is the only one that knows the whole machine, including its axes, cycle, and Modbus registers.
 
 #figure(
-  image(flow + "Main Loop.svg", height: 80%),
-  caption: [One pass of the firmware's main loop],
+  image(flow + "main-loop.pdf", height: 540pt),
+  caption: [The firmware's main loop],
   placement: auto,
 )<flowchart:main-structure>
 
-As shown in @flowchart:main-structure, the software first initializes the Ethernet controller, the Modbus TCP task, and the motion controllers, disengages the electromagnet, and then enters a continuous main loop. Each pass reads all inputs and the time once, so that everything in that pass acts on the same values. Two safety checks then run before the sequencer: any axis moving into its limit switch is stopped, and a pressed emergency stop raises a fault. A press of the Start button with the emergency stop released either clears the latched faults or, if there are none and the cycle is stopped, restarts the cycle.
+@flowchart:main-structure shows the main loop in outline. The software first initializes the Ethernet controller, the Modbus TCP task, and the motion controllers, disengages the electromagnet, and then enters a continuous main loop. Each pass reads all inputs and the time once, so that everything in that pass acts on the same values. Two safety checks then run before the sequencer: any axis moving into its limit switch is stopped, and a pressed emergency stop raises a fault. A press of the Start button with the emergency stop released either clears the latched faults or, if there are none and the cycle is stopped, restarts the cycle.
 
 If no fault is latched, the sequencer is stepped, and the current operation may itself raise a fault. A second check follows immediately, so a fault acts on the same pass in which it is raised: the machine enters its safe state instead of running the motion controllers. The duration of the pass is then recorded with the processor's cycle counter, which shows how quickly the firmware can respond. The communications interface is serviced last on every pass, including during a fault, so that the system state remains observable.
 
@@ -57,12 +77,12 @@ If no fault is latched, the sequencer is stepped, and the current operation may 
 The normal operating cycle is represented as an ordered list of thirteen nonblocking operations, shown in @flowchart:normal-cycle and grouped into five process stages: home, pick, dip, deposit, and release. After the last operation completes, the sequence wraps around to the first, so the gantry repeats the cycle, homing both axes again at the start of each one.
 
 #figure(
-  image(flow + "Cycles Normal Sequence.svg", width: 100%),
+  image(flow + "normal-cycle.pdf", width: 100%),
   caption: [Normal pick-dip-place operation sequence],
   placement: auto,
 )<flowchart:normal-cycle>
 
-Each operation represents an absolute objective rather than a blocking procedure. For example, `MOVE_Y_UP` requests that the vertical axis move to its configured upper position. The operation hands the target to the motion controller and returns immediately; the sequencer then keeps checking the operation until the axis reports that the target has been reached. Positions and the dwell time are held in a recipe, in millimeters and milliseconds, that can be changed over Modbus.
+Each operation represents an absolute objective rather than a blocking procedure. For example, _Raise Y_ requests that the vertical axis move to its configured upper position. The operation hands the target to the motion controller and returns immediately; the sequencer then keeps checking the operation until the axis reports that the target has been reached. Positions, the dwell time, and the effector settle time are held in a recipe, in millimeters and milliseconds, that can be changed over Modbus.
 
 The home stage runs the vertical axis first, so that the end effector is raised before the gantry travels horizontally. Homing leaves the horizontal axis at its origin, which is where the pick stage takes place.
 
@@ -86,12 +106,20 @@ Each operation copies every configurable value it depends on when it starts. A v
     align: left + horizon,
     inset: (x: .5em, y: .75em),
     table.header([*Operation*], [*`start()`*], [*Finished when…*], [*Aborted when…*]),
-    [Move axis], [Converts the position to steps and sets the target], [The axis is on the target step], [Its limit switch is pressed, or something else stopped the move],
-    [Home axis], [Moves toward the limit switch at homing speed], [The axis has backed off the switch and the switch has released], [The switch stays pressed after backing off, or the time limit passes],
-    [Effector], [Engages or releases the electromagnet], [Immediately], [Never],
+    [Move axis],
+    [Converts the position to steps and sets the target],
+    [The axis is on the target step],
+    [Its limit switch is pressed, or something else stopped the move],
+
+    [Home axis],
+    [Moves toward the limit switch at homing speed],
+    [The axis has backed off the switch and the switch has released],
+    [The switch stays pressed after backing off, or the time limit passes],
+
+    [Effector], [Engages or releases the electromagnet], [The settle time has elapsed], [Never],
     [Dwell], [Records the start time and the dwell duration], [The dwell duration has elapsed], [Never],
   ),
-  caption: [Operations available to the sequencer]
+  caption: [Operations available to the sequencer],
 )<table:operations>
 
 This produces a clear abstraction boundary. The sequencer does not need to know which hardware timer is assigned to an axis, which GPIO pins control the stepper drivers, how many steps remain, or how the acceleration profile is calculated. Conversely, the modules do not need to know the structure of the pick-dip-place sequence, so each one can be developed and tested independently.
@@ -102,7 +130,7 @@ This produces a clear abstraction boundary. The sequencer does not need to know 
 The cycle sequencer keeps an index to the current operation, a flag indicating whether that operation has been started, and a flag indicating whether the system is running. @flowchart:sequencer shows one sequencer step.
 
 #figure(
-  image(flow + "Sequencer.svg", width: 90%),
+  image(flow + "sequencer.pdf", width: 450pt),
   caption: [One step of the cooperative cycle sequencer],
   placement: auto,
 )<flowchart:sequencer>
@@ -114,19 +142,19 @@ The sequencer can be stopped, which halts it in place, or restarted, which reset
 #place.flush()
 === Move and Homing Operations
 
-@flowchart:move shows how a move is checked on each poll. A move never expects its limit switch to be pressed, whichever way it is traveling: heading into the switch is a collision risk, and heading away from it means a stuck or miswired switch, lost steps, or an axis that was never homed.
+@flowchart:move shows a move from start to finish. Its checks repeat on every main-loop pass until the move finishes or aborts. A move never expects its limit switch to be pressed, whichever way it is traveling: heading into the switch is a collision risk, and heading away from it means a stuck or miswired switch, lost steps, or an axis that was never homed.
 
 #figure(
-  image(flow + "Move Operation.svg", width: 75%),
-  caption: [One poll of a move operation],
+  image(flow + "move-operation.pdf", height: 560pt),
+  caption: [A move operation],
   placement: auto,
 )<flowchart:move>
 
 Homing, shown in @flowchart:homing, drives the axis toward its switch at homing speed. When the switch trips, the origin is set a fixed back-off away from the switch, 40 mm on the horizontal axis and 20 mm on the vertical axis, and the axis moves to that origin. If the switch is still pressed after backing off, it cannot be trusted and the operation fails. A time limit, derived from the axis travel, the back-off, and the homing speed, catches an axis that never reaches its switch.
 
 #figure(
-  image(flow + "Homing.svg", width: 100%),
-  caption: [One poll of the homing operation],
+  image(flow + "homing.pdf", height: 520pt),
+  caption: [Homing one axis],
   placement: auto,
 )<flowchart:homing>
 
@@ -135,11 +163,11 @@ Homing, shown in @flowchart:homing, drives the axis toward its switch at homing 
 
 Each axis has its own motion controller, which converts a goal into a continuously updated step rate. The controller supports two control modes. In _position mode_, used for every move in the cycle, it drives the axis to a target step count. In _velocity mode_, it holds a commanded speed; the homing operations use this mode to drive each axis toward its limit switch.
 
-@flowchart:motion-planner shows one call of the controller's `process()` function, which is made for each axis on every iteration of the main loop in which no fault is latched.
+@flowchart:motion-planner shows how the controller updates an axis's speed. The update runs for each axis on every iteration of the main loop in which no fault is latched.
 
 #figure(
-  image(flow + "Motion Planner.svg", width: 100%),
-  caption: [One call of the motion controller's `process()` function],
+  image(flow + "motion-controller.pdf", height: 560pt),
+  caption: [One speed update of the motion controller],
   placement: auto,
 )<flowchart:motion-planner>
 
@@ -167,7 +195,7 @@ Releasing the emergency stop does not resume the interrupted operation. A first 
 
 === Communications
 
-The Modbus TCP server runs on the W5500 at port 502 and advances one step per main-loop pass without ever blocking. Read-only registers report the emergency-stop and Start inputs, whether the sequencer is running, whether each axis is on target, the commanded effector state, the current operation index, both axis positions in steps, every latched fault, the fault that came first, and the last and longest main-loop times. Writable registers hold the recipe; a value outside its allowed range is rejected, and a multi-register write is checked in full before anything is applied.
+The Modbus TCP server runs on the W5500 at port 502 and advances one step per main-loop pass without ever blocking. Read-only registers report the emergency-stop and Start inputs, whether the sequencer is running, whether each axis is on target, the commanded effector state, the current operation index, both axis positions in steps, every latched fault, the fault that came first, and the last and longest main-loop times. Writable registers hold the recipe; a value outside its allowed range is rejected, and a multi-register write is checked in full before anything is applied. A request whose header is malformed, or whose length exceeds the largest the protocol allows, closes the connection, because the start of the next request can no longer be found.
 
 Overall, this architecture combines cooperative scheduling with asynchronous peripheral operation. Hardware timers and their interrupts perform the timing-critical work, while the main loop coordinates higher-level behavior through the sequencer. This keeps the production sequence easy to understand while isolating the detailed control of the motors, end effector, dwell timing, and communications inside dedicated software modules.
 
@@ -194,6 +222,7 @@ The parts that carry the belt drive were designed in CAD and 3D printed, as show
     image(impl + "x-axis-and-frame/base-plate-motor-mount.png", height: 4.2cm),
     image(impl + "x-axis-and-frame/x-axis-holder-motor-mount.png", height: 4.2cm),
     image(impl + "x-axis-and-frame/motor-belt-adapter.png", height: 4.2cm),
+
     image(impl + "x-axis-and-frame/bearing-gear-adapter.png", height: 3cm),
     image(impl + "x-axis-and-frame/retaining-cap.png", height: 3cm),
   ),
@@ -226,7 +255,7 @@ The X-axis base holder and the Y-axis holder were then integrated into a single 
 
 The electromagnet was characterized before it was installed. Its resistance was measured and gave an estimated current of 1.2 A, and a later test connected directly to the 12 V supply with its flyback diode drew about 1.5 A, which is the value used in the power budget. A qualitative test with a hammer showed strong holding force even with little contact area.
 
-The holder in @fig:magnet-holder-cad is a cylindrical cage that seats the magnet at its lower end. Its third version was printed and fitted the magnet smoothly, with a 5/16-inch screw added as a secondary retention. The planned IRLZ44N MOSFET driver was replaced with a 5 V relay module for its better safety behavior: the 12 V supply runs through the normally closed contact, so the magnet stays powered whenever the relay coil is off, including if the controller resets or loses power. The controller drives the relay input through an open-drain output.
+The holder in @fig:magnet-holder-cad is a cylindrical cage that seats the magnet at its lower end. Its third version was printed and fitted the magnet smoothly, with a 5/16-inch screw added as a secondary retention. The planned IRLZ44N MOSFET driver was replaced with a 5 V relay module for its better safety behavior: the 12 V supply runs through the normally closed contact, so the magnet stays powered whenever the relay coil is off, including if the controller resets or loses power. The controller drives the relay input through an open-drain output. Because there is no feedback from the magnet, the cycle waits a settle time after each switch, 300 ms by default and adjustable over Modbus, so that the magnet has time to grip or release the part.
 
 #figure(
   image(impl + "end-effector/y-axis-magnet-holder.png", height: 6.5cm),
@@ -246,8 +275,6 @@ The 24 V supply was assembled and its output adjusted to 24.1 V. The electronics
   ),
   caption: [Electronics in the container during installation, seen from both sides],
 )<fig:enclosure>
-
-#todo[Confirm the final 12 V adapter. The Progress Log says the one used for the first tests met the specifications but was not the final one.]
 
 === Emergency Stop and Relays
 
@@ -282,7 +309,7 @@ Positions, speeds, and homing distances were later converted to millimeters usin
 
 All thirteen operations of the production cycle were implemented in order, with a Start button that restarts the cycle and an emergency stop that halts both axes while keeping the electromagnet engaged. The homing operations were then written, followed by fault handling: homing gained a time limit, a stuck switch became detectable, and a limit-switch press during a move stops the machine. Faults were made to stay latched until a Start press clears them. A full unattended cycle was run, started with the Start button.
 
-A bug found while connecting the X limit switch prompted a review of the firmware's structure, which was reorganized into the layers described in the previous section, around a machine layer that owns the state and lets operations raise their own faults. Static analysis was configured for the firmware at the same stage. Homing was then enabled in the sequence for both axes, with a separate back-off for each. A lost-step check that compared each switch hit with the previous origin was removed at this stage. Finally, the main-loop time was instrumented so that the responsiveness of the cooperative design could be measured.
+A bug found while connecting the X limit switch prompted a review of the firmware's structure, which was reorganized into the layers described in the previous section, around a machine layer that owns the state and lets operations raise their own faults. Static analysis was configured for the firmware at the same stage. Homing was then enabled in the sequence for both axes, with a separate back-off for each. A lost-step check that compared each switch hit with the previous origin was removed at this stage. The main-loop time was then instrumented so that the responsiveness of the cooperative design could be measured. Finally, a code review of the whole firmware found and fixed several defects, described in @sec:review.
 
 === Communications and Monitoring
 
@@ -363,6 +390,17 @@ This section records each significant problem found during the build, its cause,
   solution: [The socket was made nonblocking, the unnecessary interrupt disabling was removed, and the library was patched to return received data first.],
   result: [The registers were read and written correctly with `madbus-cli`.],
 )
+
+=== Defects Found in Code Review <sec:review>
+
+#issue(
+  symptom: [No failure had been observed. Before the final tests, the firmware was reviewed for defects that testing might not reveal.],
+  cause: [The review found that the Modbus library was told its response buffer was larger than it was, accepted request lengths beyond the largest the protocol allows, and unpacked multi-coil writes into the wrong place. The network gateway address was outside the board's subnet, and a speed profile with zero acceleration would have caused a division by zero.],
+  solution: [The buffer size and the request length are now checked, a malformed request header closes the connection, the coil unpacking was corrected, the gateway was moved into the subnet, and the speed limits are kept above zero.],
+  result: [The fixes are on a development branch that had not been merged at the time of writing.],
+)
+
+#todo[Record the retest of Modbus and of a full cycle after merging the review fixes.]
 
 === No Step Pulses From the Timer
 
@@ -628,19 +666,97 @@ Each requirement in @table:requirements was tested against its success criterion
       inset: (x: 0.4em, y: 0.4em),
       stroke: 0.5pt,
       table.header(
-        [*Req.*], [*Requirement*], [*Success criterion*], [*Test method*], [*Measured result*], [*Trials passed*], [*Pass/Fail*], [*Evidence*],
+        [*Req.*],
+        [*Requirement*],
+        [*Success criterion*],
+        [*Test method*],
+        [*Measured result*],
+        [*Trials passed*],
+        [*Pass/Fail*],
+        [*Evidence*],
       ),
-      [R-01], [No cycle without the part-ready trigger], [Starts only when asserted], [Push button: asserted, released, disconnected], [Trigger input not added yet], [--], [Not tested], [--],
-      [R-02], [Pickup position], [Within ±1 cm on both axes], [Ruler], [X: drift under 0.5 cm. Y: judged within 1 cm], [--], [Provisional pass], [@video:viability],
-      [R-03], [Workpiece retention], [No visible slip or detachment], [One observed cycle], [No slip or drop], [--], [Pass], [@video:viability],
+      [R-01],
+      [No cycle without the part-ready trigger],
+      [Starts only when asserted],
+      [Push button: asserted, released, disconnected],
+      [Trigger input not added yet],
+      [--],
+      [Not tested],
+      [--],
+
+      [R-02],
+      [Pickup position],
+      [Within ±1 cm on both axes],
+      [Ruler],
+      [X: drift under 0.5 cm. Y: judged within 1 cm],
+      [--],
+      [Provisional pass],
+      [@video:viability],
+
+      [R-03],
+      [Workpiece retention],
+      [No visible slip or detachment],
+      [One observed cycle],
+      [No slip or drop],
+      [--],
+      [Pass],
+      [@video:viability],
+
       [R-04], [Immersion depth], [Within ±1 cm], [Ruler], [Awaiting Y calibration], [--], [Not tested], [--],
       [R-05], [Dwell time], [Within ±1 s], [Stopwatch], [Observed, not documented], [--], [Not tested], [--],
-      [R-06], [Full unattended cycle], [All stages in order], [One observed cycle], [All stages, started with the Start button], [--], [Partial], [@video:viability],
-      [R-07], [E-stop removes driver power], [Power removed, motion stops], [Multimeter at drivers], [Observed earlier; relay has since failed], [--], [Not tested], [--],
-      [R-08], [Restart inhibit], [No motion before restart], [Reset, attempt motion, restart], [Observed, not documented], [--], [Not tested], [--],
-      [R-09], [State and fault reporting], [Correct labels transmitted], [Modbus monitor, induced fault], [State shown; faults checked informally], [--], [Partial], [@video:viability],
-      [R-10], [Ten consecutive cycles], [All complete, within tolerance], [Ten recorded cycles], [Awaiting Y calibration], [--], [Not tested], [--],
-      [R-11], [1 lb payload], [Full cycle without failure], [One cycle with weight], [2.5 lb or more held through a cycle], [--], [Pass], [--],
+      [R-06],
+      [Full unattended cycle],
+      [All stages in order],
+      [One observed cycle],
+      [All stages, started with the Start button],
+      [--],
+      [Partial],
+      [@video:viability],
+
+      [R-07],
+      [E-stop removes driver power],
+      [Power removed, motion stops],
+      [Multimeter at drivers],
+      [Observed earlier; relay has since failed],
+      [--],
+      [Not tested],
+      [--],
+
+      [R-08],
+      [Restart inhibit],
+      [No motion before restart],
+      [Reset, attempt motion, restart],
+      [Observed, not documented],
+      [--],
+      [Not tested],
+      [--],
+
+      [R-09],
+      [State and fault reporting],
+      [Correct labels transmitted],
+      [Modbus monitor, induced fault],
+      [State shown; faults checked informally],
+      [--],
+      [Partial],
+      [@video:viability],
+
+      [R-10],
+      [Ten consecutive cycles],
+      [All complete, within tolerance],
+      [Ten recorded cycles],
+      [Awaiting Y calibration],
+      [--],
+      [Not tested],
+      [--],
+
+      [R-11],
+      [1 lb payload],
+      [Full cycle without failure],
+      [One cycle with weight],
+      [2.5 lb or more held through a cycle],
+      [--],
+      [Pass],
+      [--],
     ),
     caption: [Verification summary of the system requirements],
   )<table:verification>

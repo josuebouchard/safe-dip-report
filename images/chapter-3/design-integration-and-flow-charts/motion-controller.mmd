@@ -1,0 +1,13 @@
+flowchart TD
+    begin([Update the axis speed]) --> ontarget{On the target step?}
+    ontarget -->|Yes| stop[Stop immediately]
+    ontarget -->|No| mode{Control mode?}
+    mode -->|Velocity| commanded[Aim for the commanded speed]
+    mode -->|Position| brake{Time to brake?}
+    brake -->|No| max[Aim for the maximum speed]
+    brake -->|Yes| land[Aim for the landing speed]
+    commanded --> ramp[Ramp toward that speed and send it to the driver]
+    max --> ramp
+    land --> ramp
+    ramp --> done([Return])
+    stop --> done

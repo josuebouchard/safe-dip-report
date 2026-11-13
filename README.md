@@ -26,6 +26,16 @@ kicad-cli sch export svg --output . kicad_schematic/kicad_schematic.kicad_sch
 
 Build output is not committed (see `.gitignore`).
 
+The Chapter 3 flowcharts are written in Mermaid, as the `.mmd` files in
+`images/chapter-3/design-integration-and-flow-charts/`. After editing one,
+rebuild the PDFs the report uses with mermaid-cli (`mmdc`):
+
+```sh
+sh images/chapter-3/design-integration-and-flow-charts/build.sh
+```
+
+Those PDFs are committed, so building the report doesn't need Mermaid.
+
 ## Automatic builds
 
 Two GitHub Actions workflows build the generated files, so there is no need to

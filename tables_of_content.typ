@@ -66,7 +66,11 @@
 #outline(
   title: none,
   target: selector(
-    figure.where(kind: image).or(figure.where(kind: raw)).or(figure.where(kind: math.equation)),
+    figure
+      .where(kind: image)
+      .or(figure.where(kind: raw))
+      .or(figure.where(kind: math.equation))
+      .or(figure.where(kind: "video")),
   ),
 )
 
@@ -78,4 +82,4 @@
   ),
 )
 
-#metadata(false)<marker:tables-of-content-end>
+#metadata(false)<marker:tables-of-content-end>

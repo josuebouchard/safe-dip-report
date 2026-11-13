@@ -1,0 +1,10 @@
+flowchart TD
+    begin([Homing starts]) --> drive[Drive toward the limit switch at homing speed]
+    drive --> pressed{Switch pressed?}
+    pressed -->|No| timeout{Timed out?}
+    timeout -->|No| drive
+    timeout -->|Yes| timedout([Timed-out fault])
+    pressed -->|Yes| backoff[Set the origin a back-off past the switch and back off to it]
+    backoff --> released{Switch released?}
+    released -->|Yes| finished([Finished])
+    released -->|No| failed([Homing-failed fault])
