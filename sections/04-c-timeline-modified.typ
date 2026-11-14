@@ -47,6 +47,7 @@
         taskgroup(title: [*Sensors*], {
           task("Install limit switches and test homing", iv(11, 12, "J/A"))
           task("Select the part-detection sensor", iv(9, 9, "J/A"))
+          task("Part-ready trigger input", iv(13, 13, "A/J"))
         })
 
         taskgroup(title: [*Horizontal Axis*], {
@@ -61,14 +62,14 @@
 
         taskgroup(title: [*End Effector and Safety*], {
           task("Electromagnet driver and 12 V supply", iv(7, 7, "J/A"), iv(9, 9, "J"))
-          task("Wire and verify the emergency stop", iv(10, 10, "A/J"))
+          task("Wire and verify the emergency stop", iv(10, 10, "A/J"), iv(13, 13, "J/A"))
         })
 
         taskgroup(title: [*Integration and Validation*], {
           task("Run cycles with a part (retention, dwell)", iv(10, 10, "A/J"))
           task("Record the formal viability video", iv(10, 10, "A/J"))
           task("Test the complete system", iv(11, 11, "J/A"))
-          task("Ten consecutive cycles and rated load", iv(12, 12, "J/A"))
+          task("Ten consecutive cycles and rated load", iv(12, 13, "J/A"))
           task("Debug the complete system", iv(13, 13, "J/A"))
         })
 
@@ -80,7 +81,7 @@
         taskgroup(title: [*Software, Electrical, and Documentation*], {
           task("Firmware, started in early August", iv(1, 8, "J"), iv(10, 12, "J"))
           task("Electrical design (power, wiring, schematic)", iv(4, 7, "J"))
-          task("Mechanical design (CAD) and 3D printing", iv(3, 7, "A"), iv(9, 9, "A"), iv(14, 14, "A"))
+          task("Mechanical design (CAD) and 3D printing", iv(3, 7, "A"), iv(9, 9, "A"), iv(13, 14, "A"))
           task("Project expenses and budget", iv(10, 10, "A"), iv(13, 13, "A"))
           task("Website, weekly records, and report", iv(3, 15, "J/A"))
         })
