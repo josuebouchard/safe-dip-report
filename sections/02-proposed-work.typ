@@ -47,7 +47,7 @@ The GT2 belt has a pitch of 2 mm and the pulley has 20 teeth, so $L_x = 40$ mm. 
 
 $ L_y = n_"starts" p_"screw" $ <eq:screw-lead>
 
-The Tr8x8 leadscrew has a pitch of 2 mm and four starts, so $L_y = 8$ mm. The scale factor of an axis, in steps per millimeter, is then
+The Tr8x2 leadscrew has a pitch of 2 mm and a single start, so $L_y = 2$ mm. The scale factor of an axis, in steps per millimeter, is then
 
 $ K = N_"rev" / L $ <eq:steps-per-mm>
 
@@ -67,7 +67,7 @@ and at a linear speed $v$ in mm/s the step rate is
 
 $ f_"step" = K v = v / (Delta x) $ <eq:step-rate>
 
-The same factor converts an acceleration in mm/s² to steps/s². @table:axis-scale lists the resulting values for each axis. For example, a 100 mm move takes 4000 pulses on the horizontal axis and 20,000 pulses on the vertical axis.
+The same factor converts an acceleration in mm/s² to steps/s². @table:axis-scale lists the resulting values for each axis. For example, a 100 mm move takes 4000 pulses on the horizontal axis and 80,000 pulses on the vertical axis.
 
 #figure(
   table(
@@ -86,22 +86,32 @@ The same factor converts an acceleration in mm/s² to steps/s². @table:axis-sca
     [Full steps per revolution], [$N_"full"$], [200], [200],
     [Microsteps per full step], [$M$], [8], [8],
     [Pulses per revolution], [$N_"rev"$], [1600], [1600],
-    [Travel per revolution], [$L$], [40 mm], [8 mm],
-    [Scale factor], [$K$], [40 steps/mm], [200 steps/mm],
-    [Distance per step], [$Delta x$], [0.025 mm], [0.005 mm],
+    [Travel per revolution], [$L$], [40 mm], [2 mm],
+    [Scale factor], [$K$], [40 steps/mm], [800 steps/mm],
+    [Distance per step], [$Delta x$], [0.025 mm], [0.00125 mm],
   ),
   caption: [Conversion between stepper driver pulses and axis travel],
 )<table:axis-scale>
 
 #v(.5em)
 
-For the vertical axis, with $L = L_y$, the maximum safe payload is
+=== Leadscrew Payload <sec:payload>
 
-// Update from the proposal (Appendix A): keep v = n L and the payload equation,
-// but use the torque T(omega) read from the motor's 24 V torque--speed curve.
-$ m_"safe" = (2 pi T(omega) eta) / (S L g) $ <eq:payload>
+The load that the vertical axis can lift follows from the kinematics of the leadscrew and the torque--speed curve of the motor. For a leadscrew with lead $L$, defined as the axial distance traveled by the nut during one revolution @moons-thrust-generation, the rotational speed $n$ that gives a linear speed $v$ is
 
-Here $T(omega)$ is the motor torque at the operating speed, $eta$ is the mechanical efficiency of the leadscrew, $S$ is the safety factor, and $g$ is the gravitational acceleration. The derivation of this expression from the leadscrew kinematics is given in @appendix:calculations.
+$ v = n L $ <eq:linear-speed>
+
+The vertical axis cruises at $v = 20$ mm/s, and with $L = L_y = 2$ mm this is $n = 10$ rev/s, or 600 rpm. At this speed the motor delivers the torque $T(omega)$ read from its torque--speed curve, where $omega = 2 pi n$ is the angular speed. The leadscrew converts this torque into an axial force, which carries a mass $m_"max"$ against gravity, and a safety factor $S$ gives the maximum safe payload:
+
+$ F_"axial" = (2 pi T(omega) eta) / L $ <eq:axial-force>
+
+$ m_"max" = F_"axial" / g = (2 pi T(omega) eta) / (L g) $ <eq:max-mass>
+
+$ m_"safe" = m_"max" / S = (2 pi T(omega) eta) / (S L g) $ <eq:payload>
+
+Here $eta$ is the mechanical efficiency of the leadscrew, which accounts for frictional losses, and $g$ is the gravitational acceleration. A safety factor of $S = 2$ is applied to account for uncertainties in the loading, the acceleration, drivetrain losses that the nominal efficiency does not capture, and differences between the theoretical and the available motor torque.
+
+The torque must be read from the torque--speed curve at the operating speed. The static holding torque must not be used for a moving axis, because the available torque of a stepper motor decreases as its speed increases. The 150 rpm point quoted for the motor in the movement module is well below the 600 rpm of the vertical axis.
 
 === Step Pulse Generation
 
@@ -138,7 +148,7 @@ The structural frame and motion transmission of Safe Dip are built from standard
 
 The frame is assembled from 4040 T-slot aluminum extrusion, which forms the horizontal beam, the vertical column, and the supporting legs shown in @cad-model. The T-slot profile allows components to be mounted at arbitrary positions along each beam and secured with T-nuts and M5 hardware, which simplifies alignment during assembly and permits adjustment of the input, dipping, and output station positions.
 
-The horizontal axis is guided by an MGN12H linear rail and carriage and driven by a GT2 timing belt, converting the rotation of the horizontal NEMA 23 into the linear travel between stations described in @cad-dimensions. The vertical axis uses a Tr8x8 leadscrew (8 mm lead, 2 mm pitch, four starts) supported by pillow-block bearings and coupled to the vertical NEMA 23 through a flexible shaft coupler; the leadscrew converts motor rotation into the controlled lifting and immersion motion, and its selection is supported by the leadscrew speed and payload calculations in @appendix:calculations. An anti-backlash nut block is used on the leadscrew to remove axial play so that programmed immersion depth remains repeatable across cycles.
+The horizontal axis is guided by an MGN12H linear rail and carriage and driven by a GT2 timing belt, converting the rotation of the horizontal NEMA 23 into the linear travel between stations described in @cad-dimensions. The vertical axis uses a Tr8x2 leadscrew (2 mm lead) supported by pillow-block bearings and coupled to the vertical NEMA 23 through a flexible shaft coupler; the leadscrew converts motor rotation into the controlled lifting and immersion motion, and its selection is supported by the leadscrew speed and payload calculations in @sec:payload. A brass nut on the leadscrew carries the magnet holder, so that the holder rises and lowers as the screw turns.
 
 #import "@preview/subpar:0.2.2"
 
@@ -168,7 +178,7 @@ This stop path is intentionally independent of firmware and programmable logic, 
 
 A separate effector driver switches the electromagnet coil supply and is not included in the Category 0 cutoff. The electromagnet is treated as a load-holding device rather than as a hazardous actuator that must be immediately de-energized. Removing power from it during an emergency stop could create a secondary hazard by releasing the suspended ferromagnetic part into the coating bath. IEC 60204-1 requires the emergency-stop function to avoid creating such additional hazards @iec-60204-1. The electromagnet therefore remains energized during the stop, and the part is released in a controlled manner only after motion has ceased.
 
-An inline fuse holder provides overcurrent protection for the switched supply rail, while the resistor kit provides the pull resistors required by the effector driver and the other switching stages. A passive buzzer provides an audible indication whenever a fault or emergency-stop condition is active.
+An inline fuse holder provides overcurrent protection for the switched supply rail, and the resistor kit provides the resistors used in the circuit.
 
 
 #figure(
@@ -258,25 +268,14 @@ A 1N4007 flyback diode is placed across the electromagnet coil to protect the re
 )
 === Communications Module
 
-Communications between Safe Dip and the user are divided into two categories for this project: a base case and an extension goal. For the base case, the NUCLEO-F446RE's UART peripheral, along with the ST-LINK connector on the board, will be used.
+Safe Dip communicates with the user over Modbus TCP, which reports the state of the machine and its faults and lets the operator change the parameters of the cycle. The NUCLEO-F446RE's UART peripheral, along with the ST-LINK connector on the board, is used for debug messages.
 
-For the extension goal to communicate using Modbus-TCP, a W5500 was chosen. The W5500 is a standalone Ethernet module with a full TCP/IP stack implemented in the hardware/firmware on the chip itself. This means that the microcontroller doesn't have to run a TCP/IP stack, but instead it only has to communicate with the module via SPI.
+For Modbus TCP, a W5500 was chosen. The W5500 is a standalone Ethernet module with a full TCP/IP stack implemented in the hardware/firmware on the chip itself. This means that the microcontroller doesn't have to run a TCP/IP stack, but instead it only has to communicate with the module via SPI.
 
 #figure(
   image("../images/hardware/w5500.png", width: 40%),
   caption: [W5500 Ethernet module]
 )
-
-=== Electrical Schematic
-
-@figure:schematic shows the complete electrical schematic of Safe Dip, drawn in KiCad. It connects the power supplies, the emergency-stop circuit, the stepper drivers, the electromagnet driver, the sensors, and the Nucleo board, and it is the reference for the wiring of the prototype.
-
-#page(flipped: true, margin: (x: .45in, top: .45in))[
-  #figure(
-    image("../images/hardware/schematic.svg", height: 100%),
-    caption: [Electrical schematic of the Safe Dip prototype.],
-  ) <figure:schematic>
-]
 
 == Software and Programming Languages
 

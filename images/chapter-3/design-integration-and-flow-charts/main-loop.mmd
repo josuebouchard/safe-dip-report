@@ -1,6 +1,6 @@
 flowchart TD
     power([Power on]) --> init[Initialize the hardware]
-    init --> read[Read the inputs]
+    init --> read[Read and filter the inputs]
     read --> safety[Check the E-stop and limit switches]
     safety --> start[Start button: clear the faults or restart the cycle]
     start --> fault{Fault latched?}

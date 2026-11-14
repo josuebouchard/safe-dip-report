@@ -95,7 +95,7 @@ Two factors drove these changes. The first is the dependencies between tasks: th
 
 == Health and Safety
 
-Safety is the central motivation for Safe Dip. The system is intended to remove the operator from direct interaction with a repetitive dipping task and, in the full application, from proximity to hot and viscous coating material. The prototype will be evaluated under laboratory conditions without process heat, handling a workpiece of approximately 1 lb. However, the system was designed in preparation for handling 10 kg workpieces, which will present meaningful mechanical, electrical, and suspended-load hazards.
+Safety is the central motivation for Safe Dip. The system is intended to remove the operator from direct interaction with a repetitive dipping task and, in the full application, from proximity to hot and viscous coating material. The prototype was evaluated under laboratory conditions without process heat, handling a workpiece of approximately 1 lb. However, the system was designed in preparation for handling 10 kg workpieces, which will present meaningful mechanical, electrical, and suspended-load hazards.
 
 The movement emergency stop is implemented as a Category 0 stop of the movement subsystem. Actuating the normally-closed mushroom button removes power from both stepper-motor drivers immediately. The button requires a twist action to reset, and motion must remain inhibited until the button has been reset and the operator deliberately restarts the system. The electromagnet is powered from a separate supply that is not interrupted by the motion emergency stop so that an attached workpiece is not intentionally released when axis power is removed.
 

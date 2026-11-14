@@ -84,7 +84,7 @@ The South Shore Controls robotic dip cell is a custom-engineered industrial auto
 
 === Other Alternatives
 
-Before arriving at the proposed design, several alternative approaches were evaluated across three key areas of the system: the overall mechanical architecture, the end effector mechanism, and the fail-safe strategy for power loss events. Each alternative was assessed against the project's core priorities of operator safety, cost, mechanical simplicity, and suitability for the hot-dip environment. The following subsections document the options considered and the reasoning behind the decisions made.
+Before arriving at the final design, several alternative approaches were evaluated across three key areas of the system: the overall mechanical architecture, the end effector mechanism, and the fail-safe strategy for power loss events. Each alternative was assessed against the project's core priorities of operator safety, cost, mechanical simplicity, and suitability for the hot-dip environment. The following subsections document the options considered and the reasoning behind the decisions made.
 
 ==== Mechanical Architecture
 
@@ -154,7 +154,7 @@ For the laboratory prototype, the following additional operating limitations app
 
 #v(1em)
 - The laboratory prototype is designed and validated for workpieces with a maximum mass of 1 lb. Operation above this payload is outside the prototype's validated operating range.
-- The prototype shall not be operated with a heated dipping bath or exposed to temperatures beyond the rated limits of its selected components. All acceptance testing will be performed using an unheated, laboratory-safe medium under room-temperature conditions.
+- The prototype shall not be operated with a heated dipping bath or exposed to temperatures beyond the rated limits of its selected components. All acceptance testing was performed using an unheated, laboratory-safe medium under room-temperature conditions.
 - The prototype does not validate operation near molten wax, heated resin, process fumes, splashing hot material, or other industrial hot-dip conditions.
 - Because of budget limitations and component availability, the prototype uses a conventional electromagnet rather than one that holds the workpiece without power. A loss of the effector power supply or of mains power will therefore release the workpiece, although axis motion stops.
 #v(1em)

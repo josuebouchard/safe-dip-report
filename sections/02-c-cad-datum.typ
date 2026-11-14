@@ -1,6 +1,6 @@
 #import "@preview/zero:0.6.1": zi
 
-The values in @cad-dimensions describe the operating envelope of the prototype.
+The values in @cad-dimensions describe the operating envelope of the prototype. The usable travels are the ones set in the firmware. Homing sets the origin of each axis a fixed back-off past its limit switch, 40 mm on the horizontal axis and 20 mm on the vertical axis, and a travel is measured from that origin. The distances are taken to the surface of the carriage that is closest to the limit switch: the left side of the horizontal carriage and the top of the vertical carriage.
 
 #figure(
   table(
@@ -20,11 +20,11 @@ The values in @cad-dimensions describe the operating envelope of the prototype.
     [Defines the approximate laboratory floor space and vertical clearance required by the prototype.],
 
     [Usable horizontal travel],
-    [$approx #zi.cm[100]$],
+    [$#zi.cm[55]$],
     [Allows movement between the input, dipping, and output stations.],
 
     [Usable vertical travel],
-    [$approx #zi.cm[30]$],
+    [$#zi.cm[20]$],
     [Provides sufficient lifting clearance and programmed immersion depth.],
 
     [Bath envelope],

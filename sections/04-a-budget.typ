@@ -100,7 +100,7 @@
       price[35.99],
 
       [Lead Screw],
-      [TR8x8 Lead Screw (300 mm)],
+      [TR8x2 Lead Screw (300 mm)],
       [1],
       price[11.99],
 
@@ -294,7 +294,7 @@
       price[35.99],
 
       [Lead Screw],
-      [TR8x8 Lead Screw (300 mm)],
+      [TR8x2 Lead Screw (300 mm)],
       [2],
       price[11.99],
 
@@ -513,7 +513,7 @@
       price[35.99],
 
       [Lead Screw],
-      [TR8x8 Lead Screw (300 mm)],
+      [TR8x2 Lead Screw (300 mm)],
       [1],
       price[11.99],
 

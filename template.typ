@@ -51,7 +51,7 @@
       // Appendix heading: looks like a regular heading, lettered by the counter
       align(center)[
         #block(below: 2em)[
-          #text(size: 24pt)[Appendix #counter(heading).display("A") - #it.body]
+          #text(size: 24pt, hyphenate: false)[Appendix #counter(heading).display("A") - #it.body]
         ]
       ]
     } else {
