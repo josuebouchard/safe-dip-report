@@ -412,8 +412,8 @@ This section records each significant problem found during the build, its cause,
 
 #issue(
   symptom: [The stepper drivers remained powered even when the emergency stop removed power from the relay's coil.],
-  cause: [The normally open contact of the relay connecting the 24 V supply to the drivers stayed closed. The team attributed this to a defective component, since the rest of the circuit is within its specifications.],
-  solution: [The relay is to be replaced next week, probably by switching the AC side of the power supply instead. Until then, the emergency stop still stops the machine, because the second relay signals the controller, which stops the step pulses.],
+  cause: [The normally open contact of the relay connecting the 24 V supply to the drivers welded closed. The team first attributed this to a defective component. Further research traced it to the load: the stepper drivers are a capacitive load, which draws an inrush current when power is applied, and the relay's contact ratings are for resistive loads only.],
+  solution: [For now, the relay is to be replaced next week, and after an emergency stop the motors are to be unplugged before the reset. Until then, the emergency stop still stops the machine, because the second relay signals the controller, which stops the step pulses. A better alternative is to switch the AC side of the power supply instead of its 24 V output.],
   result: [Pending. Requirements R-07 and R-08 must be tested after the replacement.],
 )
 
@@ -621,7 +621,7 @@ Each requirement in @table:requirements was tested against its success criterion
 
 *Results.* Not yet tested.
 
-*Discussion.* An informal test confirmed that the emergency stop cut driver power. The motor-supply relay then failed with its contact closed (@sec:relay-failure), so the emergency stop does not currently remove driver power. It still stops the machine, because the second relay signals the controller, which stops the step pulses. The relay will be replaced next week, probably by switching the AC side of the power supply. The test must be run after the relay is replaced. Status: not yet tested.
+*Discussion.* An informal test confirmed that the emergency stop cut driver power. The motor-supply relay then failed with its contact closed (@sec:relay-failure), so the emergency stop does not currently remove driver power. It still stops the machine, because the second relay signals the controller, which stops the step pulses. The relay will be replaced next week. The test must be run after the relay is replaced. Status: not yet tested.
 
 *Evidence.* None yet.
 
