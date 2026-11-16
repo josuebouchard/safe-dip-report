@@ -62,7 +62,7 @@
       [Actuate the emergency stop during operation, reset the emergency-stop button, and attempt to command motion without performing the restart action. Perform the deliberate restart action and confirm that normal operation can be re-established.],
 
       sr(),
-      [The system shall transmit its current operating state and any active faults through the selected communications interface during operation.],
+      [The system shall transmit its current operating state and any active faults through its Modbus TCP interface during operation.],
       [Each state transition and the active fault are transmitted with correct labels.],
       [Monitor the communications interface during one complete operating cycle and introduce at least one detectable fault condition.],
 

@@ -79,6 +79,16 @@ to change on the website is in [website-updates.md](website-updates.md).
 - [ ] Confirm the final 12 V adapter (the one used for the first tests was not the final
       one).
 - [ ] Rewrite the abstract and conclusion with the final results.
+- [ ] Flyback diode: the text (Section 2.2.7) and the budget say 1N4007, but the schematic
+      says 1N5822. Check which one is installed and make all three agree, here and on the
+      website.
+- [ ] Fuses: Section 2.2.2, the hazards table (Table 4.6) and the conclusion say fuses are
+      installed, but the Task Plan shows the fuse holder slipped. Install it, or change the
+      three statements.
+- [ ] Gantt chart: the outline asks for "an actual-progress row" in Section 4.1. Add it
+      from the record of what was done each week.
+- [ ] Fig. 2.7: the text now says the buck converter is an LM2596 board. Check that the
+      picture shows that board.
 
 ## Submitting
 

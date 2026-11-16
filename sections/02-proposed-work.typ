@@ -215,11 +215,11 @@ The less stringent requirements of the #zi.V[12] line means that it can be provi
   caption: [ALITOVE DC 12V 5A Power Supply]
 )
 
-Finally, for the #zi.V[5] line, as shown in @block-diagram:hardware, a HiLetgo buck converter based on the XL4016 chip was chosen.
+Finally, for the #zi.V[5] line, as shown in @block-diagram:hardware, a buck converter board based on the LM2596 @lm2596-datasheet was chosen.
 
 #figure(
   image("../images/hardware/buck-converter.png", width: 30%),
-  caption: [HiLetgo buck converter]
+  caption: [LM2596 buck converter board]
 )
 
 === Processing Module
