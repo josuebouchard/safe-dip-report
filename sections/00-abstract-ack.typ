@@ -12,6 +12,6 @@ We would like to express our sincere gratitude to Professor Mayra Socarras for h
 
 We also thank Dean Lara Sharp and the members of the project review board for dedicating their time to evaluating our work and providing feedback. Their observations have helped us identify areas requiring greater clarity and have contributed to the continued refinement of the project.
 
-We are grateful to Valencia College and the Department of Electrical and Computer Engineering Technology for providing the instruction, facilities, laboratory resources, and technical foundation that made this project possible. We also appreciate the faculty, staff, classmates, and laboratory personnel who shared their knowledge and assistance during the development of this proposal.
+We are grateful to Valencia College and the Department of Electrical and Computer Engineering Technology for providing the instruction, facilities, laboratory resources, and technical foundation that made this project possible. We also appreciate the faculty, staff, classmates, and laboratory personnel who shared their knowledge and assistance during the development of this project.
 
 Finally, we would like to acknowledge our families, friends, coworkers, and employers for their patience, encouragement, and understanding while we balanced the academic and professional responsibilities associated with this project. Their continued support has been invaluable throughout this process.

@@ -116,3 +116,10 @@ iec-60204-1:
   url:
     date: 2026-07-20
     value: "https://webstore.iec.ch/en/publication/71256"
+ieee-code-of-ethics:
+  type: web
+  title: "IEEE Code of Ethics"
+  publisher: "Institute of Electrical and Electronics Engineers"
+  url:
+    date: 2026-11-16
+    value: "https://www.ieee.org/about/corporate/governance/p7-8.html"

@@ -215,5 +215,5 @@
       [Verify communication between the STM32 and Ethernet module through SPI. Establish a TCP connection from an external computer and confirm that data can be transmitted and received.],
     ),
     caption: [Communications specifications]
-  )
+  )<table:module:communications>
 ]

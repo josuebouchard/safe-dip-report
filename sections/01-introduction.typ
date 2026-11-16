@@ -11,7 +11,7 @@
 
 Hot-melt dip coating, also referred to as hot dipping or hot-melt wax coating, involves submerging a part into a heated liquid medium such as molten wax, resin, or a similar coating compound. Upon removal, the liquid solidifies as it cools, forming a protective layer around the part that can be cleanly stripped away when needed. This process is commonly applied before long-term storage or bulk packaging to shield parts from corrosion, prevent contact damage that could dull sharp edges, and, in some cases, enhance a tool's grip or handling comfort @dipseal-hot-melt-wax @dominessy-endmill-coating.
 
-Safe Dip seeks to address this gap by providing an affordable, safety-conscious, and instrumented automation solution tailored to this class of hot-dip operations. It targets the small-to-medium production scale where off-the-shelf industrial robots are cost-prohibitive and general-purpose systems lack the domain-specific safety integration required by industrial electrical standards.
+Many small manufacturers still perform this process by hand, because the automated equipment on the market is built for high-volume production. Safe Dip seeks to address this gap by providing an affordable, safety-conscious, and instrumented automation solution tailored to this class of hot-dip operations. It targets the small-to-medium production scale where off-the-shelf industrial robots are cost-prohibitive and general-purpose systems lack the domain-specific safety integration required by industrial electrical standards.
 
 
 == Need and Motivation
@@ -26,6 +26,8 @@ By combining this flexibility with a comparatively simple Cartesian architecture
 
 == Similar Products and Comparison
 
+@table:comparison compares Safe Dip with the commercial dip-coating systems reviewed in this section.
+
 #[
   #show figure: set block(breakable: true)
   #figure(
@@ -36,7 +38,7 @@ By combining this flexibility with a comparatively simple Cartesian architecture
       table.header(
         [*Product*], [*Price*], [*Conveyor Feed*], [*Variable Dip Depth*], [*Pick & Place*], [*Chemical Flexibility*]
       ),
-      [Safe Dip (Ours)], [\~\$500-\$600], [YES], [YES], [YES], [YES],
+      [Safe Dip (Ours)], [\~\$700], [YES], [YES], [YES], [YES],
       [Dip-Spin (EFFCO DS-250)], [est.\ \$15k–\$25k], [NO], [NO], [NO], [YES],
       [MS800 Tiltable\ Dip-Spin], [est.\ \$40k–\$80k], [NO], [NO], [NO], [YES],
       [Monorail Headstand Screw Machine], [\$2,999–\$3,999], [YES], [NO], [NO], [Partial],
@@ -46,7 +48,7 @@ By combining this flexibility with a comparatively simple Cartesian architecture
       [South Shore Robotic Dip Cell], [Custom Quote], [NO], [YES], [YES], [YES],
     ),
     caption: [Comparison of commercial dip coating systems against Safe Dip]
-  )
+  )<table:comparison>
 ]
 
 Chemical flexibility is the ability of a system to operate with different coating, cleaning, and treatment liquids without requiring changes to its mechanical architecture or control logic. The system interacts with the process only through part detection, controlled handling, programmable immersion, and placement; therefore, the chemical composition of the liquid is treated as an external process variable rather than a machine-specific design input. Compatibility is limited primarily by the temperature tolerance and chemical resistance of the end effector and other exposed hardware, rather than by the operating principle of the system itself.
@@ -56,11 +58,11 @@ This separation between the machine and the dipping chemistry is important becau
 
 === Aramfix EFFCO DS-250 Dip-Spin Machine 
 
-The EFFCO DS-250 is a batch-type industrial dip-spin coating machine designed for high-volume processing of small metal components such as fasteners, nuts, bolts, and stampings. The machine operates by loading parts into a perforated basket, submerging the entire basket into a coating tank, and then spinning the basket at high RPM to centrifugally remove excess coating and achieve a uniform film thickness. This process enables extremely consistent results across thousands of parts per cycle, making it well-suited for mass production environments. The DS-250 features a heated coating tank and programmable dip and spin cycles, allowing operators to fine-tune coating thickness to specification. However, its batch-based design means individual part handling and positional control are not possible, as all parts in the basket are processed simultaneously without differentiation. The machine requires manual loading and unloading of the basket, meaning human intervention is necessary at each production cycle. Its industrial footprint and price range of \$15,000 to \$25,000 place it well beyond the reach of small-scale or research-oriented operations. Unlike Safe Dip, the DS-250 cannot adapt to varying part geometries within a single run or interact with a conveyor-based workflow.
+The EFFCO DS-250 @aramfix-effco-ds250 is a batch-type industrial dip-spin coating machine designed for high-volume processing of small metal components such as fasteners, nuts, bolts, and stampings. The machine operates by loading parts into a perforated basket, submerging the entire basket into a coating tank, and then spinning the basket at high RPM to centrifugally remove excess coating and achieve a uniform film thickness. This process enables extremely consistent results across thousands of parts per cycle, making it well-suited for mass production environments. The DS-250 features a heated coating tank and programmable dip and spin cycles, allowing operators to fine-tune coating thickness to specification. However, its batch-based design means individual part handling and positional control are not possible, as all parts in the basket are processed simultaneously without differentiation. The machine requires manual loading and unloading of the basket, meaning human intervention is necessary at each production cycle. Its industrial footprint and price range of \$15,000 to \$25,000 place it well beyond the reach of small-scale or research-oriented operations. Unlike Safe Dip, the DS-250 cannot adapt to varying part geometries within a single run or interact with a conveyor-based workflow.
 
 === MS800 Tiltable Dip-Spin Machine
 
-The MS800 is a fully automatic, tiltable dip-spin coating machine designed for heavy-duty industrial production of fasteners and small precision components. Its distinguishing feature is a motorized tilting mechanism that repositions the basket during the drain cycle, improving coating drainage and reducing waste compared to standard vertical-axis spin machines. The system is PLC-controlled, offering precise regulation of dip duration, spin speed, tilt angle, and temperature, resulting in coating uniformity that is difficult to match with manual or semi-automatic methods. With a throughput capacity in the thousands of parts per hour, the MS800 is optimized for large-scale manufacturing lines rather than flexible or small-batch applications. The machine's price range of \$40,000 to \$80,000 reflects its industrial-grade construction and automation level. Like other dip-spin systems, it is fundamentally a batch processor and cannot handle individual components, vary dip depth per part, or interface with a pick-and-place conveyor system. Its complexity also demands trained operators and dedicated maintenance protocols. While it represents the high end of coating machine capability, it addresses a fundamentally different operational context than Safe Dip.
+The MS800 @shisheng-ms800 is a fully automatic, tiltable dip-spin coating machine designed for heavy-duty industrial production of fasteners and small precision components. Its distinguishing feature is a motorized tilting mechanism that repositions the basket during the drain cycle, improving coating drainage and reducing waste compared to standard vertical-axis spin machines. The system is PLC-controlled, offering precise regulation of dip duration, spin speed, tilt angle, and temperature, resulting in coating uniformity that is difficult to match with manual or semi-automatic methods. With a throughput capacity in the thousands of parts per hour, the MS800 is optimized for large-scale manufacturing lines rather than flexible or small-batch applications. The machine's price range of \$40,000 to \$80,000 reflects its industrial-grade construction and automation level. Like other dip-spin systems, it is fundamentally a batch processor and cannot handle individual components, vary dip depth per part, or interface with a pick-and-place conveyor system. Its complexity also demands trained operators and dedicated maintenance protocols. While it represents the high end of coating machine capability, it addresses a fundamentally different operational context than Safe Dip.
 
 === Monorail Headstand Screw Coating Machine
 
@@ -68,11 +70,11 @@ The monorail headstand screw coating machine is a continuous-flow system designe
 
 === Thread Locker Coating Machine — TH-2004L3
 
-The TH-2004L3 is a purpose-built automatic dispensing machine designed to apply thread-locking adhesive, such as Loctite or Vibra-Seal equivalents, directly onto the threads of screws and bolts prior to assembly. The machine integrates a bowl feeder for bulk part loading, a precision dispensing head that applies a metered quantity of adhesive to each thread zone, and a conveyor exit for processed parts. Its dispensing mechanism is calibrated to apply only to the thread region, avoiding contamination of the head or shank, which is critical for assembly line compatibility. The system handles fastener sizes from M3 to M36 and operates at high throughput, making it appropriate for automotive, electronics, and aerospace assembly environments. Priced between \$3,300 and \$4,500, it sits at the lower end of the industrial machine spectrum, though it is still an order of magnitude more expensive than Safe Dip. Its fundamental limitation is that it is chemically and geometrically constrained: it applies a single fluid type to a single class of headed fasteners, with no capability to handle other part geometries or coating materials. It also has no pick-and-place functionality and cannot interface with a generalized conveyor workflow.
+The TH-2004L3 @tianhao-th2004l3 is a purpose-built automatic dispensing machine designed to apply thread-locking adhesive, such as Loctite or Vibra-Seal equivalents, directly onto the threads of screws and bolts prior to assembly. The machine integrates a bowl feeder for bulk part loading, a precision dispensing head that applies a metered quantity of adhesive to each thread zone, and a conveyor exit for processed parts. Its dispensing mechanism is calibrated to apply only to the thread region, avoiding contamination of the head or shank, which is critical for assembly line compatibility. The system handles fastener sizes from M3 to M36 and operates at high throughput, making it appropriate for automotive, electronics, and aerospace assembly environments. Priced between \$3,300 and \$4,500, it sits at the lower end of the industrial machine spectrum, though it is still an order of magnitude more expensive than Safe Dip. Its fundamental limitation is that it is chemically and geometrically constrained: it applies a single fluid type to a single class of headed fasteners, with no capability to handle other part geometries or coating materials. It also has no pick-and-place functionality and cannot interface with a generalized conveyor workflow.
 
 === Full Automatic Thread Coater
 
-The full automatic thread coater is a high-capacity, end-to-end automated machine designed for the uninterrupted production-line application of thread-locking compounds or sealants on screws and bolts. It integrates automated part feeding, precision coating application, and a discharge conveyor into a single self-contained unit, eliminating the need for manual intervention during normal operation. The system is optimized for single-fluid, single-geometry workflows and is typically configured for a specific fastener size range at installation. Throughput is very high, and the machine is engineered for continuous multi-shift operation in demanding industrial environments. Priced between \$20,000 and \$30,000, it represents a significant capital investment best justified in high-volume production contexts. Its automation level, while impressive within its domain, comes at the cost of flexibility: changing the coating fluid or accommodating a different part geometry requires machine reconfiguration and downtime. It lacks any conveyor-integrated pick-and-place capability and cannot adjust dip depth or dwell time per individual part. These constraints make it an effective solution for its intended use case but a poor match for the adaptive, multi-geometry coating scenario that Safe Dip is designed to address.
+The full automatic thread coater @tianhao-automatic-thread-coater is a high-capacity, end-to-end automated machine designed for the uninterrupted production-line application of thread-locking compounds or sealants on screws and bolts. It integrates automated part feeding, precision coating application, and a discharge conveyor into a single self-contained unit, eliminating the need for manual intervention during normal operation. The system is optimized for single-fluid, single-geometry workflows and is typically configured for a specific fastener size range at installation. Throughput is very high, and the machine is engineered for continuous multi-shift operation in demanding industrial environments. Priced between \$20,000 and \$30,000, it represents a significant capital investment best justified in high-volume production contexts. Its automation level, while impressive within its domain, comes at the cost of flexibility: changing the coating fluid or accommodating a different part geometry requires machine reconfiguration and downtime. It lacks any conveyor-integrated pick-and-place capability and cannot adjust dip depth or dwell time per individual part. These constraints make it an effective solution for its intended use case but a poor match for the adaptive, multi-geometry coating scenario that Safe Dip is designed to address.
 
 === Emmeti WAX-ON Machine
 
@@ -80,7 +82,7 @@ The Emmeti WAX-ON is a fully robotic, end-to-end bottle waxing line developed fo
 
 === South Shore Controls Robotic Dip Cell
 
-The South Shore Controls robotic dip cell is a custom-engineered industrial automation solution designed for precision dipping, coating, and chemical treatment of components across a range of industries, including food processing, medical device manufacturing, and industrial finishing. The system is built around a 6-degree-of-freedom industrial robot arm that provides full spatial control over the component throughout the dip cycle, enabling complex dip trajectories, variable dip angles, and multi-stage coating sequences that rigid gantry systems cannot replicate. Custom end-effectors, or grippers, are designed to match the specific geometry of the target component, ensuring reliable handling even for irregular or delicate parts. The system is PLC-controlled and fully programmable, with PID-regulated temperature control on the coating tank and real-time process monitoring. Pricing is entirely quote-based and typically falls in the range of \$50,000 to \$100,000 depending on configuration, making it accessible only to well-capitalized industrial clients. Unlike Safe Dip, it does not incorporate a conveyor-based intake and exit workflow; parts must be presented to the robot by separate handling systems. Its strength lies in precision and flexibility within a controlled cell environment, rather than inline conveyor integration.
+The South Shore Controls robotic dip cell @south-shore-specialty-equipment is a custom-engineered industrial automation solution designed for precision dipping, coating, and chemical treatment of components across a range of industries, including food processing, medical device manufacturing, and industrial finishing. The system is built around a 6-degree-of-freedom industrial robot arm that provides full spatial control over the component throughout the dip cycle, enabling complex dip trajectories, variable dip angles, and multi-stage coating sequences that rigid gantry systems cannot replicate. Custom end-effectors, or grippers, are designed to match the specific geometry of the target component, ensuring reliable handling even for irregular or delicate parts. The system is PLC-controlled and fully programmable, with PID-regulated temperature control on the coating tank and real-time process monitoring. Pricing is entirely quote-based and typically falls in the range of \$50,000 to \$100,000 depending on configuration, making it accessible only to well-capitalized industrial clients. Unlike Safe Dip, it does not incorporate a conveyor-based intake and exit workflow; parts must be presented to the robot by separate handling systems. Its strength lies in precision and flexibility within a controlled cell environment, rather than inline conveyor integration.
 
 === Other Alternatives
 
@@ -88,12 +90,12 @@ Before arriving at the final design, several alternative approaches were evaluat
 
 ==== Mechanical Architecture
 
-From the very beginning of the project, the idea of a gantry competed against the idea of a robotic arm, as the one in @robotic-arm-example. While it presented enough dexterity for the task at hand, a couple of issues remained, regardless of the degrees of freedom it presented:
+From the very beginning of the project, the idea of a gantry competed against the idea of a robotic arm, as the one in @robotic-arm-example @universal-robots-ur5e. While it presented enough dexterity for the task at hand, a couple of issues remained, regardless of the degrees of freedom it presented:
 
 #v(1em)
 - The bigger the number of degrees of freedom it had, the bigger the electronic and computer complexity the system would carry, as each degree of freedom would require at least an additional actuator.
 - Mechanically, the fact that the arm is only anchored at one point at the bottom, offset from the object's position, meant that the motors would have to generate and support the entirety of the weight of the object.
-- Given the height of some hot-dipping pots, the arm would either require unusually long sections, which would toll even more the motors to sustain the torque, all this to be able to get deep enough for the pot, and high enough to avoid it while grabbing the object.
+- Given the height of some hot-dipping pots, the arm would either require unusually long sections, which would put an even greater torque load on the motors, all this to be able to get deep enough for the pot, and high enough to avoid it while grabbing the object.
 #v(1em)
 
 #figure(
@@ -111,9 +113,9 @@ Finally, a last alternative was considered where the objects being dipped could 
 Another aspect worth consideration is the end effector (i.e., the mechanism that grabs the objects). While a claw is usually the first option everyone thinks of, it also comes with its own disadvantages:
 
 #v(1em)
-- Claws must have a strong enough grip to ensure the object doesn't slip, while being soft enough as to not deform it or break it.
+- Claws must have a strong enough grip to ensure the object does not slip, while being soft enough as to not deform it or break it.
 - The grip strength is dependent on the geometry of the object and the positioning of the claw.
-- As the weight of the objects to be picked increases, it's been recommended to use a pneumatic claw, which introduces a new design dimension, complications, and considerations.
+- As the weight of the objects to be picked increases, it has been recommended to use a pneumatic claw, which introduces a new design dimension, complications, and considerations.
 #v(1em)
 
 While an electro-permanent magnet would have been a more suitable effector, more aligned with the safety-conscious objective of this project, its availability is limited, and its price is cost-prohibitive for a prototype.
@@ -130,11 +132,11 @@ Finally, for a project created out of the need for a safe alternative to manual 
 
 Category 1 requires more complexity than category 0, since it requires hardware to disconnect power after a specific time. While stepper motors could benefit from a soft deceleration, given the speed they reach, the complexity outweighed the benefits for this project. Furthermore, the microcontroller cannot be used to trigger a power-off sequence; it is always assumed that it can fail too.
 
-Category 2 simply didn't fit the requirements of this project.
+Category 2 simply did not fit the requirements of this project.
 
 == System Requirements and Success Criteria
 
-Each requirement below describes a specific, observable behavior with a defined pass condition. The system is treated as a black box for these requirements, and emphasis is placed on interactions with system boundaries, the required level of performance, and physical requirements.
+Each requirement in @table:requirements describes a specific, observable behavior with a defined pass condition. The system is treated as a black box for these requirements, and emphasis is placed on interactions with system boundaries, the required level of performance, and physical requirements.
 
 #include "02-d-system-requirements.typ"
 
@@ -179,7 +181,7 @@ The Safe Dip system can be divided into 7 modules as shown in @block-diagram:gen
 
 The power distribution module is composed of the power supply and is in charge of converting wall power into the different types of voltage needed.
 
-The E-stop module will contain all the mechanisms needed to perform a category-0 emergency stop, able to cut the power to the movement module. It is also in charge of alerting the processing module about the E-stop so that it can handle it gracefully.
+The E-stop module contains all the mechanisms needed to perform a category-0 emergency stop, able to cut the power to the movement module. It is also in charge of alerting the processing module about the E-stop so that it can handle it gracefully.
 
 The processing module is the heart of the system, encapsulating the microcontroller, which receives all inputs and translates them into the corresponding actuator responses. It also includes any and all components to ensure that the incoming data is at an acceptable input voltage for the microcontroller. This module receives its power from the power distribution module, and through the microcontroller's on-board power converter, it feeds #zi.V[3.3] to the other modules.
 
@@ -189,7 +191,7 @@ The movement module is composed of all the stepper motors and controllers requir
 
 The effector module controls the part of the system that grabs the object and is composed of an electromagnet. It is nonetheless designed to be as modular as possible, so that a change of effector type is not hard to implement.
 
-The communications module is an addition to the processing module in case communications are decided to be done via Ethernet TCP-Modbus. It would include a module capable of Ethernet communications.
+The communications module is an addition to the processing module that provides Modbus TCP communication over Ethernet. It consists of an Ethernet module connected to the microcontroller.
 
 The functional modules described above are expanded in @block-diagram:hardware to show the electrical implementation of Safe Dip and the interfaces between its major components. The diagram identifies the system's power-distribution paths, control signals, sensor connections, communication interfaces, and actuator drivers. It also distinguishes between the high-power circuitry used by the motion and end-effector subsystems and the low-voltage circuitry used by the processing, sensing, and communications modules. This hardware-level representation provides the basis for selecting components, defining subsystem specifications, preparing the power budget, and verifying that the modules can operate together as an integrated system.
 
@@ -201,5 +203,7 @@ The functional modules described above are expanded in @block-diagram:hardware t
 )<block-diagram:hardware>
 
 == Engineering Specifications <sec:specs>
+
+The specifications of each module and its components are listed in @table:module:power, @table:module:e-stop, @table:module:processing, @table:module:sensing, @table:module:movement, @table:end-effector, and @table:module:communications, one table per module.
 
 #include "02-a-system-specification.typ"

@@ -4,7 +4,7 @@
   [Non-Technical Considerations],
   
   description: [
-    This chapter presents the project planning and non-technical considerations associated with Safe Dip. It provides a monetary budget, a fifteen-week implementation timeline, and the distribution of responsibilities between the team members. The chapter then evaluates the environmental, health and safety, ethical, social, and sustainability aspects of the system. Particular attention is given to the hazards created by moving machinery, electrical power, and the handling of an approximately 10 kg suspended load for the fully-featured system, along with the prototype controls used to reduce those risks. Finally, the chapter discusses the project’s potential to reduce worker exposure to hazardous and repetitive dipping operations while emphasizing honest reporting, maintainability, and responsible automation.
+    This chapter presents the project planning and non-technical considerations associated with Safe Dip. It provides a monetary budget, the proposed and modified implementation timelines, and the distribution of responsibilities between the team members. The chapter then evaluates the environmental, health and safety, ethical, social, and sustainability aspects of the system. Particular attention is given to the hazards created by moving machinery, electrical power, and the handling of an approximately 10 kg suspended load for the fully-featured system, along with the prototype controls used to reduce those risks. Finally, the chapter discusses the project’s potential to reduce worker exposure to hazardous and repetitive dipping operations while emphasizing honest reporting, maintainability, and responsible automation.
   ],
 )
 
@@ -144,6 +144,8 @@ The movement emergency stop is implemented as a Category 0 stop of the movement 
 The conventional electromagnet creates an important distinction between an emergency stop and a complete power failure. The separate supply preserves holding force when only the motion subsystem is stopped, but a failure of the magnet supply may still release the load. This limitation must remain visible in the operating instructions, test procedure, and final evaluation of the prototype.
 
 == Ethical Aspects
+
+The team evaluated its work against the IEEE Code of Ethics @ieee-code-of-ethics. The Code asks engineers to hold paramount the safety, health, and welfare of the public and to disclose promptly the factors that might endanger people; to be honest and realistic in stating claims based on the available data; to acknowledge and correct errors; and to credit properly the contributions of others. Each of these applies directly to a machine that is presented as a safety system.
 
 The ethical responsibility of the project team extends beyond demonstrating that the mechanism can complete a pick-dip-place cycle. Because Safe Dip is presented as a safety-oriented system, performance and safety claims must be based on documented tests rather than design intent alone. In particular, the report must clearly distinguish between the intended 10 kg, elevated-temperature product concept and the laboratory prototype, which is tested without heat and with several safeguards that remain incomplete relative to an industrial installation.
 

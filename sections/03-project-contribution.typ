@@ -240,7 +240,7 @@ The parts that carry the belt drive were designed in CAD and 3D printed, as show
   label: <fig:x-axis-parts>,
 )
 
-The X-axis holder went through five versions, the last printed 90% solid for strength. Braces were added so that the frame no longer wobbled. In the final adjustments, the rear motor mount and the belt were moved toward the end of the frame so that the mechanism reaches both ends of the axis, as homing requires, and grease was applied to the moving parts. The horizontal NEMA 23 motor was wired to a DM542TE driver powered from the 24 V supply, and its movement was adjusted until it looked right. The driver's STEP and DIR inputs were connected to controller pins PA0 and PB0, and its DIP switches were set to eight microsteps per full step, which gives the 1600 pulses per revolution used in @table:axis-scale. On the first full group test, shown in @video:first-test, both axes moved successfully with the live axis positions displayed on a laptop.
+The X-axis holder went through five versions, the last printed 90% solid for strength. Braces were added so that the frame no longer wobbled. In the final adjustments, the rear motor mount and the belt were moved toward the end of the frame so that the mechanism reaches both ends of the axis, as homing requires, and grease was applied to the moving parts. The horizontal NEMA 23 motor was wired to a DM542TE driver powered from the 24 V supply, and its movement was adjusted until it ran smoothly. The driver's STEP and DIR inputs were connected to controller pins PA0 and PB0, and its DIP switches were set to eight microsteps per full step, which gives the 1600 pulses per revolution used in @table:axis-scale. On the first full group test, shown in @video:first-test, both axes moved successfully with the live axis positions displayed on a laptop.
 
 #video("week-8-first-full-test.mp4", [First full test of both axes with the monitor interface])<video:first-test>
 
@@ -386,7 +386,7 @@ This section records each significant problem found during the build, its cause,
 #issue(
   symptom: [Parts of the belt transmission of the X axis broke, on both sides of the axis. The stepper motor adapter was the main failure. The housing of the other ball bearing was damaged, but it was only twisted, not broken.],
   cause: [The belt needs side tension to work properly, and both parts were cantilevered: they were held only from the bottom, on a small surface. The side load of the belt broke them easily.],
-  solution: [The stepper motor adapter was given a second hold, at the top as well as at the bottom, and the belt is no longer overtightened. The ridges of the belt transfer the motion, so it does not need much tension. The bearings for the upper part of the X axis were also reworked to stop its pieces from oscillating.],
+  solution: [The stepper motor adapter was given a second hold, at the top as well as at the bottom, and the belt is no longer overtightened. The ridges of the belt transfer the motion, so it does not need much tension. The bearings for the upper part of the X axis were also reworked to stop its pieces from oscillating. Because the parts were still not firm enough, a new part was then designed for the transmission.],
   result: [Because both axes are homed from their limit switches at the start of each cycle, the occasional lost step does not matter.],
 )
 

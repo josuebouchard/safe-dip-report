@@ -2,7 +2,7 @@
 #import "../template.typ": chapter, todo
 
 #chapter(
-  description: [This chapter describes the theory and the design of Safe Dip in detail. We explain the system's two-axis Cartesian gantry architecture and define its operating limitations. We present the testable system requirements and their verification criteria, describe each functional module through a system block diagram, provide engineering specifications for each subsystem, and outline the project budget.]
+  description: [This chapter describes the theory and the design of Safe Dip in detail. We present the equations that relate motor rotation to axis motion, payload, step pulses, and motion profiles. We then describe the hardware components and the mechanical design of each module, the software and programming languages used, and the power budget of the prototype.]
 )[Background Research]
 
 // Describe exactly what you will do to obtain a solution. Suitable content for this section should include, but is not limited to:
@@ -97,7 +97,7 @@ The same factor converts an acceleration in mm/s² to steps/s². @table:axis-sca
 
 === Leadscrew Payload <sec:payload>
 
-The load that the vertical axis can lift follows from the kinematics of the leadscrew and the torque--speed curve of the motor. For a leadscrew with lead $L$, defined as the axial distance traveled by the nut during one revolution @moons-thrust-generation, the rotational speed $n$ that gives a linear speed $v$ is
+The load that the vertical axis can lift follows from the kinematics of the leadscrew and the torque--speed curve of the motor. For a leadscrew with lead $L$, defined as the axial distance traveled by the nut during one revolution @moons-thrust-generation @iqs-lead-screws, the rotational speed $n$ that gives a linear speed $v$ is
 
 $ v = n L $ <eq:linear-speed>
 
@@ -268,9 +268,9 @@ A 1N4007 flyback diode is placed across the electromagnet coil to protect the re
 )
 === Communications Module
 
-Safe Dip communicates with the user over Modbus TCP, which reports the state of the machine and its faults and lets the operator change the parameters of the cycle. The NUCLEO-F446RE's UART peripheral, along with the ST-LINK connector on the board, is used for debug messages.
+Safe Dip communicates with the user over Modbus TCP @modbus-application-protocol-v1-1b3, which reports the state of the machine and its faults and lets the operator change the parameters of the cycle. The NUCLEO-F446RE's UART peripheral, along with the ST-LINK connector on the board, is used for debug messages.
 
-For Modbus TCP, a W5500 was chosen. The W5500 is a standalone Ethernet module with a full TCP/IP stack implemented in the hardware/firmware on the chip itself. This means that the microcontroller doesn't have to run a TCP/IP stack, but instead it only has to communicate with the module via SPI.
+For Modbus TCP, a W5500 was chosen. The W5500 is a standalone Ethernet module with a full TCP/IP stack implemented in the hardware/firmware on the chip itself. This means that the microcontroller does not have to run a TCP/IP stack, but instead it only has to communicate with the module via SPI.
 
 #figure(
   image("../images/hardware/w5500.png", width: 40%),
@@ -285,7 +285,7 @@ The Modbus TCP library is written in C99. C is ubiquitous in embedded systems be
 
 The microcontroller is configured with STM32CubeMX and the STM32Cube HAL, and the firmware is built with the STM32CubeCLT toolchain (ST Arm Clang, CMake, and Ninja), which gives the team one reproducible command-line build. clangd and clang-format keep the editor feedback and the code style consistent, the on-board ST-LINK of the Nucleo board programs and debugs the microcontroller and provides serial output, and Git and GitHub keep the history of the firmware.
 
-Testing uses a Modbus TCP client, `madbus-cli`, to read and write coils and registers through the whole path from the computer to the STM32, an oscilloscope to check the step pulses, which come from a hardware timer and can only be confirmed by measuring the signal, and a multimeter to check the supply voltages and signal levels.
+Testing uses a Modbus TCP client, `madbus-cli` @madbus-cli, to read and write coils and registers through the whole path from the computer to the STM32, an oscilloscope to check the step pulses, which come from a hardware timer and can only be confirmed by measuring the signal, and a multimeter to check the supply voltages and signal levels.
 
 The electrical schematic is drawn in KiCad, which is free and open source and checks the wiring rules before anything is built. The mechanical parts are modeled in Onshape, which runs in a web browser so that both team members can work on the same model, and the 3D-printed parts are prepared in Bambu Studio, which previews the supports and the print time before a part is printed.
 

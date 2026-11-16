@@ -10,7 +10,7 @@
   projectName: [Safe Dip],
   subtitle: [A Safety-Oriented Hot-Dip Pick-and-Place System],
   professor: "Mayra Socarras",
-  date: datetime.today(),
+  date: datetime(year: 2026, month: 11, day: 20),
 )
 
 // Intro pages are numbered using i
@@ -24,7 +24,8 @@
 #pagebreak(weak: true)
 
 // Now we set for body
-#set heading(numbering: "1.1")
+// The template numbers headings down to the third level only.
+#set heading(numbering: (..nums) => if nums.pos().len() <= 3 { numbering("1.1", ..nums) })
 #counter(page).update(1)
 #set page(numbering: "1")
 
