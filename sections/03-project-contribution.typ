@@ -270,7 +270,7 @@ The printed parts of the gantry are shown together in @fig:printed-parts, as the
   figure(image(impl + "printed-parts/screw-holder-cap.png", height: 2.2cm), caption: [Screw-holder cap]),
   figure(image(impl + "printed-parts/limit-switch-holder.png", height: 2.2cm), caption: [Limit-switch holder]),
   figure(image(impl + "printed-parts/x-axis-transmission-holder.png", height: 2.2cm), caption: [X-axis transmission holder]),
-  figure(image(impl + "printed-parts/stepper-adapter-x.png", width: 3.4cm), caption: [X-axis stepper adapter]),
+  figure(image(impl + "printed-parts/stepper-adapter-x.png", height: 2.6cm), caption: [X-axis stepper adapter]),
   figure(image(impl + "printed-parts/gear-holder.png", height: 2.2cm), caption: [Gear holder]),
   figure(image(impl + "printed-parts/gear-adapter.png", height: 2.2cm), caption: [Gear adapter]),
   figure(image(impl + "printed-parts/x-axis-lock.png", height: 2.2cm), caption: [X-axis lock]),
