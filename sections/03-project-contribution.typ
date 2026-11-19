@@ -523,9 +523,15 @@ The mechanical parts required learning both Onshape and the slicer software, and
 
 == Requirement Testing and Results <sec:testing>
 
-Each requirement in @table:requirements was tested against its success criterion. All testing used an unheated, laboratory-safe medium at room temperature and the approved 1 lb prototype payload; the prototype does not validate operation at the intended industrial temperature or with a production coating medium. The first results were recorded in @video:viability.
+Each requirement in @table:requirements was tested against its success criterion. All testing used an unheated, laboratory-safe medium at room temperature and the approved 1 lb prototype payload; the prototype does not validate operation at the intended industrial temperature or with a production coating medium. The first results were recorded in @video:viability, and the later ones in @video:main-test, @video:ui, and @video:xaxis.
 
 #video("viability-video.mp4", [Checkpoint 2 viability demonstration of the integrated prototype])<video:viability>
+
+#video("main_test_11min.mp4", [Main unattended test: about ten full cycles and part of an eleventh, 11 min 53 s])<video:main-test>
+
+#video("main_test_modbus_ui_synced.mp4", [Modbus monitor recording of the main test, synchronized to the main test video])<video:ui>
+
+#video("xaxis_consistency.mp4", [X-axis displacement consistency test])<video:xaxis>
 
 === R-01: Part-Ready Trigger
 
@@ -551,9 +557,9 @@ Each requirement in @table:requirements was tested against its success criterion
 
 *Results.* The X axis showed drift under 0.5 cm. The Y axis was harder to measure because the platform moves, and it was judged to be within 1 cm without a precise measurement.
 
-*Discussion.* The X result is a measurement and meets the criterion. The Y result is an estimate, and both axes will be measured again with a recording. A later check of the X axis, with the whole system running, also found it correct, but it was not recorded. Status: met.
+*Discussion.* The X result is a measurement and meets the criterion. The Y result is an estimate, and both axes will be measured again with a recording. A later video of the X axis shows a consistent reading of about 4 cm at home across repeated moves (@video:xaxis). The other X stops were not read from the video. Status: met.
 
-*Evidence.* @video:viability.
+*Evidence.* @video:viability and @video:xaxis.
 
 === R-03: Workpiece Retention
 
@@ -573,29 +579,29 @@ Each requirement in @table:requirements was tested against its success criterion
 
 *Requirement.* The system shall lower the workpiece to the programmed immersion depth within ±1 cm. Success criterion: measured depth within ±1 cm of programmed depth.
 
-*Test setup.* A ruler at the dipping station.
+*Test setup.* A ruler beside the vertical axis at the dipping station, in view of the camera.
 
-*Procedure.* Execute one dip sequence and measure the actual immersion depth relative to the programmed value.
+*Procedure.* One dip sequence was executed during the main unattended test, and the position of the vertical axis was read on the ruler at the top and at the bottom of the move.
 
-*Results.* Not yet tested.
+*Results.* The vertical axis read 9.3 cm at the top and 19.3 cm at the bottom, which is an immersion depth of 10.0 cm. The programmed depth was 100 mm, so the measured depth is within the ±1 cm tolerance.
 
-*Discussion.* Both axes have since been calibrated, but the immersion depth has not been measured yet. Status: not yet tested.
+*Discussion.* The depth was measured on one cycle. Status: met.
 
-*Evidence.* None yet.
+*Evidence.* @video:main-test, in the clip with the ruler that starts at 1:38 (the exact timestamps are still to be added).
 
 === R-05: Dwell Time
 
 *Requirement.* The system shall hold the workpiece at the programmed immersion depth for the programmed dwell time within ±1 s. Success criterion: measured dwell within ±1 s of the programmed value.
 
-*Test setup.* A stopwatch or equivalent timing instrument.
+*Test setup.* The video of the main unattended test, measured frame by frame in DaVinci Resolve at 29.97 frames per second. A stopwatch in the shot shows that the video is not spliced.
 
-*Procedure.* Execute one dip sequence and measure the dwell period.
+*Procedure.* In the cycle that begins at about 9:02, the dwell was measured from the first frame in which the orange shaft coupler stops to the last frame in which it is still in the same position.
 
-*Results.* Not yet documented.
+*Results.* The dwell lasted 2.10 s, from 9:16:06 to 9:18:09 in minutes, seconds, and frames. The programmed dwell was 2000 ms, so the error is +0.10 s, within the ±1 s tolerance.
 
-*Discussion.* Cycles with a part were run to check the dwell time, and the dwell looked correct, but there is no recording of it. Status: not yet tested.
+*Discussion.* The dwell was measured on one cycle. Status: met.
 
-*Evidence.* None yet.
+*Evidence.* @video:main-test, 9:16:06 to 9:18:09.
 
 === R-06: Full Unattended Cycle
 
@@ -605,11 +611,11 @@ Each requirement in @table:requirements was tested against its success criterion
 
 *Procedure.* A cycle was started, and each stage was observed in order.
 
-*Results.* Every stage completed in order without operator intervention, except the start from the part-ready trigger, because the cycle was started with the Start button.
+*Results.* Every stage completed in order without operator intervention, except the start from the part-ready trigger, because the cycle was started with the Start button. The cycle at about 9:02 to 10:07 of the main test video shows every stage, and the operation index on the monitor advances through the cycle in order.
 
 *Discussion.* The start from the part-ready trigger is tested under R-01, which is not implemented yet. Status: met.
 
-*Evidence.* @video:viability.
+*Evidence.* @video:viability, @video:main-test, and @video:ui.
 
 === R-07: Emergency-Stop Power Removal
 
@@ -651,7 +657,7 @@ Each requirement in @table:requirements was tested against its success criterion
 
 *Discussion.* Fault reporting was implemented after the viability video was recorded. The screen recording of the monitor covers the emergency-stop fault, but the other faults have not been shown on it. Status: partially met.
 
-*Evidence.* @video:viability for state reporting, and @fig:dashboard-estop for the fault.
+*Evidence.* @video:viability for state reporting, and @fig:dashboard-estop for the fault. In @video:ui, which shares the timeline of @video:main-test, the operation index changes as the X axis moves toward the dip (9:06) and as the Y axis goes down into the bath (9:10), and the emergency-stop fault is latched and marked as the first fault at 11:51, with the message to release the emergency stop and press Start.
 
 === R-10: Ten Consecutive Cycles
 
@@ -661,11 +667,11 @@ Each requirement in @table:requirements was tested against its success criterion
 
 *Procedure.* Command ten consecutive full cycles, recording the cycle time, commanded and measured immersion depth, and measured dwell time for each.
 
-*Results.* Not yet tested.
+*Results.* The main test video shows ten complete cycles and part of an eleventh, one after the other, with the X axis reaching the bath about every 65 s, from about 0:25 to 11:18. The part was placed by hand at the input station in every cycle, because the prototype has no input table. The depth and the dwell were measured on one cycle (R-04 and R-05), not on each cycle.
 
-*Discussion.* The test needs the depth to be measured in each cycle. Status: not yet tested.
+*Discussion.* The cycles ran back to back, but each one has not yet been checked for a dropped workpiece, a missed placement, and the return to home, and the depth and the dwell were not recorded for each cycle as the procedure asks. Status: partially met.
 
-*Evidence.* None yet.
+*Evidence.* @video:main-test, and @video:ui for the operation index.
 
 === R-11: Rated Payload
 
@@ -675,11 +681,11 @@ Each requirement in @table:requirements was tested against its success criterion
 
 *Procedure.* A weight was attached and one complete cycle was commanded.
 
-*Results.* A weight of 2.5 lb or more, above the required 1 lb, was held through a full cycle in an informal test.
+*Results.* A weight of 2.5 lb or more, above the required 1 lb, was held through a full cycle in an informal test. In the main test, a plate that the team reports as 5 lb was carried on the rod through every cycle.
 
-*Discussion.* The informal test exceeded the rated payload. Status: met.
+*Discussion.* Both tests exceeded the rated payload. A photo of a scale reading for the plate is still to be added. Status: met.
 
-*Evidence.* The informal test recorded on the Final Testing and Results page of the website.
+*Evidence.* @video:main-test, and the informal test recorded on the Final Testing and Results page of the website.
 
 == Verification Summary
 
@@ -719,7 +725,7 @@ Each requirement in @table:requirements was tested against its success criterion
       [X: drift under 0.5 cm. Y: judged within 1 cm],
       [--],
       [Met],
-      [@video:viability],
+      [@video:viability, @video:xaxis],
 
       [R-03],
       [Workpiece retention],
@@ -730,8 +736,8 @@ Each requirement in @table:requirements was tested against its success criterion
       [Met],
       [@video:viability],
 
-      [R-04], [Immersion depth], [Within ±1 cm], [Ruler], [Depth not yet measured], [--], [Not yet tested], [--],
-      [R-05], [Dwell time], [Within ±1 s], [Stopwatch], [Observed, not documented], [--], [Not yet tested], [--],
+      [R-04], [Immersion depth], [Within ±1 cm], [Ruler], [10.0 cm against 10 cm programmed], [1/1], [Met], [@video:main-test],
+      [R-05], [Dwell time], [Within ±1 s], [Video timing], [2.10 s against 2.00 s programmed], [1/1], [Met], [@video:main-test],
       [R-06],
       [Full unattended cycle],
       [All stages in order],
@@ -739,7 +745,7 @@ Each requirement in @table:requirements was tested against its success criterion
       [All stages, started with the Start button],
       [--],
       [Met],
-      [@video:viability],
+      [@video:viability, @video:main-test],
 
       [R-07],
       [E-stop removes driver power],
@@ -763,28 +769,28 @@ Each requirement in @table:requirements was tested against its success criterion
       [State and fault reporting],
       [Correct labels transmitted],
       [Modbus monitor, induced fault],
-      [State shown; faults checked informally],
+      [State shown; e-stop fault shown; other faults not shown],
       [--],
       [Partially met],
-      [@video:viability],
+      [@video:viability, @video:ui],
 
       [R-10],
       [Ten consecutive cycles],
       [All complete, within tolerance],
       [Ten recorded cycles],
-      [Depth not yet measured],
+      [Ten cycles recorded; depth and dwell not recorded for each],
       [--],
-      [Not yet tested],
-      [--],
+      [Partially met],
+      [@video:main-test],
 
       [R-11],
       [1 lb payload],
       [Full cycle without failure],
       [One cycle with weight],
-      [2.5 lb or more held through a cycle],
+      [2.5 lb or more held; 5 lb plate carried through the cycles],
       [--],
       [Met],
-      [--],
+      [@video:main-test],
     ),
     caption: [Verification summary of the system requirements],
   )<table:verification>
