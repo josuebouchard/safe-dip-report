@@ -679,7 +679,7 @@ Each requirement in @table:requirements was tested against its success criterion
 
 *Procedure.* A weight was attached and one complete cycle was commanded.
 
-*Results.* A weight of 2.5 lb or more, above the required 1 lb, was held through a full cycle in an informal test. In the main test, a plate that the team reports as 5 lb was carried on the rod through every cycle.
+*Results.* A weight of 2.5 lb or more, above the required 1 lb, was held through a full cycle in an informal test. In the ten-cycle test, a plate that the team reports as 5 lb was carried on the rod through every cycle.
 
 *Discussion.* Both tests exceeded the rated payload. A photo of a scale reading for the plate is still to be added. Status: met.
 
