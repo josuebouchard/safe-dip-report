@@ -259,6 +259,28 @@ The vertical axis was designed with two bearing holders supporting the leadscrew
   label: <fig:y-axis-cad>,
 )
 
+The printed parts of the gantry are shown together in @fig:printed-parts, as they appear in the CAD model.
+
+#subfigs(
+  figure(image(impl + "printed-parts/vertical-shaft.png", width: 3.4cm), caption: [Vertical shaft]),
+  figure(image(impl + "printed-parts/top-holder.png", height: 2.2cm), caption: [Top holder]),
+  figure(image(impl + "printed-parts/vertical-screw-base-1.png", height: 2.2cm), caption: [Vertical screw base, part 1]),
+  figure(image(impl + "printed-parts/vertical-screw-base-2.png", height: 2.2cm), caption: [Vertical screw base, part 2]),
+  figure(image(impl + "printed-parts/y-axis-holder.png", height: 2.2cm), caption: [Y-axis holder]),
+  figure(image(impl + "printed-parts/screw-holder-cap.png", height: 2.2cm), caption: [Screw-holder cap]),
+  figure(image(impl + "printed-parts/limit-switch-holder.png", height: 2.2cm), caption: [Limit-switch holder]),
+  figure(image(impl + "printed-parts/x-axis-transmission-holder.png", height: 2.2cm), caption: [X-axis transmission holder]),
+  figure(image(impl + "printed-parts/stepper-adapter-x.png", width: 3.4cm), caption: [X-axis stepper adapter]),
+  figure(image(impl + "printed-parts/gear-holder.png", height: 2.2cm), caption: [Gear holder]),
+  figure(image(impl + "printed-parts/gear-adapter.png", height: 2.2cm), caption: [Gear adapter]),
+  figure(image(impl + "printed-parts/x-axis-lock.png", height: 2.2cm), caption: [X-axis lock]),
+  columns: (1fr, 1fr, 1fr, 1fr),
+  column-gutter: 8pt,
+  row-gutter: 10pt,
+  caption: [Printed parts of the gantry in CAD],
+  label: <fig:printed-parts>,
+)
+
 The vertical motor was wired in the same way to a second DM542TE driver, with its STEP and DIR inputs on controller pins PA1 and PC1 and the same microstep setting. The X-axis base holder and the Y-axis holder were then integrated into a single assembly, and the rails were aligned and secured. The vertical movement was first tested without the magnet by holding the nut so that it could not rotate, and the assembly was later checked by hand and with a drill driving the leadscrew.
 
 === End Effector
