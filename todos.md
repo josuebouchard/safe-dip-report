@@ -25,13 +25,6 @@ information or a photo only the team has.
       (Section 3.3, Damaged Leadscrew Holder) and the frame L-support (Frame Wobble).
       The captions assume that is what they show.
 - [ ] Figures 3.14 and 3.15 (the dashboard): confirm they show what the captions say.
-- [ ] Chapter 2 CAD pictures (Figs. 2.1 and 2.2) now show the as-built model. They have no
-      dimension lines and do not include the limit switches. If a dimensioned drawing of
-      the assembly from Adriano is available, add it. The Week 5 plate drawings on the website have
-      dimensions and could be a stopgap.
-
-## Text still to write
-
 - [ ] **Part-ready trigger** (Section 3.1.1 describes the design, which is not in the
       firmware yet). After implementing it, test R-01 and R-06, rewrite that part in past
       tense, and update the cycle diagram, the table of operations, the Modbus map, the
