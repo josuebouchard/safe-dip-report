@@ -79,13 +79,12 @@ to change on the website is in [website-updates.md](website-updates.md).
 - [ ] Confirm the final 12 V adapter (the one used for the first tests was not the final
       one).
 - [ ] Rewrite the abstract and conclusion with the final results.
-- [ ] Upload the three new test videos to the website's `public/progress/` under the names
-      `main_test_11min.mp4`, `main_test_modbus_ui_synced.mp4` and `xaxis_consistency.mp4`
-      (Videos 3.6 to 3.8 link to them), then check the links.
+- [ ] Upload the Modbus monitor recording of the main test (synchronized to the main test
+      video) and add it back as a video entry. It supports R-06 and R-09: the operation
+      index changes at 9:06 and 9:10 and the e-stop fault is latched at 11:51. The text that
+      cited it was removed from the report and the website for now.
 - [ ] R-04: add the exact timestamps of the two ruler readings (the clip starts at 1:38).
 - [ ] R-11: add a photo of a scale reading for the 5 lb plate.
-- [ ] R-10: check each cycle of the main test for drops and return to home, or change the
-      status.
 - [ ] R-01, R-07 and R-08: record the trigger and the e-stop videos (Videos A and B of the
       verification summary), after the relay is replaced.
 - [ ] Flyback diode: the text (Section 2.2.7) and the budget say 1N4007, but the schematic

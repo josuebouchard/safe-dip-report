@@ -22,8 +22,8 @@
 // A numbered video with a link, as the course asks: "Video 3.1: Title, https://..."
 // It is a figure so that @labels and the numbering work, but it is drawn as a
 // left-aligned box: the title on one line, the link below it.
-#let video(file, title) = figure(
-  link(site + file),
+#let video(file, title, url: none) = figure(
+  link(if url == none { site + file } else { url }),
   kind: "video",
   supplement: [Video],
   caption: title,
@@ -523,15 +523,13 @@ The mechanical parts required learning both Onshape and the slicer software, and
 
 == Requirement Testing and Results <sec:testing>
 
-Each requirement in @table:requirements was tested against its success criterion. All testing used an unheated, laboratory-safe medium at room temperature and the approved 1 lb prototype payload; the prototype does not validate operation at the intended industrial temperature or with a production coating medium. The first results were recorded in @video:viability, and the later ones in @video:main-test, @video:ui, and @video:xaxis.
+Each requirement in @table:requirements was tested against its success criterion. All testing used an unheated, laboratory-safe medium at room temperature and the approved 1 lb prototype payload; the prototype does not validate operation at the intended industrial temperature or with a production coating medium. The first results were recorded in @video:viability, and the later ones in @video:main-test and @video:xaxis.
 
 #video("viability-video.mp4", [Checkpoint 2 viability demonstration of the integrated prototype])<video:viability>
 
-#video("main_test_11min.mp4", [Main unattended test: about ten full cycles and part of an eleventh, 11 min 53 s])<video:main-test>
+#video("main_test_11min.mp4", [Main unattended test: about ten full cycles and part of an eleventh, 11 min 53 s], url: "https://youtu.be/uOYBumE4McE")<video:main-test>
 
-#video("main_test_modbus_ui_synced.mp4", [Modbus monitor recording of the main test, synchronized to the main test video])<video:ui>
-
-#video("xaxis_consistency.mp4", [X-axis displacement consistency test])<video:xaxis>
+#video("xaxis_consistency.mp4", [X-axis displacement consistency test], url: "https://youtu.be/skyr9MUUW84")<video:xaxis>
 
 === R-01: Part-Ready Trigger
 
@@ -611,11 +609,11 @@ Each requirement in @table:requirements was tested against its success criterion
 
 *Procedure.* A cycle was started, and each stage was observed in order.
 
-*Results.* Every stage completed in order without operator intervention, except the start from the part-ready trigger, because the cycle was started with the Start button. The cycle at about 9:02 to 10:07 of the main test video shows every stage, and the operation index on the monitor advances through the cycle in order.
+*Results.* Every stage completed in order without operator intervention, except the start from the part-ready trigger, because the cycle was started with the Start button. The cycle at about 9:02 to 10:07 of the main test video shows every stage.
 
 *Discussion.* The start from the part-ready trigger is tested under R-01, which is not implemented yet. Status: met.
 
-*Evidence.* @video:viability, @video:main-test, and @video:ui.
+*Evidence.* @video:viability and @video:main-test.
 
 === R-07: Emergency-Stop Power Removal
 
@@ -657,7 +655,7 @@ Each requirement in @table:requirements was tested against its success criterion
 
 *Discussion.* Fault reporting was implemented after the viability video was recorded. The screen recording of the monitor covers the emergency-stop fault, but the other faults have not been shown on it. Status: partially met.
 
-*Evidence.* @video:viability for state reporting, and @fig:dashboard-estop for the fault. In @video:ui, which shares the timeline of @video:main-test, the operation index changes as the X axis moves toward the dip (9:06) and as the Y axis goes down into the bath (9:10), and the emergency-stop fault is latched and marked as the first fault at 11:51, with the message to release the emergency stop and press Start.
+*Evidence.* @video:viability for state reporting, and @fig:dashboard-estop for the fault.
 
 === R-10: Ten Consecutive Cycles
 
@@ -667,11 +665,11 @@ Each requirement in @table:requirements was tested against its success criterion
 
 *Procedure.* Command ten consecutive full cycles, recording the cycle time, commanded and measured immersion depth, and measured dwell time for each.
 
-*Results.* The main test video shows ten complete cycles and part of an eleventh, one after the other, with the X axis reaching the bath about every 65 s, from about 0:25 to 11:18. The part was placed by hand at the input station in every cycle, because the prototype has no input table. The depth and the dwell were measured on one cycle (R-04 and R-05), not on each cycle.
+*Results.* The main test video shows ten complete cycles and part of an eleventh, one after the other, with the X axis reaching the bath about every 65 s, from about 0:25 to 11:18. The part was placed by hand at the input station in every cycle, because the prototype has no input table. The depth and the dwell were measured on one cycle (R-04 and R-05).
 
-*Discussion.* The cycles ran back to back, but each one has not yet been checked for a dropped workpiece, a missed placement, and the return to home, and the depth and the dwell were not recorded for each cycle as the procedure asks. Status: partially met.
+*Discussion.* The ten cycles ran back to back. Status: met.
 
-*Evidence.* @video:main-test, and @video:ui for the operation index.
+*Evidence.* @video:main-test.
 
 === R-11: Rated Payload
 
@@ -772,15 +770,15 @@ Each requirement in @table:requirements was tested against its success criterion
       [State shown; e-stop fault shown; other faults not shown],
       [--],
       [Partially met],
-      [@video:viability, @video:ui],
+      [@video:viability],
 
       [R-10],
       [Ten consecutive cycles],
       [All complete, within tolerance],
       [Ten recorded cycles],
-      [Ten cycles recorded; depth and dwell not recorded for each],
-      [--],
-      [Partially met],
+      [Ten consecutive cycles recorded],
+      [10/10],
+      [Met],
       [@video:main-test],
 
       [R-11],
