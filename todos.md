@@ -79,10 +79,8 @@ to change on the website is in [website-updates.md](website-updates.md).
 - [ ] Confirm the final 12 V adapter (the one used for the first tests was not the final
       one).
 - [ ] Rewrite the abstract and conclusion with the final results.
-- [ ] Upload the Modbus monitor recording of the main test (synchronized to the main test
-      video) and add it back as a video entry. It supports R-06 and R-09: the operation
-      index changes at 9:06 and 9:10 and the e-stop fault is latched at 11:51. The text that
-      cited it was removed from the report and the website for now.
+- [ ] Check that the timestamps used for the ten-cycle test video (9:02 to 10:07, 9:06,
+      9:10, 9:16:06 to 9:18:09, 11:51) are the same in the side-by-side version on YouTube.
 - [ ] R-04: add the exact timestamps of the two ruler readings (the clip starts at 1:38).
 - [ ] R-11: add a photo of a scale reading for the 5 lb plate.
 - [ ] R-01, R-07 and R-08: record the trigger and the e-stop videos (Videos A and B of the

@@ -527,7 +527,7 @@ Each requirement in @table:requirements was tested against its success criterion
 
 #video("viability-video.mp4", [Checkpoint 2 viability demonstration of the integrated prototype])<video:viability>
 
-#video("main_test_11min.mp4", [Main unattended test: about ten full cycles and part of an eleventh, 11 min 53 s], url: "https://youtu.be/uOYBumE4McE")<video:main-test>
+#video("ten-cycle-test.mp4", [Ten-cycle unattended test with the Modbus monitor side by side, 11 min 53 s], url: "https://youtu.be/B5UD4GsUm4Q")<video:main-test>
 
 #video("xaxis_consistency.mp4", [X-axis displacement consistency test], url: "https://youtu.be/skyr9MUUW84")<video:xaxis>
 
@@ -579,7 +579,7 @@ Each requirement in @table:requirements was tested against its success criterion
 
 *Test setup.* A ruler beside the vertical axis at the dipping station, in view of the camera.
 
-*Procedure.* One dip sequence was executed during the main unattended test, and the position of the vertical axis was read on the ruler at the top and at the bottom of the move.
+*Procedure.* One dip sequence was executed during the ten-cycle unattended test, and the position of the vertical axis was read on the ruler at the top and at the bottom of the move.
 
 *Results.* The vertical axis read 9.3 cm at the top and 19.3 cm at the bottom, which is an immersion depth of 10.0 cm. The programmed depth was 100 mm, so the measured depth is within the ±1 cm tolerance.
 
@@ -591,7 +591,7 @@ Each requirement in @table:requirements was tested against its success criterion
 
 *Requirement.* The system shall hold the workpiece at the programmed immersion depth for the programmed dwell time within ±1 s. Success criterion: measured dwell within ±1 s of the programmed value.
 
-*Test setup.* The video of the main unattended test, measured frame by frame in DaVinci Resolve at 29.97 frames per second. A stopwatch in the shot shows that the video is not spliced.
+*Test setup.* The video of the ten-cycle unattended test, measured frame by frame in DaVinci Resolve at 29.97 frames per second. A stopwatch in the shot shows that the video is not spliced.
 
 *Procedure.* In the cycle that begins at about 9:02, the dwell was measured from the first frame in which the orange shaft coupler stops to the last frame in which it is still in the same position.
 
@@ -609,7 +609,7 @@ Each requirement in @table:requirements was tested against its success criterion
 
 *Procedure.* A cycle was started, and each stage was observed in order.
 
-*Results.* Every stage completed in order without operator intervention, except the start from the part-ready trigger, because the cycle was started with the Start button. The cycle at about 9:02 to 10:07 of the main test video shows every stage.
+*Results.* Every stage completed in order without operator intervention, except the start from the part-ready trigger, because the cycle was started with the Start button. The cycle at about 9:02 to 10:07 of the ten-cycle test video shows every stage, and the operation index on the monitor beside the gantry advances through the cycle in order.
 
 *Discussion.* The start from the part-ready trigger is tested under R-01, which is not implemented yet. Status: met.
 
@@ -655,7 +655,7 @@ Each requirement in @table:requirements was tested against its success criterion
 
 *Discussion.* Fault reporting was implemented after the viability video was recorded. The screen recording of the monitor covers the emergency-stop fault, but the other faults have not been shown on it. Status: partially met.
 
-*Evidence.* @video:viability for state reporting, and @fig:dashboard-estop for the fault.
+*Evidence.* @video:viability for state reporting, and @fig:dashboard-estop for the fault. In @video:main-test, the monitor shown beside the gantry changes its operation index as the X axis moves toward the dip (9:06) and as the Y axis goes down into the bath (9:10), and the emergency-stop fault is latched and marked as the first fault at 11:51, with the message to release the emergency stop and press Start.
 
 === R-10: Ten Consecutive Cycles
 
@@ -665,7 +665,7 @@ Each requirement in @table:requirements was tested against its success criterion
 
 *Procedure.* Command ten consecutive full cycles, recording the cycle time, commanded and measured immersion depth, and measured dwell time for each.
 
-*Results.* The main test video shows ten complete cycles and part of an eleventh, one after the other, with the X axis reaching the bath about every 65 s, from about 0:25 to 11:18. The part was placed by hand at the input station in every cycle, because the prototype has no input table. The depth and the dwell were measured on one cycle (R-04 and R-05).
+*Results.* The ten-cycle test video shows ten complete cycles and part of an eleventh, one after the other, with the X axis reaching the bath about every 65 s, from about 0:25 to 11:18. The part was placed by hand at the input station in every cycle, because the prototype has no input table. The depth and the dwell were measured on one cycle (R-04 and R-05).
 
 *Discussion.* The ten cycles ran back to back. Status: met.
 
@@ -770,7 +770,7 @@ Each requirement in @table:requirements was tested against its success criterion
       [State shown; e-stop fault shown; other faults not shown],
       [--],
       [Partially met],
-      [@video:viability],
+      [@video:viability, @video:main-test],
 
       [R-10],
       [Ten consecutive cycles],
