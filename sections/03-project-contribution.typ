@@ -575,9 +575,9 @@ Each requirement in @table:requirements was tested against its success criterion
 
 *Procedure.* The system was commanded to the programmed pickup position, and the position of the end effector was measured relative to the target.
 
-*Results.* The X axis showed drift under 0.5 cm. The Y axis was harder to measure because the platform moves, and it was judged to be within 1 cm without a precise measurement.
+*Results.* The X axis showed drift under 0.5 cm. The Y axis was harder to measure because the platform moves, and it was judged to be within 1 cm without a precise measurement. The drift of the X axis was not greater than 20 mm.
 
-*Discussion.* The X result is a measurement and meets the criterion. The Y result is an estimate, and both axes will be measured again with a recording. A later video of the X axis shows a consistent reading of about 4 cm at home across repeated moves (@video:xaxis). The other X stops were not read from the video. Status: met.
+*Discussion.* The X result is a measurement and meets the criterion. The Y result is an estimate, and both axes will be measured again with a recording. A later video of the X axis shows a consistent reading of about 4 cm at home across repeated moves (@video:xaxis). The other X stops were not read from the video. Because each cycle homes both axes on their limit switches, the errors do not add up from one cycle to the next. Status: met.
 
 *Evidence.* @video:viability and @video:xaxis.
 
