@@ -25,9 +25,9 @@ information or a photo only the team has.
       (Section 3.3, Damaged Leadscrew Holder) and the frame L-support (Frame Wobble).
       The captions assume that is what they show.
 - [ ] Figures 3.14 and 3.15 (the dashboard): confirm they show what the captions say.
-- [ ] Chapter 2 CAD pictures still show the proposal design with two conveyors, and have no
-      dimension lines. **Needed for the final report (Nov 20):** a dimensioned drawing of
-      the as-built assembly, from Adriano. The Week 5 plate drawings on the website have
+- [ ] Chapter 2 CAD pictures (Figs. 2.1 and 2.2) now show the as-built model. They have no
+      dimension lines and do not include the limit switches. If a dimensioned drawing of
+      the assembly from Adriano is available, add it. The Week 5 plate drawings on the website have
       dimensions and could be a stopgap.
 
 ## Text still to write

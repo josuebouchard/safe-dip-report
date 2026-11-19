@@ -152,19 +152,19 @@ The horizontal axis is guided by an MGN12H linear rail and carriage and driven b
 
 #import "@preview/subpar:0.2.2"
 
-#v(-1em)
+#v(0.5em)
 #figure(
-  image("../images/CAD-model.png", width: 90%),
+  image("../images/CAD-model.png", height: 8.4cm),
   caption: [CAD model of the Safe Dip mechanical arrangement -\ Perspective view]
 )<cad-model>
 #figure(
-  image("../images/CAD-model-front.png", width: 90%),
+  image("../images/CAD-model-front.png", height: 8.4cm),
   caption: [CAD model of the Safe Dip mechanical arrangement -\ Front view]
 )
 
 #v(1em)
 
-The CAD model in @cad-model shows the mechanical arrangement of the Safe Dip prototype. The model shows the relative placement of the horizontal axis, vertical assembly, input station, dipping station, output station, and end effector. The dimensions were checked against the selected mechanical components and the required axis travel and clearances.
+The CAD model in @cad-model shows the mechanical arrangement of the Safe Dip prototype. The model shows the aluminum frame, the two horizontal rails with the carriage plate that slides along them, and the vertical assembly with its stepper motor, leadscrew, and magnet holder. The timing belt of the horizontal axis is drawn between its two pulleys. The model does not include the limit switches. The dimensions were checked against the selected mechanical components and the required axis travel and clearances.
 
 #include "02-c-cad-datum.typ"
 
