@@ -28,10 +28,6 @@ information or a photo only the team has.
 
 ## Text still to write
 
-- [ ] **Part-ready trigger** (Section 3.1.1 describes the design, which is not in the
-      firmware yet). After implementing it, test R-01 and R-06, rewrite that part in past
-      tense, and update the cycle diagram, the table of operations, the Modbus map, the
-      monitor's stage list, and the verification table.
 - [ ] **First homing test of both axes** (Section 3.2.6, Sensing).
 - [ ] **(you)** Section 3.2.6 says a printed holder was made for the switches, but the
       switches are glued in place. Check that the two statements agree.
@@ -41,15 +37,6 @@ information or a photo only the team has.
 Only measured values go in. Anything not measured stays "Not yet tested".
 
 - [ ] Trial counts and formal measurements for every requirement.
-- [ ] R-01 (trigger), R-04 (immersion depth) and R-10 (ten cycles): not yet run.
-- [ ] R-05 (dwell time): results say "Not yet documented".
-- [ ] R-07 and R-08: wait for the replacement of the failed motor-supply relay, then test
-      and document them.
-- [ ] R-09: check the recording shows each stage in order and a fault appearing while the
-      machine runs. If it does, the requirement can be marked as met, then update the
-      verification table.
-- [ ] R-11: the evidence is the informal test on the website. Record the exact weight, the
-      trials, and a video.
 - [ ] R-02: the Y error was only estimated. Repeat it with a measurement.
 
 ## Must match the website
@@ -64,6 +51,10 @@ to change on the website is in [website-updates.md](website-updates.md).
 
 ## Before the final report (Nov 20)
 
+- [ ] Fig. 3.2 (the normal-cycle diagram) does not show the `WAIT_FOR_PIECE` operation yet.
+      Add it where the firmware puts it, and check that Table 3.1 and Section 3.1.1 agree.
+- [ ] Push the firmware that the trigger and e-stop videos ran on, and check Appendix A and
+      the Modbus map against it (the operation indices shifted by one).
 - [ ] Rerun the firmware-size chart
       (`images/chapter-3/implementation/firmware-size-over-time/loc_history.py`).
 - [ ] Check the code listings in Appendix A and the monitor listings (A.9 to A.11) against
@@ -78,9 +69,6 @@ to change on the website is in [website-updates.md](website-updates.md).
 - [ ] Check that the timestamps used for the ten-cycle test video (9:02 to 10:07, 9:06,
       9:10, 9:16:06 to 9:18:09, 11:51) are the same in the side-by-side version on YouTube.
 - [ ] R-04: add the exact timestamps of the two ruler readings (the clip starts at 1:38).
-- [ ] R-11: add a photo of a scale reading for the 5 lb plate.
-- [ ] R-01, R-07 and R-08: record the trigger and the e-stop videos (Videos A and B of the
-      verification summary), after the relay is replaced.
 - [ ] Flyback diode: the text (Section 2.2.7) and the budget say 1N4007, but the schematic
       says 1N5822. Check which one is installed and make all three agree, here and on the
       website.

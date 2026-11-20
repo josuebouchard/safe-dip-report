@@ -84,7 +84,7 @@ If no fault is latched, the sequencer is stepped, and the current operation may 
 #place.flush()
 === Normal Cycle Sequence <sec:normal-cycle>
 
-The normal operating cycle is represented as an ordered list of thirteen nonblocking operations, shown in @flowchart:normal-cycle and grouped into five process stages: home, pick, dip, deposit, and release. After the last operation completes, the sequence wraps around to the first, so the gantry repeats the cycle, homing both axes again at the start of each one.
+The normal operating cycle is represented as an ordered list of nonblocking operations, shown in @flowchart:normal-cycle and grouped into five process stages: home, pick, dip, deposit, and release. After the last operation completes, the sequence wraps around to the first, so the gantry repeats the cycle, homing both axes again at the start of each one.
 
 #figure(
   image(flow + "normal-cycle.pdf", width: 100%),
@@ -96,9 +96,9 @@ Each operation represents an absolute objective rather than a blocking procedure
 
 The home stage runs the vertical axis first, so that the end effector is raised before the gantry travels horizontally. Homing leaves the horizontal axis at its origin, which is where the pick stage takes place.
 
-The part-ready trigger is not in the firmware yet, and the rest of this section describes its design. The trigger is a pair of Dupont pins on the controller. One pin is connected to ground, and the other to a free input, pin PA10 (D2), which tolerates 5 V and has its internal pull-up enabled. Closing the pair, with a jumper or with the dry contact of the external system, pulls the input low, which means that a part is ready. An open pair, and an unplugged or broken wire, leave the input high, which means that no part is ready, so a disconnected trigger can never start a cycle. The input is read once per pass of the main loop with the other inputs, and it goes through the same filter as the limit switches, so that a spike of noise cannot start a cycle: the trigger counts as asserted only after the input has read low for 3 ms, and it counts as released at once.
+The part-ready trigger is a pair of Dupont pins on the controller. One pin is connected to ground, and the other to a free input, pin PA10 (D2), which tolerates 5 V and has its internal pull-up enabled. Closing the pair, with a switch or with the dry contact of the external system, pulls the input low, which means that a part is ready. An open pair, and an unplugged or broken wire, leave the input high, which means that no part is ready, so a disconnected trigger can never start a cycle.
 
-The trigger is used by a new operation, _Wait for trigger_, which is the first operation of the cycle, before the homing operations. While the trigger is not asserted, the operation keeps running and nothing moves, so no motion starts without it. When the trigger is asserted, the operation finishes, and the cycle homes both axes and runs as before. The Start button still restarts the sequence, which brings the machine back to the wait, so the trigger is needed at the start of every cycle. It is not checked while a cycle is running, so opening it during a cycle does not stop the machine; the emergency stop and the faults do that. The state of the trigger is also reported over Modbus as a discrete input, and the operation appears in the stage list of the monitor, so that the wait can be seen. Adding the operation shifts the operation index by one, so the Modbus map and the monitor change with it.
+The trigger is used by an operation called `WAIT_FOR_PIECE`, which holds the cycle until the trigger is asserted. A press of the Start button starts the sequencer, which then waits in this operation: while the trigger is not asserted, the operation keeps running and nothing moves, so no motion starts without it. When the trigger is asserted, the operation finishes and the cycle continues. The monitor shows the operation in its stage list, so that the wait can be seen. Adding the operation shifted the operation index of the later operations by one, so the Modbus map and the monitor changed with it.
 
 #place.flush()
 === Operation Interface <sec:operation-interface>
@@ -130,6 +130,7 @@ Each operation copies every configurable value it depends on when it starts. A v
 
     [Effector], [Engages or releases the electromagnet], [The settle time has elapsed], [Never],
     [Dwell], [Records the start time and the dwell duration], [The dwell duration has elapsed], [Never],
+    [Wait for piece], [Starts waiting and keeps running], [The part-ready trigger is asserted], [Never],
   ),
   caption: [Operations available to the sequencer],
 )<table:operations>
@@ -345,7 +346,7 @@ The scale, the travel of both axes, and the positions of the cycle were then tun
 
 === Cycle and Fault Firmware
 
-All thirteen operations of the production cycle were implemented in order, with a Start button that restarts the cycle and an emergency stop that halts both axes while keeping the electromagnet engaged. The homing operations were then written, followed by fault handling: homing gained a time limit, a stuck switch became detectable, and a limit-switch press during a move stops the machine. Faults were made to stay latched until a Start press clears them. A full unattended cycle was run, started with the Start button.
+All the operations of the production cycle were implemented in order, with a Start button that restarts the cycle and an emergency stop that halts both axes while keeping the electromagnet engaged. The homing operations were then written, followed by fault handling: homing gained a time limit, a stuck switch became detectable, and a limit-switch press during a move stops the machine. Faults were made to stay latched until a Start press clears them. A full unattended cycle was run, started with the Start button. The part-ready trigger was then added as an operation that holds the cycle until the trigger is asserted. For the tests that do not concern the trigger, it was kept asserted, in most cases forced in software, so that the cycle starts from the Start button.
 
 A bug found while connecting the X limit switch prompted a review of the firmware's structure, which was reorganized into the layers described in the previous section, around a machine layer that owns the state and lets operations raise their own faults. Static analysis was configured for the firmware at the same stage. Homing was then enabled in the sequence for both axes, with a separate back-off for each. A lost-step check that compared each switch hit with the previous origin was removed at this stage. The main-loop time was then instrumented so that the responsiveness of the cooperative design could be measured. Finally, a code review of the whole firmware found and fixed several defects, described in @sec:review.
 
@@ -435,8 +436,8 @@ This section records each significant problem found during the build, its cause,
 #issue(
   symptom: [The stepper drivers remained powered even when the emergency stop removed power from the relay's coil.],
   cause: [The normally open contact of the relay connecting the 24 V supply to the drivers welded closed. The team first attributed this to a defective component. Further research traced it to the load: the stepper drivers are a capacitive load, which draws an inrush current when power is applied, and the relay's contact ratings are for resistive loads only.],
-  solution: [For now, the relay is to be replaced next week, and after an emergency stop the motors are to be unplugged before the reset. Until then, the emergency stop still stops the machine, because the second relay signals the controller, which stops the step pulses. A better alternative is to switch the AC side of the power supply instead of its 24 V output.],
-  result: [Pending. Requirements R-07 and R-08 must be tested after the replacement.],
+  solution: [The relay was replaced. In the meantime the emergency stop still stopped the machine, because the second relay signals the controller, which stops the step pulses. A better alternative is to switch the AC side of the power supply instead of its 24 V output.],
+  result: [With the new relay, the emergency stop removes the driver power again, as shown in the test of requirement R-07 (@sec:test-r07).],
 )
 
 === Modbus Connections Dropping
@@ -545,7 +546,7 @@ The mechanical parts required learning both Onshape and the slicer software, and
 
 == Requirement Testing and Results <sec:testing>
 
-Each requirement in @table:requirements was tested against its success criterion. All testing used an unheated, laboratory-safe medium at room temperature and the approved 1 lb prototype payload; the prototype does not validate operation at the intended industrial temperature or with a production coating medium. The first results were recorded in @video:viability, and the later ones in @video:main-test and @video:xaxis.
+Each requirement in @table:requirements was tested against its success criterion. All testing used an unheated, laboratory-safe medium at room temperature and the approved 1 lb prototype payload; the prototype does not validate operation at the intended industrial temperature or with a production coating medium. The first results were recorded in @video:viability, and the later ones in @video:main-test, @video:xaxis, @video:trigger, and @video:estop.
 
 #video("viability-video.mp4", [Checkpoint 2 viability demonstration of the integrated prototype])<video:viability>
 
@@ -553,19 +554,23 @@ Each requirement in @table:requirements was tested against its success criterion
 
 #video("xaxis_consistency.mp4", [X-axis displacement consistency test], url: "https://youtu.be/skyr9MUUW84")<video:xaxis>
 
+#video("trigger_R01_proof.mp4", [Part-ready trigger test], url: "https://youtu.be/L0WtPBGHtws")<video:trigger>
+
+#video("estop_R07_R08_proof.mp4", [Emergency-stop and restart test], url: "https://youtu.be/yML0pdzHQa8")<video:estop>
+
 === R-01: Part-Ready Trigger
 
 *Requirement.* The system shall not initiate a pick-dip-place cycle unless its part-ready trigger input is asserted. Success criterion: a cycle starts with the trigger asserted; no motion starts with it released or disconnected.
 
-*Test setup.* A push button connected to the trigger input.
+*Test setup.* A switch wired to the pair of trigger pins, the gantry in view of the camera, and the Modbus monitor on a laptop.
 
-*Procedure.* Command a cycle with the trigger asserted, then release it, then disconnect it, and command a cycle each time.
+*Procedure.* With the machine at rest, the Start button was pressed so that the sequencer started, and the trigger was then taken through its three states: asserted, released, and disconnected.
 
-*Results.* Not yet tested.
+*Results.* After the Start press, the monitor shows the sequencer waiting in `WAIT_FOR_PIECE`, and the gantry does not move while the trigger switch and its wire are handled. The motion starts only after the trigger is asserted. A cycle therefore starts with the trigger asserted, and no motion starts with it released or disconnected.
 
-*Discussion.* The trigger input has not been added to the firmware yet, and the cycle currently starts from the Start button. Its design is described in @sec:normal-cycle: a pair of pins that reads as "part ready" only while it is closed, so the released and disconnected cases are the same state. The test setup is a jumper on the pair. Status: not yet tested.
+*Discussion.* The released and the disconnected cases are the same electrical state, because the input has a pull-up: both leave the input high, which means that no part is ready. The tests of the other requirements keep the trigger asserted, in most cases forced in software, so that they start from the Start button. Status: met.
 
-*Evidence.* None yet.
+*Evidence.* @video:trigger.
 
 === R-02: Pickup Position Accuracy <sec:test-r02>
 
@@ -577,7 +582,7 @@ Each requirement in @table:requirements was tested against its success criterion
 
 *Results.* The X axis showed drift under 0.5 cm. The Y axis was harder to measure because the platform moves, and it was judged to be within 1 cm without a precise measurement.
 
-*Discussion.* The X result is a measurement and meets the criterion. The Y result is an estimate, and both axes will be measured again with a recording. A later video of the X axis shows a consistent reading of about 4 cm at home across repeated moves (@video:xaxis), and the drift of the X axis in that video was not greater than 0.25 cm. The other X stops were not read from the video. Because each cycle homes both axes on their limit switches, the errors do not add up from one cycle to the next. Status: met.
+*Discussion.* The X result is a measurement and meets the criterion. The Y result is an estimate, and both axes will be measured again with a recording. A later video of the X axis shows a consistent reading of about 4 cm at home across repeated moves (@video:xaxis), which shows the ruler reading at the input, dip, and output stops on two passes. The drift of the X axis in that video was not greater than 0.25 cm. Because each cycle homes both axes on their limit switches, the errors do not add up from one cycle to the next. Status: met.
 
 *Evidence.* @video:viability and @video:xaxis.
 
@@ -631,25 +636,25 @@ Each requirement in @table:requirements was tested against its success criterion
 
 *Procedure.* A cycle was started, and each stage was observed in order.
 
-*Results.* Every stage completed in order without operator intervention, except the start from the part-ready trigger, because the cycle was started with the Start button. The cycle at about 9:02 to 10:07 of the ten-cycle test video shows every stage, and the operation index on the monitor beside the gantry advances through the cycle in order.
+*Results.* Every stage completed in order without operator intervention, except the start from the part-ready trigger, because the trigger was held asserted and the cycle was started with the Start button. The cycle at about 9:02 to 10:07 of the ten-cycle test video shows every stage, and the operation index on the monitor beside the gantry advances through the cycle in order.
 
-*Discussion.* The start from the part-ready trigger is tested under R-01, which is not implemented yet. Status: met.
+*Discussion.* The trigger was held asserted for this test, and its effect on the start of a cycle is tested under R-01. Status: met.
 
 *Evidence.* @video:viability and @video:main-test.
 
-=== R-07: Emergency-Stop Power Removal
+=== R-07: Emergency-Stop Power Removal <sec:test-r07>
 
 *Requirement.* The system shall remove power from both stepper-motor drivers when the emergency stop is actuated. Success criterion: driver power removed and all axis motion stops.
 
-*Test setup.* A multimeter at the supply terminals of both drivers.
+*Test setup.* A multimeter at the supply terminals of the stepper drivers, with the power LEDs of the drivers in view, and the Modbus monitor.
 
-*Procedure.* Actuate the emergency stop while an axis is moving and measure the power supplied to both drivers.
+*Procedure.* With the drivers powered, the supply voltage at the drivers was measured, the Start button was pressed so that the axes moved, and the emergency stop was pressed while they were moving.
 
-*Results.* Not yet tested.
+*Results.* The motors stopped when the emergency stop was pressed, the power LEDs of the drivers went off, and the voltage at the drivers fell from 24.1 V to 0 V. The voltage of the second driver was also measured, powered and after the stop.
 
-*Discussion.* An informal test confirmed that the emergency stop cut driver power. The motor-supply relay then failed with its contact closed (@sec:relay-failure), so the emergency stop does not currently remove driver power. It still stops the machine, because the second relay signals the controller, which stops the step pulses. The relay will be replaced next week. The test must be run after the relay is replaced. Status: not yet tested.
+*Discussion.* The press of the emergency stop and the meter appear in separate shots of the video, and the motion before the press is judged by eye. The meter reads 0 V and the LEDs are off after the press, so the driver power was removed. Status: met.
 
-*Evidence.* None yet.
+*Evidence.* @video:estop.
 
 === R-08: Restart Inhibit
 
@@ -659,11 +664,11 @@ Each requirement in @table:requirements was tested against its success criterion
 
 *Procedure.* Actuate the emergency stop during operation, reset the button, attempt to command motion without the restart action, then perform the restart action and confirm that normal operation resumes.
 
-*Results.* Not yet tested.
+*Results.* After the emergency stop, the monitor shows the emergency-stop fault latched and marked as the first fault. A press of the Start button while the emergency stop was still pressed did not move the motor. After the emergency stop was reset, the LEDs of the drivers came back on and the monitor still showed the fault. The next press of Start cleared the fault, and a second press restarted the motor.
 
-*Discussion.* An informal test confirmed that the system restarted only after a deliberate press of the Start button. The test should be documented after the relay is replaced. Status: not yet tested.
+*Discussion.* The reset alone did not move the machine: a Start press was needed first to clear the fault, and a second one to restart, so no motion occurred until the deliberate restart action. Status: met.
 
-*Evidence.* None yet.
+*Evidence.* @video:estop.
 
 === R-09: State and Fault Reporting
 
@@ -675,9 +680,9 @@ Each requirement in @table:requirements was tested against its success criterion
 
 *Results.* State reporting was shown working in the video. State and faults were then checked informally over Modbus during a cycle. A screen recording of the monitor (@fig:dashboard) shows the operation index, the axis positions, the inputs that show whether each axis is on target, and the highlighted stage of the cycle changing while the cycle ran. It also shows the emergency-stop fault latched and marked as the first fault, with the instruction to press Start to clear it (@fig:dashboard-estop).
 
-*Discussion.* Fault reporting was implemented after the viability video was recorded. The screen recording of the monitor covers the emergency-stop fault, but the other faults have not been shown on it. Status: partially met.
+*Discussion.* Fault reporting was implemented after the viability video was recorded. The criterion asks for at least one detectable fault, and the emergency-stop fault is shown latched and marked as the first fault, both in the ten-cycle test and in the emergency-stop test. The other faults were not provoked. Status: met.
 
-*Evidence.* @video:viability for state reporting, and @fig:dashboard-estop for the fault. In @video:main-test, the monitor shown beside the gantry changes its operation index as the X axis moves toward the dip (9:06) and as the Y axis goes down into the bath (9:10), and the emergency-stop fault is latched and marked as the first fault at 11:51, with the message to release the emergency stop and press Start.
+*Evidence.* @video:viability for state reporting, @video:estop and @fig:dashboard-estop for the fault. In @video:main-test, the monitor shown beside the gantry changes its operation index as the X axis moves toward the dip (9:06) and as the Y axis goes down into the bath (9:10), and the emergency-stop fault is latched and marked as the first fault at 11:51, with the message to release the emergency stop and press Start.
 
 === R-10: Ten Consecutive Cycles
 
@@ -689,7 +694,7 @@ Each requirement in @table:requirements was tested against its success criterion
 
 *Results.* The ten-cycle test video shows ten complete cycles and part of an eleventh, one after the other, with the X axis reaching the bath about every 65 s, from about 0:25 to 11:18. The part was placed by hand at the input station in every cycle, because the prototype has no input table. The depth and the dwell were measured on one cycle (R-04 and R-05).
 
-*Discussion.* The ten cycles ran back to back. Status: met.
+*Discussion.* The ten cycles ran back to back, with the part-ready trigger held asserted. Status: met.
 
 *Evidence.* @video:main-test.
 
@@ -701,11 +706,16 @@ Each requirement in @table:requirements was tested against its success criterion
 
 *Procedure.* A weight was attached and one complete cycle was commanded.
 
-*Results.* A weight of 2.5 lb or more, above the required 1 lb, was held through a full cycle in an informal test. In the ten-cycle test, a plate that the team reports as 5 lb was carried on the rod through every cycle.
+*Results.* A weight of 2.5 lb or more, above the required 1 lb, was held through a full cycle in an informal test. In the ten-cycle test, a plate stamped 2.27 kg / 5 lb (@fig:payload-plate) was carried on the rod through every cycle.
 
-*Discussion.* Both tests exceeded the rated payload. A photo of a scale reading for the plate is still to be added. Status: met.
+*Discussion.* Both tests exceeded the rated payload. The weight of the plate is the value stamped by its manufacturer, not a scale reading. Status: met.
 
-*Evidence.* @video:main-test, and the informal test recorded on the Final Testing and Results page of the website.
+*Evidence.* @video:main-test, @fig:payload-plate, and the informal test recorded on the Final Testing and Results page of the website.
+
+#figure(
+  image("../images/chapter-3/testing/payload-plate.jpg", height: 6cm),
+  caption: [The payload plate, stamped 2.27 kg / 5 lb],
+)<fig:payload-plate>
 
 == Verification Summary
 
@@ -732,11 +742,11 @@ Each requirement in @table:requirements was tested against its success criterion
       [R-01],
       [No cycle without the part-ready trigger],
       [Starts only when asserted],
-      [Push button: asserted, released, disconnected],
-      [Trigger input not added yet],
-      [--],
-      [Not yet tested],
-      [--],
+      [Switch: asserted, released, disconnected],
+      [Starts only when asserted; no motion released or disconnected],
+      [3/3],
+      [Met],
+      [@video:trigger],
 
       [R-02],
       [Pickup position],
@@ -771,28 +781,28 @@ Each requirement in @table:requirements was tested against its success criterion
       [E-stop removes driver power],
       [Power removed, motion stops],
       [Multimeter at drivers],
-      [Observed earlier; relay has since failed],
+      [Driver voltage 24.1 V to 0 V on e-stop; motors stop],
       [--],
-      [Not yet tested],
-      [--],
+      [Met],
+      [@video:estop],
 
       [R-08],
       [Restart inhibit],
       [No motion before restart],
       [Reset, attempt motion, restart],
-      [Observed, not documented],
+      [Inhibited until the fault is cleared and Start is pressed again],
       [--],
-      [Not yet tested],
-      [--],
+      [Met],
+      [@video:estop],
 
       [R-09],
       [State and fault reporting],
       [Correct labels transmitted],
       [Modbus monitor, induced fault],
-      [State shown; e-stop fault shown; other faults not shown],
+      [State shown; e-stop fault shown],
       [--],
-      [Partially met],
-      [@video:viability, @video:main-test],
+      [Met],
+      [@video:viability, @video:main-test, @video:estop],
 
       [R-10],
       [Ten consecutive cycles],
@@ -807,10 +817,10 @@ Each requirement in @table:requirements was tested against its success criterion
       [1 lb payload],
       [Full cycle without failure],
       [One cycle with weight],
-      [2.5 lb or more held; 5 lb plate carried through the cycles],
+      [2.5 lb or more held; plate stamped 5 lb carried through the cycles],
       [--],
       [Met],
-      [@video:main-test],
+      [@video:main-test, @fig:payload-plate],
     ),
     caption: [Verification summary of the system requirements],
   )<table:verification>

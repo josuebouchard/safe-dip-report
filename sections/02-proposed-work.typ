@@ -168,7 +168,7 @@ The CAD model in @cad-model shows the mechanical arrangement of the Safe Dip pro
 
 #include "02-c-cad-datum.typ"
 
-=== E-Stop and Protection module
+=== E-Stop and Protection module <sec:e-stop-module>
 
 The emergency-stop and protection hardware satisfies the requirements in @table:module:e-stop. Its purpose is to remove power from the motor drivers independently of the STM32 while treating the electromagnet as a load-holding device. This arrangement stops the hazardous motion without causing the suspended workpiece to fall into the coating bath.
 
