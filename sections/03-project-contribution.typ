@@ -829,7 +829,23 @@ Each requirement in @table:requirements was tested against its success criterion
 
 == Final Design <sec:final-design>
 
-@fig:final-gantry shows the current build of the gantry, and @fig:final-details shows the moving assembly, the end effector, and the electronics. @fig:video-frame is a frame from a video of the assembled prototype running, with the limit switches fitted.
+@fig:prototype-overview shows the finished prototype as a whole: the aluminum frame with the two horizontal rails, the belt of the X axis, the Y-axis assembly with the electromagnet, and the enclosure with the electronics on the floor. The emergency-stop button is at the lower left. @fig:prototype-details shows the Y-axis assembly and the enclosure close up.
+
+#figure(
+  image(final + "prototype-overview.jpg", height: 11cm),
+  caption: [The finished Safe Dip prototype],
+)<fig:prototype-overview>
+
+#subfigs(
+  figure(image(final + "prototype-y-carriage.jpg", height: 9.5cm), caption: [Y-axis assembly with the stepper motor, the lead screw, the limit switch, and the electromagnet]),
+  figure(image(final + "prototype-electronics-box.jpg", height: 9.5cm), caption: [Enclosure with the electronics under its lid, and the cables to the motors and the electromagnet]),
+  columns: (1fr, 1fr),
+  column-gutter: 8pt,
+  caption: [Close-up views of the finished prototype],
+  label: <fig:prototype-details>,
+)
+
+@fig:final-gantry shows an earlier build of the gantry, and @fig:final-details shows the moving assembly, the end effector, and the electronics. @fig:video-frame is a frame from a video of the assembled prototype running, with the limit switches fitted.
 
 #figure(
   image(final + "frame-assembled.jpg", height: 11cm),
