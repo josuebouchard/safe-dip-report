@@ -15,8 +15,8 @@ The values in @cad-dimensions describe the operating envelope of the prototype. 
       [*Design Purpose*],
     ),
 
-    [Overall prototype dimensions],
-    [$#zi.cm[108] × #zi.cm[60] × #zi.cm[80]$],
+    [Overall prototype dimensions \ (height × width × depth)],
+    [$#zi.cm[100.85] × #zi.cm[84] × #zi.cm[95]$],
     [Defines the approximate laboratory floor space and vertical clearance required by the prototype.],
 
     [Usable horizontal travel],
