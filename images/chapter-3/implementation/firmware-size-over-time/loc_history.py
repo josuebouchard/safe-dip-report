@@ -26,9 +26,11 @@ import matplotlib.dates as mdates
 import matplotlib.pyplot as plt
 
 # The hand-written code, as (label, path prefix). Each gets its own series in the chart.
+# The first group is drawn at the bottom: the Modbus library changed little, so it makes a
+# flat base and the growth of the application shows on top of it.
 GROUPS = [
-    ("Application (App/)", "App/"),
     ("Modbus library (Libraries/modbus/)", "Libraries/modbus/"),
+    ("Application (App/)", "App/"),
 ]
 EXTENSIONS = (".c", ".cpp", ".h", ".hpp")
 
@@ -118,7 +120,7 @@ def main():
     fig, ax = plt.subplots(figsize=(6.4, 3.3))
     ax.stackplot(
         dates, *series, labels=[label for label, _ in GROUPS],
-        colors=["#3b78c4", "#e08a2e"], step="post", alpha=0.9,
+        colors=["#e08a2e", "#3b78c4"], step="post", alpha=0.9,
     )
     ax.plot(dates, total, color="#222222", linewidth=1.0, drawstyle="steps-post")
     ax.axvline(SEMESTER_START, color="#777777", linestyle="--", linewidth=0.9)
