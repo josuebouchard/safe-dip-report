@@ -138,7 +138,7 @@ Each operation copies every configurable value it depends on when it starts. A v
 This produces a clear abstraction boundary. The sequencer does not need to know which hardware timer is assigned to an axis, which GPIO pins control the stepper drivers, how many steps remain, or how the acceleration profile is calculated. Conversely, the modules do not need to know the structure of the pick-dip-place sequence, so each one can be developed and tested independently.
 
 #place.flush()
-=== Cycle Sequencer
+=== Cycle Sequencer <sec:cycle-sequencer>
 
 The cycle sequencer keeps an index to the current operation, a flag indicating whether that operation has been started, and a flag indicating whether the system is running. @flowchart:sequencer shows one sequencer step.
 
@@ -148,7 +148,7 @@ The cycle sequencer keeps an index to the current operation, a flag indicating w
   placement: auto,
 )<flowchart:sequencer>
 
-The step is listed in @listing:sequencer. If the system is not running, the step returns without doing anything. If the current operation has not been started, the sequencer starts it and returns; polling begins on the next iteration of the main loop. Otherwise, the operation is polled. While it reports `running`, the sequencer performs no further work. When it reports `finished`, the sequencer clears the started flag and advances to the next operation, wrapping to the first after the last. When it reports `aborted`, the sequencer stops and keeps its index on that operation, so the failed step can be read over Modbus.
+The list of operations that the sequencer runs is shown in @listing:cycle. The step is listed in @listing:sequencer. If the system is not running, the step returns without doing anything. If the current operation has not been started, the sequencer starts it and returns; polling begins on the next iteration of the main loop. Otherwise, the operation is polled. While it reports `running`, the sequencer performs no further work. When it reports `finished`, the sequencer clears the started flag and advances to the next operation, wrapping to the first after the last. When it reports `aborted`, the sequencer stops and keeps its index on that operation, so the failed step can be read over Modbus.
 
 The sequencer can be stopped, which halts it in place, or restarted, which resets the index to the first operation and sets it running. The Start button always uses the restart path, so the cycle never resumes from the middle of an operation whose physical state may no longer be known.
 

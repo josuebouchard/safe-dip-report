@@ -235,6 +235,51 @@ Every step of the cycle is an operation, and all operations implement the same i
   caption: [The interface that every operation of the cycle implements],
 ) <listing:operation>
 
+== Cycle definition
+
+The cycle is not written as a function. It is a list of operations, and the only file that knows which operations exist is the one that builds this list (@sec:cycle-sequencer). @listing:cycle shows it, trimmed to a few of the operations. Each operation is created once with the values it needs: the axis and the recipe position of a move, the state of the electromagnet, or the dwell time. The array then puts the 14 operations in the order of the cycle, grouped here by stage. The Y axis goes down and up through the same two objects in the pick, the dip, and the deposit. The position of an operation in the array is the operation index that the controller publishes over Modbus (@table:modbus-ops), so changing the order of the list changes that table too.
+
+#figure(
+  ```cpp
+  static MoveStepperOperation move_x_dip{machine.axis_x, machine.recipe.x_dip_mm};
+  static MoveStepperOperation move_y_up{machine.axis_y, machine.recipe.y_up_mm};
+  static MoveStepperOperation move_y_down{machine.axis_y, machine.recipe.y_down_mm};
+  static EffectorOperation effector_engage{hardware::effector, true,
+                                           machine.recipe.effector_settle_ms};
+  static DwellOperation dwell{machine.recipe.dwell_ms};
+  static WaitForTriggerOperation wait_for_piece{};
+  // The other operations are declared the same way
+
+  static std::array<Operation<Tick> *, 14> operations = {
+      // Home
+      &home_y,
+      &home_x,
+
+      // Pick
+      &wait_for_piece,
+      &move_y_down,
+      &effector_engage,
+      &move_y_up,
+
+      // Dip
+      &move_x_dip,
+      &move_y_down,
+      &dwell,
+      &move_y_up,
+
+      // Deposit
+      &move_x_output,
+      &move_y_down,
+
+      // Release
+      &effector_disengage,
+      &move_y_up,
+  };
+  ```,
+
+  caption: [The list of operations that defines the cycle],
+) <listing:cycle>
+
 == Sequencer step
 
 The cycle is a list of nonblocking operations, and the sequencer runs one step of it on every pass of the main loop (@flowchart:sequencer). @listing:sequencer shows that step. An operation that has not started is started, and one that has started is polled. A finished operation advances the sequence to the next one. An aborted operation stops the sequencer but leaves its index on that operation, so the failed step can be read over Modbus.
