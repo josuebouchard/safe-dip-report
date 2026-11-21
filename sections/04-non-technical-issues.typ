@@ -24,7 +24,7 @@ The proposed implementation schedule spans sixteen weeks. Mechanical constructio
 
   #figure(
     [
-      #set text(size: 8.5pt)
+      #set text(size: 8pt)
       #include "04-c-timeline-modified.typ"
     ],
     caption: [Modified Safe Dip implementation schedule.],
