@@ -14,6 +14,16 @@
   }
   (from: a - 1, to: b, content: label, style: (stroke: 10pt + color))
 }
+
+// One cell of the actual-progress row: the tasks of the Task Plan that were done
+// in week w, out of the tasks planned for that week.
+#let progress-color = rgb("#2e8b57")
+#let pv(w, done, planned) = (
+  from: w - 1,
+  to: w,
+  content: text(size: 7pt, fill: white, weight: "bold")[#done/#planned],
+  style: (stroke: 10pt + progress-color),
+)
   #align(center)[
     *Legend:*
     #box(fill: adriano-color, inset: 3pt)[*A*] Adriano
@@ -23,6 +33,8 @@
     #box(fill: both-color, inset: 3pt)[#text(fill: white, weight: "bold")[B]] Both
     #h(1em)
     (the first letter is the person leading the task)
+    #h(1em)
+    #box(fill: progress-color, inset: 3pt)[#text(fill: white, weight: "bold")[n/m]] Actual progress: tasks done / tasks planned that week
   ]
 
   
@@ -84,6 +96,20 @@
           task("Mechanical design (CAD) and 3D printing", iv(3, 7, "A"), iv(9, 9, "A"), iv(13, 14, "A"))
           task("Project expenses and budget", iv(10, 10, "A"), iv(13, 13, "A"))
           task("Website, weekly records, and report", iv(3, 15, "J/A"))
+        })
+
+        taskgroup(title: [*Actual progress*], {
+          task(
+            "Tasks done in the week (Task Plan)",
+            pv(6, 3, 7),
+            pv(7, 3, 8),
+            pv(8, 2, 4),
+            pv(9, 6, 11),
+            pv(10, 9, 13),
+            pv(11, 4, 12),
+            pv(12, 10, 12),
+            pv(13, 8, 9),
+          )
         })
 
         milestone(text(size: 7pt)[*Oct 11* Checkpoint 1], at: 7)

@@ -75,7 +75,7 @@ to change on the website is in [website-updates.md](website-updates.md).
 - [ ] Fuses: Section 2.2.2, the hazards table (Table 4.6) and the conclusion say fuses are
       installed, but the Task Plan shows the fuse holder slipped. Install it, or change the
       three statements.
-- [ ] Gantt chart: the outline asks for "an actual-progress row" in Section 4.1. Add it
+- [x] Gantt chart: the outline asks for "an actual-progress row" in Section 4.1. Add it
       from the record of what was done each week.
 - [ ] Fig. 2.7: the text now says the buck converter is an LM2596 board. Check that the
       picture shows that board.

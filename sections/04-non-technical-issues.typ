@@ -11,7 +11,7 @@
 #place.flush()
 == Project Timeline
 
-The proposed implementation schedule spans sixteen weeks. Mechanical construction and firmware development proceed in parallel so that each subsystem can be tested soon after installation. The schedule intentionally reserves the final weeks for integrated testing, debugging, refinement, and presentation preparation.
+The proposed implementation schedule spans sixteen weeks. Mechanical construction and firmware development proceed in parallel so that each subsystem can be tested soon after installation. The schedule intentionally reserves the final weeks for integrated testing, debugging, refinement, and presentation preparation. The modified schedule (@figure:gantt-modified) ends with an actual-progress row. For each week from Week 6, when the Weekly Task Plan began, it shows how many of the tasks planned for that week were done, taken from the status that the team recorded in the plan.
 
 #page(flipped: true, margin: 0.45in)[
   #figure(
