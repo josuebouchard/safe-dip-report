@@ -235,6 +235,8 @@ Every step of the cycle is an operation, and all operations implement the same i
   caption: [The interface that every operation of the cycle implements],
 ) <listing:operation>
 
+#pagebreak(weak: true)
+
 == Cycle definition
 
 The cycle is not written as a function. It is a list of operations, and the only file that knows which operations exist is the one that builds this list (@sec:cycle-sequencer). @listing:cycle shows it, trimmed to a few of the operations. Each operation is created once with the values it needs: the axis and the recipe position of a move, the state of the electromagnet, or the dwell time. The array then puts the 14 operations in the order of the cycle, grouped here by stage. The Y axis goes down and up through the same two objects in the pick, the dip, and the deposit. The position of an operation in the array is the operation index that the controller publishes over Modbus (@table:modbus-ops), so changing the order of the list changes that table too.
