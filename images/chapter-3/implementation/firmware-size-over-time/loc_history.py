@@ -9,7 +9,8 @@ Run it again before the final report to include the newest commits:
     python loc_history.py PATH_TO_FIRMWARE_REPO [REF]
 
 REF is the branch to read (default: HEAD). It writes loc.csv and loc-over-time.svg
-next to this script.
+next to this script. Rows already in loc.csv for days before the first commit of REF are
+kept, for a repository whose history does not reach back to the start.
 """
 
 import csv
@@ -86,6 +87,22 @@ def main():
                 *[totals[p] for _, p in GROUPS],
             )
         )
+
+    # The remote repository starts at the end of the summer work. Rows that an earlier
+    # run (on a computer with the whole history) saved for the days before its first
+    # commit are kept, so the chart still starts with the Modbus library in June.
+    old_csv = here / "loc.csv"
+    if old_csv.exists():
+        first_day = rows[0][0].strftime("%Y-%m-%d")
+        kept = []
+        with open(old_csv, newline="") as f:
+            for r in csv.DictReader(f):
+                if r["date"] < first_day:
+                    kept.append((datetime.strptime(r["date"], "%Y-%m-%d"), r["commit"], int(r["files"]),
+                                 *[int(r[prefix]) for _, prefix in GROUPS]))
+        # The same commit can fall on two different days in two time zones.
+        seen = {r[1] for r in kept}
+        rows = kept + [r for r in rows if r[1] not in seen]
 
     with open(here / "loc.csv", "w", newline="") as f:
         w = csv.writer(f)

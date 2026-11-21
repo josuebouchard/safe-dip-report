@@ -431,9 +431,10 @@ Finally, @listing:state shows how one poll of the board is turned into the machi
   // Maps the raw tables to their meaning (some fields are left out here)
   func newState(di []bool, ir, hr []uint16) *State {
   	return &State{
-  		EStop:   di[0],
-  		Running: di[2],
-  		Fault:   di[6],
+  		Trigger: di[0],
+  		EStop:   di[1],
+  		Running: di[3],
+  		Fault:   di[7],
   		OpIndex: ir[0],
   		X:       signed32(ir[1], ir[2]),
   		Y:       signed32(ir[3], ir[4]),
@@ -448,6 +449,110 @@ Finally, @listing:state shows how one poll of the board is turned into the machi
 
   caption: [Reading the state of the machine in the monitor],
 ) <listing:state>
+
+== Modbus map <appendix:modbus-map>
+
+The firmware serves Modbus TCP from the W5500 on port 502, one connection at a time, and the monitor of @sec:monitor-code reads it. All addresses are zero-based. The unit identifier is not checked, and a request past the end of a table is answered with the exception for an illegal data address. The discrete inputs of @table:modbus-di report the state of the inputs and of the machine. The input registers of @table:modbus-ir report the operation index, the axis positions, the faults, and the time of the main loop.
+
+#figure(
+  table(
+    columns: (auto, auto, 1fr),
+    align: left + horizon,
+    inset: (x: .5em, y: .5em),
+    table.header([*Address*], [*Name*], [*Meaning*]),
+    [0], [Trigger], [1 while the part-ready trigger is asserted (the pin reads low)],
+    [1], [E-stop], [1 while the emergency stop is pressed],
+    [2], [Start], [1 while the Start button is pressed],
+    [3], [Sequencer running], [1 while the cycle is running; cleared by any fault],
+    [4], [X at target], [1 when the X axis is on its target step],
+    [5], [Y at target], [1 when the Y axis is on its target step],
+    [6], [Effector engaged], [Commanded state of the electromagnet, not feedback from it],
+    [7], [Fault active], [1 while any fault is latched],
+  ),
+  caption: [Discrete inputs (function code 2, read only)],
+) <table:modbus-di>
+
+#figure(
+  table(
+    columns: (auto, auto, 1fr),
+    align: left + horizon,
+    inset: (x: .5em, y: .5em),
+    table.header([*Address*], [*Name*], [*Meaning*]),
+    [0], [Operation index], [Position in the cycle, @table:modbus-ops],
+    [1, 2], [X position], [Steps, signed 32 bits, high word first],
+    [3, 4], [Y position], [Steps, signed 32 bits, high word first],
+    [5], [Faults active], [Bit mask of every latched fault, @table:modbus-faults],
+    [6], [First fault], [Bit of the fault that stopped the machine, 0 if none],
+    [7], [Loop time], [Microseconds of the last main-loop pass, Modbus included],
+    [8], [Maximum loop time], [Longest pass since reset, in microseconds],
+  ),
+  caption: [Input registers (function code 4, read only)],
+) <table:modbus-ir>
+
+The operation index of @table:modbus-ops is the position of the operation in the cycle. While a fault is latched, it stays on the operation that failed until the next start.
+
+#figure(
+  table(
+    columns: (auto, auto, 1fr),
+    align: left + horizon,
+    inset: (x: .5em, y: .5em),
+    table.header([*Index*], [*Stage*], [*Operation*]),
+    [0], [Home], [Home Y],
+    [1], [Home], [Home X],
+    [2], [Pick], [Wait for the trigger],
+    [3], [Pick], [Lower Y],
+    [4], [Pick], [Engage the magnet],
+    [5], [Pick], [Raise Y],
+    [6], [Dip], [Move X to the bath],
+    [7], [Dip], [Lower Y],
+    [8], [Dip], [Dwell],
+    [9], [Dip], [Raise Y],
+    [10], [Deposit], [Move X to the output],
+    [11], [Deposit], [Lower Y],
+    [12], [Release], [Release the magnet],
+    [13], [Release], [Raise Y],
+  ),
+  caption: [Operation index, the first input register],
+) <table:modbus-ops>
+
+A fault stops the sequencer and both axes and keeps the electromagnet engaged, on the same pass of the main loop in which it is raised, and it stays latched after its cause goes away. One press of the Start button clears every latched fault, unless the emergency stop is still pressed, and a second press restarts the cycle from its first operation. A fault cannot be cleared remotely.
+
+#figure(
+  table(
+    columns: (auto, auto, auto, 1fr),
+    align: left + horizon,
+    inset: (x: .5em, y: .5em),
+    table.header([*Bit*], [*Value*], [*Name*], [*Raised when*]),
+    [0], [1], [E-stop], [The emergency stop reads pressed, including a broken wire],
+    [1], [2], [Operation interrupted], [A move was stopped short of its target by something other than its limit switch],
+    [2], [4], [Operation timed out], [Homing did not finish within its time limit],
+    [3], [8], [X homing failed], [The X switch still reads pressed after backing off],
+    [4], [16], [Y homing failed], [The same, for the Y switch],
+    [5], [32], [X limit hit], [The X switch read pressed during a move, in either direction],
+    [6], [64], [Y limit hit], [The same, for the Y switch],
+  ),
+  caption: [Faults, the bits of the fault registers],
+) <table:modbus-faults>
+
+The holding registers hold the recipe of the cycle. A written value takes effect the next time its operation starts, and an operation that is running keeps the value it started with. A write of several registers is checked in full before anything is applied, and if one value is out of range, nothing changes and the server answers with a server failure. The values return to their defaults when the controller is reset.
+
+#figure(
+  table(
+    columns: (auto, 1fr, auto, auto, auto),
+    align: left + horizon,
+    inset: (x: .5em, y: .5em),
+    table.header([*Address*], [*Name*], [*Unit*], [*Range*], [*Default*]),
+    [0], [X input position], [mm], [0 to 550], [0],
+    [1], [X dip position], [mm], [0 to 550], [250],
+    [2], [X output position], [mm], [0 to 550], [450],
+    [3], [Y up position], [mm], [0 to 200], [0],
+    [4], [Y down position], [mm], [0 to 200], [100],
+    [5], [Dwell time], [ms], [0 to 65,535], [2000],
+    [6], [Effector settle time], [ms], [0 to 65,535], [300],
+  ),
+  caption: [Holding registers (function codes 3, 6, and 16)],
+) <table:modbus-hr>
+
 
 = Engineering Codes and Standards
 

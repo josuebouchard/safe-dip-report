@@ -96,7 +96,7 @@ Each operation represents an absolute objective rather than a blocking procedure
 
 The home stage runs the vertical axis first, so that the end effector is raised before the gantry travels horizontally. Homing leaves the horizontal axis at its origin, which is where the pick stage takes place.
 
-The part-ready trigger is a pair of Dupont pins on the controller. One pin is connected to ground, and the other to a free input, pin PA10 (D2), which tolerates 5 V and has its internal pull-up enabled. Closing the pair, with a switch or with the dry contact of the external system, pulls the input low, which means that a part is ready. An open pair, and an unplugged or broken wire, leave the input high, which means that no part is ready, so a disconnected trigger can never start a cycle.
+The part-ready trigger is a pair of Dupont pins on the controller. One pin is connected to ground, and the other to a free input, pin PC0 (A5), which tolerates 5 V and has its internal pull-up enabled. Closing the pair, with a switch or with the dry contact of the external system, pulls the input low, which means that a part is ready. An open pair, and an unplugged or broken wire, leave the input high, which means that no part is ready, so a disconnected trigger can never start a cycle.
 
 The trigger is used by an operation called `WAIT_FOR_PIECE`, which holds the cycle until the trigger is asserted. A press of the Start button starts the sequencer, which then waits in this operation: while the trigger is not asserted, the operation keeps running and nothing moves, so no motion starts without it. When the trigger is asserted, the operation finishes and the cycle continues. The monitor shows the operation in its stage list, so that the wait can be seen. Adding the operation shifted the operation index of the later operations by one, so the Modbus map and the monitor changed with it.
 
@@ -208,7 +208,7 @@ Releasing the emergency stop does not resume the interrupted operation. A first 
 
 === Communications
 
-The Modbus TCP server runs on the W5500 at port 502 and advances one step per main-loop pass without ever blocking. It serves a single connection, so only one Modbus client can be connected to the controller at a time. Read-only registers report the emergency-stop and Start inputs, whether the sequencer is running, whether each axis is on target, the commanded effector state, the current operation index, both axis positions in steps, every latched fault, the fault that came first, and the last and longest main-loop times. Writable registers hold the recipe; a value outside its allowed range is rejected, and a multi-register write is checked in full before anything is applied. A request whose header is malformed, or whose length exceeds the largest the protocol allows, closes the connection, because the start of the next request can no longer be found.
+The Modbus TCP server runs on the W5500 at port 502 and advances one step per main-loop pass without ever blocking. It serves a single connection, so only one Modbus client can be connected to the controller at a time. Read-only registers report the part-ready trigger, the emergency-stop and Start inputs, whether the sequencer is running, whether each axis is on target, the commanded effector state, the current operation index, both axis positions in steps, every latched fault, the fault that came first, and the last and longest main-loop times. Writable registers hold the recipe; the complete map is in @appendix:modbus-map. A value outside its allowed range is rejected, and a multi-register write is checked in full before anything is applied. A request whose header is malformed, or whose length exceeds the largest the protocol allows, closes the connection, because the start of the next request can no longer be found.
 
 Overall, this architecture combines cooperative scheduling with asynchronous peripheral operation. Hardware timers and their interrupts perform the timing-critical work, while the main loop coordinates higher-level behavior through the sequencer. This keeps the production sequence easy to understand while isolating the detailed control of the motors, end effector, dwell timing, and communications inside dedicated software modules.
 
@@ -380,7 +380,7 @@ The W5500 module was connected to the controller over SPI, with the clock, data-
   caption: [Lines of firmware source over time, counted at every commit],
 )<fig:loc>
 
-The Modbus library came first. It was started on June 21 and had about 1,100 lines by early August, when the work on the application began. On August 24, the start of the build semester, the firmware had 2,047 lines in 40 files, 967 of them in the application. The application then grew in steps, to about 1,200 lines by the time the full production cycle ran at the end of September, and to 1,517 lines by November 3. Most of the growth in November came from the fault handling, the homing of both axes, the machine layer, the limit-switch debounce, and the loop timer. At the time of writing, the firmware has 3,168 lines in 57 files: 2,067 in the application and 1,101 in the Modbus library.
+The Modbus library came first. It was started on June 21 and had about 1,100 lines by early August, when the work on the application began. On August 24, the start of the build semester, the firmware had 2,047 lines in 40 files, 967 of them in the application. The application then grew in steps, to about 1,200 lines by the time the full production cycle ran at the end of September, and to 1,573 lines by November 3. Most of the growth in November came from the fault handling, the homing of both axes, the machine layer, the limit-switch debounce, the loop timer, and the part-ready trigger. At the time of writing, the firmware has 3,192 lines in 58 files: 2,091 in the application and 1,101 in the Modbus library.
 
 == Troubleshooting <sec:troubleshooting>
 
@@ -464,7 +464,7 @@ This section records each significant problem found during the build, its cause,
   symptom: [No failure had been observed. Before the final tests, the firmware was reviewed for defects that testing might not reveal.],
   cause: [The review found that the Modbus library was told its response buffer was larger than it was, accepted request lengths beyond the largest the protocol allows, and unpacked multi-coil writes into the wrong place. The network gateway address was outside the board's subnet, and a speed profile with zero acceleration would have caused a division by zero.],
   solution: [The buffer size and the request length are now checked, a malformed request header closes the connection, the coil unpacking was corrected, the gateway was moved into the subnet, and the speed limits are kept above zero.],
-  result: [The fixes are on a development branch that had not been merged at the time of writing.],
+  result: [The fixes were merged into the main branch of the firmware.],
 )
 
 === No Step Pulses From the Timer
