@@ -568,7 +568,7 @@ Each requirement in @table:requirements was tested against its success criterion
 
 *Results.* After the Start press, the monitor shows the sequencer waiting in `WAIT_FOR_PIECE`, and the gantry does not move while the trigger switch and its wire are handled. The motion starts only after the trigger is asserted. A cycle therefore starts with the trigger asserted, and no motion starts with it released or disconnected.
 
-*Discussion.* The released and the disconnected cases are the same electrical state, because the input has a pull-up: both leave the input high, which means that no part is ready. The tests of the other requirements keep the trigger asserted, in most cases forced in software, so that they start from the Start button. Status: met.
+*Discussion.* The released and the disconnected cases are the same electrical state, because the input has a pull-up: both leave the input high, which means that no part is ready. The tests of the other requirements keep the trigger asserted, in most cases forced in software, so that they start from the Start button. Result: Pass.
 
 *Evidence.* @video:trigger.
 
@@ -582,7 +582,7 @@ Each requirement in @table:requirements was tested against its success criterion
 
 *Results.* The X axis showed drift under 0.5 cm. The Y axis was harder to measure because the platform moves, and it was judged to be within 1 cm without a precise measurement.
 
-*Discussion.* The X result is a measurement and meets the criterion. The Y result is an estimate, and both axes will be measured again with a recording. A later video of the X axis shows a consistent reading of about 4 cm at home across repeated moves (@video:xaxis), which shows the ruler reading at the input, dip, and output stops on two passes. The drift of the X axis in that video was not greater than 0.25 cm. Because each cycle homes both axes on their limit switches, the errors do not add up from one cycle to the next. Status: met.
+*Discussion.* The X result is a measurement and meets the criterion. The Y result is an estimate, and both axes will be measured again with a recording. A later video of the X axis shows a consistent reading of about 4 cm at home across repeated moves (@video:xaxis), which shows the ruler reading at the input, dip, and output stops on two passes. The drift of the X axis in that video was not greater than 0.25 cm. Because each cycle homes both axes on their limit switches, the errors do not add up from one cycle to the next. Result: Pass.
 
 *Evidence.* @video:viability and @video:xaxis.
 
@@ -596,7 +596,7 @@ Each requirement in @table:requirements was tested against its success criterion
 
 *Results.* The workpiece did not slip or fall in the test shown in the video. A weight of 2.5 lb or more with a minimal contact area was also held through a full cycle in an informal test.
 
-*Discussion.* Retention exceeded the requirement in the informal test. Status: met.
+*Discussion.* Retention exceeded the requirement in the informal test. Result: Pass.
 
 *Evidence.* @video:viability ("Screw not slipping test").
 
@@ -610,7 +610,7 @@ Each requirement in @table:requirements was tested against its success criterion
 
 *Results.* The vertical axis read 9.3 cm at the top and 19.3 cm at the bottom, which is an immersion depth of 10.0 cm. The programmed depth was 100 mm, so the measured depth is within the ±1 cm tolerance.
 
-*Discussion.* The depth was measured on one cycle. Status: met.
+*Discussion.* The depth was measured on one cycle. Result: Pass.
 
 *Evidence.* @video:main-test, in the clip with the ruler that starts at 1:38 (the exact timestamps are still to be added).
 
@@ -624,7 +624,7 @@ Each requirement in @table:requirements was tested against its success criterion
 
 *Results.* The dwell lasted 2.10 s, from 9:16:06 to 9:18:09 in minutes, seconds, and frames. The programmed dwell was 2000 ms, so the error is +0.10 s, within the ±1 s tolerance.
 
-*Discussion.* The dwell was measured on one cycle. Status: met.
+*Discussion.* The dwell was measured on one cycle. Result: Pass.
 
 *Evidence.* @video:main-test, 9:16:06 to 9:18:09.
 
@@ -638,7 +638,7 @@ Each requirement in @table:requirements was tested against its success criterion
 
 *Results.* Every stage completed in order without operator intervention, except the start from the part-ready trigger, because the trigger was held asserted and the cycle was started with the Start button. The cycle at about 9:02 to 10:07 of the ten-cycle test video shows every stage, and the operation index on the monitor beside the gantry advances through the cycle in order.
 
-*Discussion.* The trigger was held asserted for this test, and its effect on the start of a cycle is tested under R-01. Status: met.
+*Discussion.* The trigger was held asserted for this test, and its effect on the start of a cycle is tested under R-01. Result: Pass.
 
 *Evidence.* @video:viability and @video:main-test.
 
@@ -652,7 +652,7 @@ Each requirement in @table:requirements was tested against its success criterion
 
 *Results.* The motors stopped when the emergency stop was pressed, the power LEDs of the drivers went off, and the voltage at the drivers fell from 24.1 V to 0 V. The voltage of the second driver was also measured, powered and after the stop.
 
-*Discussion.* The press of the emergency stop and the meter appear in separate shots of the video, and the motion before the press is judged by eye. The meter reads 0 V and the LEDs are off after the press, so the driver power was removed. Status: met.
+*Discussion.* The press of the emergency stop and the meter appear in separate shots of the video, and the motion before the press is judged by eye. The meter reads 0 V and the LEDs are off after the press, so the driver power was removed. Result: Pass.
 
 *Evidence.* @video:estop.
 
@@ -666,7 +666,7 @@ Each requirement in @table:requirements was tested against its success criterion
 
 *Results.* After the emergency stop, the monitor shows the emergency-stop fault latched and marked as the first fault. A press of the Start button while the emergency stop was still pressed did not move the motor. After the emergency stop was reset, the LEDs of the drivers came back on and the monitor still showed the fault. The next press of Start cleared the fault, and a second press restarted the motor.
 
-*Discussion.* The reset alone did not move the machine: a Start press was needed first to clear the fault, and a second one to restart, so no motion occurred until the deliberate restart action. Status: met.
+*Discussion.* The reset alone did not move the machine: a Start press was needed first to clear the fault, and a second one to restart, so no motion occurred until the deliberate restart action. Result: Pass.
 
 *Evidence.* @video:estop.
 
@@ -680,7 +680,7 @@ Each requirement in @table:requirements was tested against its success criterion
 
 *Results.* State reporting was shown working in the video. State and faults were then checked informally over Modbus during a cycle. A screen recording of the monitor (@fig:dashboard) shows the operation index, the axis positions, the inputs that show whether each axis is on target, and the highlighted stage of the cycle changing while the cycle ran. It also shows the emergency-stop fault latched and marked as the first fault, with the instruction to press Start to clear it (@fig:dashboard-estop).
 
-*Discussion.* Fault reporting was implemented after the viability video was recorded. The criterion asks for at least one detectable fault, and the emergency-stop fault is shown latched and marked as the first fault, both in the ten-cycle test and in the emergency-stop test. The other faults were not provoked. Status: met.
+*Discussion.* Fault reporting was implemented after the viability video was recorded. The criterion asks for at least one detectable fault, and the emergency-stop fault is shown latched and marked as the first fault, both in the ten-cycle test and in the emergency-stop test. The other faults were not provoked. Result: Pass.
 
 *Evidence.* @video:viability for state reporting, @video:estop and @fig:dashboard-estop for the fault. In @video:main-test, the monitor shown beside the gantry changes its operation index as the X axis moves toward the dip (9:06) and as the Y axis goes down into the bath (9:10), and the emergency-stop fault is latched and marked as the first fault at 11:51, with the message to release the emergency stop and press Start.
 
@@ -694,7 +694,7 @@ Each requirement in @table:requirements was tested against its success criterion
 
 *Results.* The ten-cycle test video shows ten complete cycles and part of an eleventh, one after the other, with the X axis reaching the bath about every 65 s, from about 0:25 to 11:18. The part was placed by hand at the input station in every cycle, because the prototype has no input table. The depth and the dwell were measured on one cycle (R-04 and R-05).
 
-*Discussion.* The ten cycles ran back to back, with the part-ready trigger held asserted. Status: met.
+*Discussion.* The ten cycles ran back to back, with the part-ready trigger held asserted. Result: Pass.
 
 *Evidence.* @video:main-test.
 
@@ -708,7 +708,7 @@ Each requirement in @table:requirements was tested against its success criterion
 
 *Results.* A weight of 2.5 lb or more, above the required 1 lb, was held through a full cycle in an informal test. In the ten-cycle test, a plate stamped 2.27 kg / 5 lb (@fig:payload-plate) was carried on the rod through every cycle.
 
-*Discussion.* Both tests exceeded the rated payload. The weight of the plate is the value stamped by its manufacturer, not a scale reading. Status: met.
+*Discussion.* Both tests exceeded the rated payload. The weight of the plate is the value stamped by its manufacturer, not a scale reading. Result: Pass.
 
 *Evidence.* @video:main-test, @fig:payload-plate, and the informal test recorded on the Final Testing and Results page of the website.
 
@@ -719,7 +719,7 @@ Each requirement in @table:requirements was tested against its success criterion
 
 == Verification Summary
 
-@table:verification summarizes the results of @sec:testing, in the order of @table:requirements. Trial counts are marked "--" where they have not been recorded.
+@table:verification summarizes the results of @sec:testing, in the order of @table:requirements. Trials passed are given as the number of trials passed out of the trials run.
 
 #page(flipped: true, margin: 0.45in)[
   #set text(size: 9pt)
@@ -745,7 +745,7 @@ Each requirement in @table:requirements was tested against its success criterion
       [Switch: asserted, released, disconnected],
       [Starts only when asserted; no motion released or disconnected],
       [3/3],
-      [Met],
+      [Pass],
       [@video:trigger],
 
       [R-02],
@@ -753,8 +753,8 @@ Each requirement in @table:requirements was tested against its success criterion
       [Within ±1 cm on both axes],
       [Ruler],
       [X: drift under 0.5 cm. Y: judged within 1 cm],
-      [--],
-      [Met],
+      [1/1],
+      [Pass],
       [@video:viability, @video:xaxis],
 
       [R-03],
@@ -762,19 +762,19 @@ Each requirement in @table:requirements was tested against its success criterion
       [No visible slip or detachment],
       [One observed cycle],
       [No slip or drop],
-      [--],
-      [Met],
+      [1/1],
+      [Pass],
       [@video:viability],
 
-      [R-04], [Immersion depth], [Within ±1 cm], [Ruler], [10.0 cm against 10 cm programmed], [1/1], [Met], [@video:main-test],
-      [R-05], [Dwell time], [Within ±1 s], [Video timing], [2.10 s against 2.00 s programmed], [1/1], [Met], [@video:main-test],
+      [R-04], [Immersion depth], [Within ±1 cm], [Ruler], [10.0 cm against 10 cm programmed], [1/1], [Pass], [@video:main-test],
+      [R-05], [Dwell time], [Within ±1 s], [Video timing], [2.10 s against 2.00 s programmed], [1/1], [Pass], [@video:main-test],
       [R-06],
       [Full unattended cycle],
       [All stages in order],
       [One observed cycle],
       [All stages, started with the Start button],
-      [--],
-      [Met],
+      [1/1],
+      [Pass],
       [@video:viability, @video:main-test],
 
       [R-07],
@@ -782,8 +782,8 @@ Each requirement in @table:requirements was tested against its success criterion
       [Power removed, motion stops],
       [Multimeter at drivers],
       [Driver voltage 24.1 V to 0 V on e-stop; motors stop],
-      [--],
-      [Met],
+      [1/1],
+      [Pass],
       [@video:estop],
 
       [R-08],
@@ -791,8 +791,8 @@ Each requirement in @table:requirements was tested against its success criterion
       [No motion before restart],
       [Reset, attempt motion, restart],
       [Inhibited until the fault is cleared and Start is pressed again],
-      [--],
-      [Met],
+      [1/1],
+      [Pass],
       [@video:estop],
 
       [R-09],
@@ -800,8 +800,8 @@ Each requirement in @table:requirements was tested against its success criterion
       [Correct labels transmitted],
       [Modbus monitor, induced fault],
       [State shown; e-stop fault shown],
-      [--],
-      [Met],
+      [1/1],
+      [Pass],
       [@video:viability, @video:main-test, @video:estop],
 
       [R-10],
@@ -810,7 +810,7 @@ Each requirement in @table:requirements was tested against its success criterion
       [Ten recorded cycles],
       [Ten consecutive cycles recorded],
       [10/10],
-      [Met],
+      [Pass],
       [@video:main-test],
 
       [R-11],
@@ -818,8 +818,8 @@ Each requirement in @table:requirements was tested against its success criterion
       [Full cycle without failure],
       [One cycle with weight],
       [2.5 lb or more held; plate stamped 5 lb carried through the cycles],
-      [--],
-      [Met],
+      [1/1],
+      [Pass],
       [@video:main-test, @fig:payload-plate],
     ),
     caption: [Verification summary of the system requirements],
