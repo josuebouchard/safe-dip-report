@@ -9,7 +9,7 @@
 
 = Programming Code <appendix:code>
 
-This appendix shows the pieces of the firmware that carry the main ideas of Chapter 3. They are excerpts, not the whole program, and some comments were shortened. The firmware is written in C++ for the STM32 controller. Each listing is introduced by a short explanation and points to the section of Chapter 3 that describes the same idea in words.
+This appendix shows the pieces of the firmware that carry the main ideas of Chapter 3. They are excerpts, not the whole program, and some comments were shortened. The firmware is written in C++ for the STM32 controller. The complete firmware can be found at #link("https://github.com/josuebouchard/safe-dip-firmware"). Each listing is introduced by a short explanation and points to the section of Chapter 3 that describes the same idea in words.
 
 == Step pulse generation
 
