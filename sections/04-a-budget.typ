@@ -557,11 +557,6 @@
       [1],
       price[4.25],
 
-      [Resistor Kit],
-      [Upvivi Resistor Assortment Kit],
-      [1],
-      price[6.99],
-
       [Bolt and Nut Kit],
       [M5 Screw and Nut Kit],
       [1],
@@ -627,7 +622,7 @@
       table.cell(colspan: 3, align: right)[
         *Total (before tax)*
       ],
-      [*#price[712.87]*],
+      [*#price[705.88]*],
     ),
 
     caption: [Cost of the final design.],

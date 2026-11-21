@@ -178,7 +178,7 @@ This stop path is intentionally independent of firmware and programmable logic, 
 
 A separate effector driver switches the electromagnet coil supply and is not included in the Category 0 cutoff. The electromagnet is treated as a load-holding device rather than as a hazardous actuator that must be immediately de-energized. Removing power from it during an emergency stop could create a secondary hazard by releasing the suspended ferromagnetic part into the coating bath. IEC 60204-1 requires the emergency-stop function to avoid creating such additional hazards @iec-60204-1. The electromagnet therefore remains energized during the stop, and the part is released in a controlled manner only after motion has ceased.
 
-An inline fuse holder provides overcurrent protection for the switched supply rail, and the resistor kit provides the resistors used in the circuit.
+An inline fuse holder provides overcurrent protection for the switched supply rail.
 
 
 #figure(
