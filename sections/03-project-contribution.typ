@@ -719,7 +719,7 @@ Each requirement in @table:requirements was tested against its success criterion
 
 == Verification Summary
 
-@table:verification summarizes the results of @sec:testing, in the order of @table:requirements. Trials passed are given as the number of trials passed out of the trials run. A dash marks a result that rests on observation and has no trial count.
+@table:verification summarizes the results of @sec:testing, in the order of @table:requirements. Trials passed are given as the number of trials passed out of the trials run.
 
 #page(flipped: true, margin: 0.45in)[
   #set text(size: 9pt)
@@ -753,7 +753,7 @@ Each requirement in @table:requirements was tested against its success criterion
       [Within ±1 cm on both axes],
       [Ruler],
       [X: drift under 0.5 cm. Y: judged within 1 cm],
-      [--],
+      [1/1],
       [Pass],
       [@video:viability, @video:xaxis],
 
@@ -762,7 +762,7 @@ Each requirement in @table:requirements was tested against its success criterion
       [No visible slip or detachment],
       [One observed cycle],
       [No slip or drop],
-      [--],
+      [1/1],
       [Pass],
       [@video:viability],
 
@@ -773,7 +773,7 @@ Each requirement in @table:requirements was tested against its success criterion
       [All stages in order],
       [One observed cycle],
       [All stages, started with the Start button],
-      [--],
+      [1/1],
       [Pass],
       [@video:viability, @video:main-test],
 
@@ -800,7 +800,7 @@ Each requirement in @table:requirements was tested against its success criterion
       [Correct labels transmitted],
       [Modbus monitor, induced fault],
       [State shown; e-stop fault shown],
-      [--],
+      [1/1],
       [Pass],
       [@video:viability, @video:main-test, @video:estop],
 
@@ -818,7 +818,7 @@ Each requirement in @table:requirements was tested against its success criterion
       [Full cycle without failure],
       [One cycle with weight],
       [2.5 lb or more held; plate stamped 5 lb carried through the cycles],
-      [--],
+      [1/1],
       [Pass],
       [@video:main-test, @fig:payload-plate],
     ),
